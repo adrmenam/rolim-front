@@ -8,7 +8,7 @@ import { HomeThirteenComponent } from './shop/home-13/home-thirteen.component';
 export const rootRouterConfig: Routes = [
   {
     path: '',
-    redirectTo: 'home/thirteen',
+    redirectTo: 'demo',
     pathMatch: 'full'
   },
   {
