@@ -11,8 +11,8 @@ export interface Menu {
 
 export const MENUITEMS: Menu[] = [
 	{
-		title: 'home', type: 'sub', children: [
-	      { path: 'home/one', title: 'Fashion-01', type: 'extTabLink' },          
+		title: 'inicio', type: 'sub', children: [
+	      /*{ path: 'home/one', title: 'Fashion-01', type: 'extTabLink' },          
 	      { path: 'home/two', title: 'Fashion-02', type: 'extTabLink'},         
 	      { path: 'home/three', title: 'Fashion-03', type: 'extTabLink' },         
 	      { path: 'home/four', title: 'vegetable', type: 'extTabLink' },        
@@ -25,22 +25,22 @@ export const MENUITEMS: Menu[] = [
 	      { path: 'home/eleven', title: 'metro', type: 'extTabLink' },   
 	      { path: 'home/twelve', title: 'gym', type: 'extTabLink' },   
 	      { path: 'home/thirteen', title: 'tools', type: 'extTabLink' },   
-	      { path: 'home/fourteen', title: 'marijuana', type: 'extTabLink' }  
+	      { path: 'home/fourteen', title: 'marijuana', type: 'extTabLink' }*/
 	    ]
 	},
 	{
-		title: 'features', type: 'sub', megaMenu: true, megaMenuType: 'small', children: [
-	      { path: '/blog/left-sidebar', title: 'blog-left-sidebar', image: 'assets/images/feature/blog-page.jpg', type: 'link' },
+		title: 'servicios', type: 'sub', megaMenu: false, megaMenuType: 'small', children: [
+	      /*{ path: '/blog/left-sidebar', title: 'blog-left-sidebar', image: 'assets/images/feature/blog-page.jpg', type: 'link' },
 	      { path: '/blog/right-sidebar', title: 'blog-right-sidebar', image: 'assets/images/feature/blog(right-sidebar).jpg', type: 'link' },
 	      { path: '/blog/details', title: 'blog-detail',  image: 'assets/images/feature/blog-detail.jpg', type: 'link' },
 	      { path: '/home/left-sidebar/collection/all', title: 'category-left-sidebar', image: 'assets/images/feature/category-page.jpg', type: 'link' },
 	      { path: '/home/right-sidebar/collection/all', title: 'category-right-sidebar', image: 'assets/images/feature/category-page(right).jpg', type: 'link' },
-	      { path: '/home/no-sidebar/collection/all', title: 'category-no-sidebar', image: 'assets/images/feature/category-page(no-sidebar).jpg', type: 'link' }
+	      { path: '/home/no-sidebar/collection/all', title: 'category-no-sidebar', image: 'assets/images/feature/category-page(no-sidebar).jpg', type: 'link' }*/
 	    ]
 	},
 	{
-		title: 'products', type: 'sub', megaMenu: true, megaMenuType: 'medium', children: [
-	      { path: '/home/left-sidebar/product/1', title: 'left-sidebar', image: 'assets/images/feature/product-page(left-sidebar).jpg', type: 'link' },
+		title: 'precios', type: 'sub', megaMenu: false, megaMenuType: 'medium', children: [
+		  /*{ path: '/home/left-sidebar/product/1', title: 'left-sidebar', image: 'assets/images/feature/product-page(left-sidebar).jpg', type: 'link' },
 	      { path: '/home/right-sidebar/product/1', title: 'right-sidebar', image: 'assets/images/feature/product-page(right-sidebar).jpg', type: 'link' },
 	      { path: '/home/no-sidebar/product/1', title: 'no-sidebar',  image: 'assets/images/feature/product-page(no-sidebar).jpg', type: 'link' },
 	      { path: '/home/col-left/product/1', title: '3-col-thumbnail-left', image: 'assets/images/feature/product-page(3-col-left).jpg', type: 'link' },
@@ -49,13 +49,13 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/home/accordian/product/1', title: 'accordian-details', image: 'assets/images/feature/product-page(accordian).jpg', type: 'link' },
 	      { path: '/home/left-image/product/1', title: 'thumbnail-left', image: 'assets/images/feature/product-page(left-image).jpg', type: 'link' },
 	      { path: '/home/right-image/product/1', title: 'thumbnail-right', image: 'assets/images/feature/product-page(right-image).jpg', type: 'link' },
-	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }
+	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }*/
 	    ]
 	},
 	{
-		title: 'pages', type: 'sub', children: [
+		title: 'nosotros', type: 'sub', children: [
 	      { path: '/pages/about-us', title: 'about-us', type: 'link' },          
-	      { path: '/pages/lookbook', title: 'lookbook', type: 'link' },         
+	      /*{ path: '/pages/lookbook', title: 'lookbook', type: 'link' },         
 	      { path: '/pages/typography', title: 'Typography', type: 'link' }, 
 	      { 
 	      	title: 'Portfolio',  type: 'sub', children: [
@@ -81,10 +81,10 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/pages/order-success', title: 'order-success', type: 'link' },  
 	      { path: '/pages/contact', title: 'contact', type: 'link' },  
 	      { path: '/pages/faq', title: 'FAQ', type: 'link' },  
-	      { path: '/pages/404', title: '404', type: 'link'}        
+	      { path: '/pages/404', title: '404', type: 'link'}   */     
 	    ]
 	},
-	{
+	/*{
 		title: 'shop', type: 'sub', megaMenu: true, megaMenuType: 'large', children: [
 	      { 
 	      	title: 'mens-fashion',  type: 'link', children: [
@@ -137,5 +137,5 @@ export const MENUITEMS: Menu[] = [
 	      	]
 	      },
 	    ]
-	},
+	},*/
 ]
