@@ -27,6 +27,9 @@ import { MasonaryThreeGridComponent } from './portfolio/masonary-three-grid/maso
 import { MasonaryFourGridComponent } from './portfolio/masonary-four-grid/masonary-four-grid.component';
 import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/masonary-fullwidth.component';
 
+import { PrivacyComponent } from './privacy/privacy.component';
+import { TermsComponent } from './terms/terms.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -126,6 +129,14 @@ const routes: Routes = [
       {
         path: 'fullwidth/masonary',
         component: MasonaryFullwidthComponent
+      },
+      {
+        path: 'terms',
+        component: TermsComponent
+      },
+      {
+        path: 'privacy',
+        component: PrivacyComponent
       }
     ]
   }

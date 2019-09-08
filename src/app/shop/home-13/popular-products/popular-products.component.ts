@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../../shared/classes/product';
+import { ProductsService } from '../../../shared/services/products.service';
+
 
 @Component({
   selector: 'app-popular-products',
@@ -11,7 +13,13 @@ export class PopularProductsComponent implements OnInit {
      // Get product Using Input
   @Input() products: Product;
 
-  constructor() { }
+  private ServiceProducts   :   Product[] = [];
+
+  constructor(private productsService: ProductsService) { 
+    this.productsService.getProductByCategory('servicio').subscribe(services => {
+      this.ServiceProducts = services 
+   })
+  }
 
   ngOnInit() {
   }

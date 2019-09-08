@@ -10,10 +10,11 @@ export interface Menu {
 }
 
 export const MENUITEMS: Menu[] = [
-	{
+	{ path: 'home/thirteen', title: 'Inicio', type: 'extTabLink' },
+	/*{
 		title: 'inicio', type: 'sub', children: [
-			{ path: 'home/thirteen', title: 'Inicio', type: 'extTabLink' }
-	      /*{ path: 'home/one', title: 'Fashion-01', type: 'extTabLink' },          
+			
+	      { path: 'home/one', title: 'Fashion-01', type: 'extTabLink' },          
 	      { path: 'home/two', title: 'Fashion-02', type: 'extTabLink'},         
 	      { path: 'home/three', title: 'Fashion-03', type: 'extTabLink' },         
 	      { path: 'home/four', title: 'vegetable', type: 'extTabLink' },        
@@ -26,21 +27,24 @@ export const MENUITEMS: Menu[] = [
 	      { path: 'home/eleven', title: 'metro', type: 'extTabLink' },   
 	      { path: 'home/twelve', title: 'gym', type: 'extTabLink' },   
 	      { path: 'home/thirteen', title: 'tools', type: 'extTabLink' },   
-	      { path: 'home/fourteen', title: 'marijuana', type: 'extTabLink' }*/
+	      { path: 'home/fourteen', title: 'marijuana', type: 'extTabLink' }
 	    ]
-	},
-	{
-		title: 'servicios', type: 'sub', megaMenu: false, megaMenuType: 'small', children: [
-	      /*{ path: '/blog/left-sidebar', title: 'blog-left-sidebar', image: 'assets/images/feature/blog-page.jpg', type: 'link' },
+	},*/
+	/*{
+		title: 'Productos y Servicios', type: 'sub', megaMenu: false, megaMenuType: 'small', children: [
+		  { path: '/blog/left-sidebar', title: 'Productos', type: 'link' },
+		  { path: '/blog/left-sidebar', title: 'Servicios', type: 'link' }
 	      { path: '/blog/right-sidebar', title: 'blog-right-sidebar', image: 'assets/images/feature/blog(right-sidebar).jpg', type: 'link' },
 	      { path: '/blog/details', title: 'blog-detail',  image: 'assets/images/feature/blog-detail.jpg', type: 'link' },
 	      { path: '/home/left-sidebar/collection/all', title: 'category-left-sidebar', image: 'assets/images/feature/category-page.jpg', type: 'link' },
 	      { path: '/home/right-sidebar/collection/all', title: 'category-right-sidebar', image: 'assets/images/feature/category-page(right).jpg', type: 'link' },
-	      { path: '/home/no-sidebar/collection/all', title: 'category-no-sidebar', image: 'assets/images/feature/category-page(no-sidebar).jpg', type: 'link' }*/
+	      { path: '/home/no-sidebar/collection/all', title: 'category-no-sidebar', image: 'assets/images/feature/category-page(no-sidebar).jpg', type: 'link' }
 	    ]
-	},
+	},*/
 	{
-		title: 'precios', type: 'sub', megaMenu: false, megaMenuType: 'medium', children: [
+		title: 'precios', type: 'sub', children: [
+		  { path: '/home/left-sidebar/collection/all', title: 'Productos', type: 'link' },
+		  { path: '/home/left-sidebar/collection/all', title: 'Servicios', type: 'link' }
 		  /*{ path: '/home/left-sidebar/product/1', title: 'left-sidebar', image: 'assets/images/feature/product-page(left-sidebar).jpg', type: 'link' },
 	      { path: '/home/right-sidebar/product/1', title: 'right-sidebar', image: 'assets/images/feature/product-page(right-sidebar).jpg', type: 'link' },
 	      { path: '/home/no-sidebar/product/1', title: 'no-sidebar',  image: 'assets/images/feature/product-page(no-sidebar).jpg', type: 'link' },
@@ -53,9 +57,10 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }*/
 	    ]
 	},
-	{
+	{ path: '/pages/about-us', title: 'Conócenos', type: 'link' },
+	/*{
 		title: 'nosotros', type: 'sub', children: [
-	      { path: '/pages/about-us', title: 'about-us', type: 'link' },          
+	      { path: '/pages/about-us', title: 'Conócenos', type: 'extTabLink' },          
 	      /*{ path: '/pages/lookbook', title: 'lookbook', type: 'link' },         
 	      { path: '/pages/typography', title: 'Typography', type: 'link' }, 
 	      { 
@@ -82,9 +87,9 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/pages/order-success', title: 'order-success', type: 'link' },  
 	      { path: '/pages/contact', title: 'contact', type: 'link' },  
 	      { path: '/pages/faq', title: 'FAQ', type: 'link' },  
-	      { path: '/pages/404', title: '404', type: 'link'}   */     
+	      { path: '/pages/404', title: '404', type: 'link'}  
 	    ]
-	},
+	},*/
 	/*{
 		title: 'shop', type: 'sub', megaMenu: true, megaMenuType: 'large', children: [
 	      { 

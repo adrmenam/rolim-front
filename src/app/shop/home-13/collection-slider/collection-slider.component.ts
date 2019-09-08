@@ -17,25 +17,40 @@ export class CollectionSliderThirteenComponent implements OnInit {
    // services
   public categories = [{
     image: 'assets/images/tools/category/1.jpg',
-    title: 'auto parts',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant parts</a></li><li><a href="#">Skeleton parts</a></li><li><a href="#">Slow parts</a></li><li><a href="#">Solar-powered parts</a></li>'),
+    title: 'Plan Estudiantil',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$21.00</a></li>'),
   }, {
     image: 'assets/images/tools/category/2.jpg',
-    title: 'brakes & steering',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant parts</a></li><li><a href="#">Skeleton parts</a></li><li><a href="#">Slow parts</a></li><li><a href="#">Solar-powered parts</a></li>'),
+    title: 'Plan Estudiantil Premium',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">12 prendas de planchado</a></li><li><a href="#">$35.00</a></li>'),
   }, {
     image: 'assets/images/tools/category/3.jpg',
-    title: 'engine & drivetrain',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant parts</a></li><li><a href="#">Skeleton parts</a></li><li><a href="#">Slow parts</a></li><li><a href="#">Solar-powered parts</a></li>'),
+    title: 'Plan Soltero/a',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$48.00</a></li>'),
   }, {
     image: 'assets/images/tools/category/4.jpg',
-    title: 'exterior accesories',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant parts</a></li><li><a href="#">Skeleton parts</a></li><li><a href="#">Slow parts</a></li><li><a href="#">Solar-powered parts</a></li>'),
+    title: 'Plan Colegas',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$40.00</a></li>'),
   }, {
     image: 'assets/images/tools/category/5.jpg',
-    title: 'other parts',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant parts</a></li><li><a href="#">Skeleton parts</a></li><li><a href="#">Slow parts</a></li><li><a href="#">Solar-powered parts</a></li>'),
-  }]
+    title: 'Plan Ejecutivo',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">12 prendas de planchado</a></li><li><a href="#">$52.00</a></li>'),
+  },{
+    image: 'assets/images/tools/category/4.jpg',
+    title: 'Plan Ejecutivo Premium',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$64.00</a></li>'),
+  },
+  {
+    image: 'assets/images/tools/category/4.jpg',
+    title: 'Plan Familiar',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">8 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$104.00</a></li>'),
+  },
+  {
+    image: 'assets/images/tools/category/4.jpg',
+    title: 'Plan Familiar Premium',
+    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">8 fundas de lavado</a></li><li><a href="#">48 prendas de planchado</a></li><li><a href="#">$128.00</a></li>'),
+  }
+]
 
    // Slick slider config
   public catSlideConfig = {

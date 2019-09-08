@@ -28,6 +28,8 @@ import { MasonaryTwoGridComponent } from './portfolio/masonary-two-grid/masonary
 import { MasonaryThreeGridComponent } from './portfolio/masonary-three-grid/masonary-three-grid.component';
 import { MasonaryFourGridComponent } from './portfolio/masonary-four-grid/masonary-four-grid.component';
 import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/masonary-fullwidth.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { TermsComponent } from './terms/terms.component';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/mason
     MasonaryTwoGridComponent,
     MasonaryThreeGridComponent,
     MasonaryFourGridComponent,
-    MasonaryFullwidthComponent
+    MasonaryFullwidthComponent,
+    PrivacyComponent,
+    TermsComponent
   ]
 })
 export class PagesModule { }

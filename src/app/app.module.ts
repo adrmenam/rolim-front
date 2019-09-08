@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { DemoComponent } from './demo/demo.component';
 import * as $ from 'jquery';
+import { TermsComponent } from './terms/terms.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -27,7 +28,8 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     MainComponent,
-    DemoComponent
+    DemoComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,
