@@ -16,39 +16,47 @@ export class CollectionSliderThirteenComponent implements OnInit {
 
    // services
   public categories = [{
-    image: 'assets/images/tools/category/1.jpg',
+    image: 'assets/images/laundry/product/estudiantil.jpg',
     title: 'Plan Estudiantil',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$21.00</a></li>'),
+    url: '/home/no-sidebar/product/1'
   }, {
-    image: 'assets/images/tools/category/2.jpg',
+    image: 'assets/images/laundry/product/estudiantil_premium.jpg',
     title: 'Plan Estudiantil Premium',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">12 prendas de planchado</a></li><li><a href="#">$35.00</a></li>'),
+    url: '/home/no-sidebar/product/2'
   }, {
-    image: 'assets/images/tools/category/3.jpg',
+    image: 'assets/images/laundry/product/soltero.jpg',
     title: 'Plan Soltero/a',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$48.00</a></li>'),
+    url: '/home/no-sidebar/product/3'
   }, {
-    image: 'assets/images/tools/category/4.jpg',
+    image: 'assets/images/laundry/product/colegas.jpg',
     title: 'Plan Colegas',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$40.00</a></li>'),
+    url: '/home/no-sidebar/product/4'
   }, {
-    image: 'assets/images/tools/category/5.jpg',
+    image: 'assets/images/laundry/product/ejecutivo.jpg',
     title: 'Plan Ejecutivo',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">12 prendas de planchado</a></li><li><a href="#">$52.00</a></li>'),
+    url: '/home/no-sidebar/product/5'
   },{
-    image: 'assets/images/tools/category/4.jpg',
+    image: 'assets/images/laundry/product/ejecutivo_premium.jpg',
     title: 'Plan Ejecutivo Premium',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">4 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$64.00</a></li>'),
+    url: '/home/no-sidebar/product/6'
   },
   {
-    image: 'assets/images/tools/category/4.jpg',
+    image: 'assets/images/laundry/product/familiar.jpg',
     title: 'Plan Familiar',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">8 fundas de lavado</a></li><li><a href="#">24 prendas de planchado</a></li><li><a href="#">$104.00</a></li>'),
+    url: '/home/no-sidebar/product/7'
   },
   {
-    image: 'assets/images/tools/category/4.jpg',
+    image: 'assets/images/laundry/product/familiar_premium.jpg',
     title: 'Plan Familiar Premium',
     text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">8 fundas de lavado</a></li><li><a href="#">48 prendas de planchado</a></li><li><a href="#">$128.00</a></li>'),
+    url: '/home/no-sidebar/product/8'
   }
 ]
 

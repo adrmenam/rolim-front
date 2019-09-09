@@ -4,7 +4,7 @@
     <span class="lable4" *ngIf='product.sale'>on sale</span>
   </div>
   <div class="front">
-    <a [routerLink]="['/home/left-sidebar/product', product.id]"><img [src]="!variantImage ? product.pictures[0] : variantImage" class="img-fluid" alt=""></a>
+    <a [routerLink]="['/home/no-sidebar/product', product.id]"><img [src]="!variantImage ? product.pictures[0] : variantImage" class="img-fluid" alt=""></a>
   </div>
   <ul class="product-thumb-list">
     <li class="grid_thumb_img" [ngClass]="{'active': selectedItem == variant.images}" *ngFor="let variant of product.variants">
@@ -31,7 +31,7 @@
 <div class="product-detail">
   <div>
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-    <a [routerLink]="['/home/left-sidebar/product', product.id]"><h6>{{product.name}}</h6></a>
+    <a [routerLink]="['/home/no-sidebar/product', product.id]"><h6>{{product.name}}</h6></a>
     <h4 *ngIf="!productsService?.catalogMode">{{product.price | currency:productsService?.currency:'symbol'}} 
       <del><span class="money">{{product.salePrice | currency:productsService?.currency:'symbol'}}</span></del> 
     </h4>

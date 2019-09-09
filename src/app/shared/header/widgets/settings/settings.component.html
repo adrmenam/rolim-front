@@ -6,7 +6,7 @@
         <i class="ti-search" (click)="openSearch()"></i>
       </div>
     </li>
-    <li class="onhover-div mobile-setting">
+    <!--<li class="onhover-div mobile-setting">
       <div><img src="assets/images/icon/setting.png" class="img-fluid" alt="">
         <i class="ti-settings"></i></div>
       <div class="show-div setting">
@@ -23,7 +23,7 @@
           <li><a [routerLink]="" (click)="updateCurrency('GBP')">Pound</a> </li>
         </ul>
       </div>
-    </li>
+    </li>-->
     <li class="onhover-div mobile-cart" *ngIf="!productsService?.catalogMode">
       <div>
         <a [routerLink]="'/home/cart'">
@@ -32,15 +32,15 @@
         </a>
       </div>
       <ul class="show-div shopping-cart" *ngIf='!shoppingCartItems.length'>
-        <h5>Your cart is currently empty.</h5>
+        <h5>Tu carrito está vacío</h5>
       </ul>
       <span class="cart_qty_cls">{{shoppingCartItems.length}}</span>
       <ul class="show-div shopping-cart" *ngIf='shoppingCartItems.length'>
         <li *ngFor="let item of shoppingCartItems">
           <div class="media">
-            <a [routerLink]="['/home/left-sidebar/product', item.product.id]"><img class="mr-3" [src]="item.product.pictures[0]" alt="Generic placeholder image"></a>
+            <a [routerLink]="['/home/no-sidebar/product', item.product.id]"><img class="mr-3" [src]="item.product.pictures[0]" alt="Generic placeholder image"></a>
             <div class="media-body">
-              <a [routerLink]="['/home/left-sidebar/product', item.product.id]"><h4>{{ item.product.name }}</h4></a>
+              <a [routerLink]="['/home/no-sidebar/product', item.product.id]"><h4>{{ item.product.name }}</h4></a>
               <h4><span>{{ item.quantity }} x {{ item.product.price | currency:productsService?.currency:'symbol' }}</span></h4>
             </div>
           </div>
@@ -55,8 +55,8 @@
         </li>
         <li>
           <div class="buttons">
-            <a [routerLink]="'/home/cart'" class="view-cart">view cart</a>
-            <a [routerLink]="'/home/checkout'" class="checkout">checkout</a>
+            <a [routerLink]="'/home/cart'" class="view-cart">Ver carrito</a>
+            <a [routerLink]="'/home/checkout'" class="checkout">Pagar</a>
           </div>
         </li>
       </ul>

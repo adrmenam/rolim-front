@@ -14,11 +14,11 @@
 	
 	<router-outlet></router-outlet>
 	
-	<app-footer-one *ngIf="url != '/home/three' && url != '/home/twelve' && url != '/home/thirteen' && url != '/home/fourteen'"></app-footer-one>
+	<app-footer-one *ngIf="url != '/home/three' && url != '/home/twelve' && url != '/home/fourteen'"></app-footer-one>
 	
 	<app-footer-two *ngIf="url == '/home/three' || url == '/home/twelve'"></app-footer-two>
 
-	<app-footer-three *ngIf="url == '/home/thirteen'"></app-footer-three>
+	<!--<app-footer-three *ngIf="url == '/home/thirteen'"></app-footer-three>-->
 
 	<app-footer-four *ngIf="url == '/home/fourteen'"></app-footer-four>
 

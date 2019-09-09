@@ -41,11 +41,11 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/home/no-sidebar/collection/all', title: 'category-no-sidebar', image: 'assets/images/feature/category-page(no-sidebar).jpg', type: 'link' }
 	    ]
 	},*/
-	{
+	/*{
 		title: 'precios', type: 'sub', children: [
 		  { path: '/home/left-sidebar/collection/all', title: 'Productos', type: 'link' },
 		  { path: '/home/left-sidebar/collection/all', title: 'Servicios', type: 'link' }
-		  /*{ path: '/home/left-sidebar/product/1', title: 'left-sidebar', image: 'assets/images/feature/product-page(left-sidebar).jpg', type: 'link' },
+		  { path: '/home/left-sidebar/product/1', title: 'left-sidebar', image: 'assets/images/feature/product-page(left-sidebar).jpg', type: 'link' },
 	      { path: '/home/right-sidebar/product/1', title: 'right-sidebar', image: 'assets/images/feature/product-page(right-sidebar).jpg', type: 'link' },
 	      { path: '/home/no-sidebar/product/1', title: 'no-sidebar',  image: 'assets/images/feature/product-page(no-sidebar).jpg', type: 'link' },
 	      { path: '/home/col-left/product/1', title: '3-col-thumbnail-left', image: 'assets/images/feature/product-page(3-col-left).jpg', type: 'link' },
@@ -54,9 +54,11 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/home/accordian/product/1', title: 'accordian-details', image: 'assets/images/feature/product-page(accordian).jpg', type: 'link' },
 	      { path: '/home/left-image/product/1', title: 'thumbnail-left', image: 'assets/images/feature/product-page(left-image).jpg', type: 'link' },
 	      { path: '/home/right-image/product/1', title: 'thumbnail-right', image: 'assets/images/feature/product-page(right-image).jpg', type: 'link' },
-	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }*/
+	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }
 	    ]
-	},
+	},*/
+	{ path: '/home/no-sidebar/collection/all', title: 'Planes mensuales', type: 'link' },
+	{ path: '/home/no-sidebar/collection/all', title: 'Individuales', type: 'link' },
 	{ path: '/pages/about-us', title: 'Conócenos', type: 'link' },
 	/*{
 		title: 'nosotros', type: 'sub', children: [
