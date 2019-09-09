@@ -1,10 +1,10 @@
-<app-header-one *ngIf="url != '/home/two' && url != '/home/three' && url != '/home/four' && url != '/home/five' && url != '/home/ten' && url != '/home/eleven' && url != '/home/twelve' && url != '/home/thirteen' && url != '/home/fourteen'"></app-header-one>
+<app-header-four *ngIf="url != '/home/two' && url != '/home/three' && url != '/home/four' && url != '/home/five' && url != '/home/ten' && url != '/home/eleven' && url != '/home/twelve' && url != '/home/fourteen'"></app-header-four>
 
 <app-header-two *ngIf="url == '/home/five' || url == '/home/three'"></app-header-two>
 
 <app-header-three *ngIf="url == '/home/two' || url == '/home/four' || url === '/home/fourteen' "></app-header-three>
 
-<app-header-four *ngIf="url == '/home/twelve' || url == '/home/thirteen'"></app-header-four>
+<!--<app-header-four *ngIf="url == '/home/twelve' || url == '/home/thirteen'"></app-header-four>-->
 
 <app-header-five *ngIf="url == '/home/ten'"></app-header-five>
 
