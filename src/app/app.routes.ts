@@ -7,7 +7,7 @@ import { DemoComponent } from './demo/demo.component';
 export const rootRouterConfig: Routes = [
   {
     path: '',
-    redirectTo: 'demo',
+    redirectTo: 'home/index',
     pathMatch: 'full'
   },
   {
@@ -34,7 +34,7 @@ export const rootRouterConfig: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home/thirteen'
+    redirectTo: 'home/index'
   }
 ];
 

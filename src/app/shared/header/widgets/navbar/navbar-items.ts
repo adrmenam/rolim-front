@@ -10,11 +10,11 @@ export interface Menu {
 }
 
 export const MENUITEMS: Menu[] = [
-	{ path: 'home/thirteen', title: 'Inicio', type: 'extTabLink' },
+	{ path: 'home/index', title: 'Inicio', type: 'extTabLink' },
 	/*{
 		title: 'inicio', type: 'sub', children: [
 			
-	      { path: 'home/one', title: 'Fashion-01', type: 'extTabLink' },          
+	      { path: 'home/index', title: 'Fashion-01', type: 'extTabLink' },          
 	      { path: 'home/two', title: 'Fashion-02', type: 'extTabLink'},         
 	      { path: 'home/three', title: 'Fashion-03', type: 'extTabLink' },         
 	      { path: 'home/four', title: 'vegetable', type: 'extTabLink' },        

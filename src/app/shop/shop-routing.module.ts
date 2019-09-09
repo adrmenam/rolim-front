@@ -87,7 +87,7 @@ const routes: Routes = [
     component: HomeTwelveComponent
   },
   { 
-    path: 'thirteen',
+    path: 'index',
     component: HomeThirteenComponent
   },
   { 
