@@ -13,7 +13,7 @@ export class PopularProductsComponent implements OnInit {
      // Get product Using Input
   @Input() products: Product;
 
-  private ServiceProducts   :   Product[] = [];
+  public ServiceProducts   :   Product[] = [];
 
   constructor(private productsService: ProductsService) { 
     this.productsService.getProductByCategory('servicio').subscribe(services => {

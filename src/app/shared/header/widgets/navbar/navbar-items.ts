@@ -57,8 +57,8 @@ export const MENUITEMS: Menu[] = [
 	      { path: '/home/vertical/product/1', title: 'vertical-tab', image: 'assets/images/feature/product-page(vertical-tab).jpg', type: 'link' }
 	    ]
 	},*/
-	{ path: '/home/no-sidebar/collection/all', title: 'Planes mensuales', type: 'link' },
-	{ path: '/home/no-sidebar/collection/all', title: 'Individuales', type: 'link' },
+	{ path: '/home/no-sidebar/collection/plan', title: 'Planes mensuales', type: 'link' },
+	{ path: '/home/no-sidebar/collection/tools', title: 'Individuales', type: 'link' },
 	{ path: '/pages/about-us', title: 'Conócenos', type: 'link' },
 	/*{
 		title: 'nosotros', type: 'sub', children: [

@@ -18,7 +18,7 @@ export class CollectionSliderThirteenComponent implements OnInit {
   public categories = [{
     image: 'assets/images/laundry/product/estudiantil.jpg',
     title: 'Plan Estudiantil',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">2 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$21.00</a></li>'),
+    text:  '<li><a href="#">2 fundas de lavado</a></li><li><a href="#">0 prendas de planchado</a></li><li><a href="#">$21.00</a></li>',
     url: '/home/no-sidebar/product/1'
   }, {
     image: 'assets/images/laundry/product/estudiantil_premium.jpg',
