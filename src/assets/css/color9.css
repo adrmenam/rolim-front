@@ -712,7 +712,7 @@ button.btn.btn-solid:active, button.btn.btn-outline:active {
 .logo-block img {
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
-  opacity: 0.5;
+  opacity: 1;
   -webkit-transition: .5s ease;
   transition: .5s ease;
   margin: 0 auto;

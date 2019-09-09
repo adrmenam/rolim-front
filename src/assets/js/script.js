@@ -91,7 +91,7 @@ $(document).ready(function() {
   /*=====================
    06.Color js
    ==========================*/
-
+/*
   (function() {
     $('<div class="color-picker" id="color-picker">' +
       '<a href="#" class="handle">' +
@@ -250,5 +250,5 @@ $(document).ready(function() {
       $('.color-picker').animate({ right: '-190px' });
     }
   });
-
+*/
 });

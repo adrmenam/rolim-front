@@ -103,15 +103,21 @@ export class CartService {
   public getShippingCost(): Observable<number> {
     return this.cartItems.pipe(map((product: CartItem[]) => {
       return products.reduce((prev, curr: CartItem) => {
-        return (prev + curr.product.price * curr.quantity) * 0.1;
+        return 1.5;
       }, 0);
     }));
   }
 
   public getTotalWithShipping(): Observable<number> {
     return this.cartItems.pipe(map((product: CartItem[]) => {
-      return products.reduce((prev, curr: CartItem) => {
-        return ((prev + curr.product.price * curr.quantity) * 0.1)+(prev + curr.product.price * curr.quantity);
+      return products.reduce((prev, curr: CartItem, i) => {
+        
+        var price = 0;
+          if(i==0){
+            price = curr.product.price+1.5;           
+          }else
+            price = curr.product.price;     
+        return (prev + price * curr.quantity);
       }, 0);
     }));
   }

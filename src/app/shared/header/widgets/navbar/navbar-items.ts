@@ -10,7 +10,7 @@ export interface Menu {
 }
 
 export const MENUITEMS: Menu[] = [
-	{ path: 'home/index', title: 'Inicio', type: 'extTabLink' },
+	{ path: 'home/index', title: 'Inicio', type: 'link' },
 	/*{
 		title: 'inicio', type: 'sub', children: [
 			
