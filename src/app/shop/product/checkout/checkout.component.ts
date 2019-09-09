@@ -22,6 +22,9 @@ export class CheckoutComponent implements OnInit {
   public orderDetails   :  any[] = [];
   public amount         :  number;
   public payPalConfig ? : PayPalConfig;
+  public ship : any = 'F';
+  public privacy : boolean = false;
+  public terms : boolean = false;
 
 
   // Form Validator
@@ -50,8 +53,21 @@ export class CheckoutComponent implements OnInit {
   
   // Get sub Total
   public getTotal(): Observable<number> {
+    if(this.ship=='T')
+      return this.cartService.getTotalWithShipping();
+    else
+      return this.cartService.getTotalAmount();
+  }
+
+  public getSubTotal(): Observable<number> {
     return this.cartService.getTotalAmount();
   }
+
+  public getShippingCost(): Observable<number> {
+    return this.cartService.getShippingCost();
+  }
+
+
  
   // stripe payment gateway
   stripeCheckout() {

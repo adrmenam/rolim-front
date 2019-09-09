@@ -100,5 +100,21 @@ export class CartService {
     }));
   }
 
+  public getShippingCost(): Observable<number> {
+    return this.cartItems.pipe(map((product: CartItem[]) => {
+      return products.reduce((prev, curr: CartItem) => {
+        return (prev + curr.product.price * curr.quantity) * 0.1;
+      }, 0);
+    }));
+  }
+
+  public getTotalWithShipping(): Observable<number> {
+    return this.cartItems.pipe(map((product: CartItem[]) => {
+      return products.reduce((prev, curr: CartItem) => {
+        return ((prev + curr.product.price * curr.quantity) * 0.1)+(prev + curr.product.price * curr.quantity);
+      }, 0);
+    }));
+  }
+
 
 }
