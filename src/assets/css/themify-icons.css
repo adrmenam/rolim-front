@@ -64,12 +64,13 @@
 }
 .ti-shopping-cart:before {
 	content: "\e60d";
-	color: #009BDE;
+	color: #2011cf;
+	font-size: 30px;
+	font-weight: bold;
 }
 .ti-shopping-cart-full:before {
 	content: "\e60e";
 	color: #009BDE;
-	background: white;
 }
 .ti-settings:before {
 	content: "\e60f";

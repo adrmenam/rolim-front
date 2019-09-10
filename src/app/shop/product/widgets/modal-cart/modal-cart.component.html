@@ -17,26 +17,26 @@
                                     <div class="media-body align-self-center text-center">
                                         <a [routerLink]="['/home/no-sidebar/product', product.id]">
                                             <h6>
-                                                <i class="fa fa-check"></i>Item
+                                                <i class="fa fa-check"></i>
                                                 <span>{{product.name}}</span>
-                                                <span> successfully added to your Cart</span>
+                                                <span> se ha añadido a tu carrito</span>
                                             </h6>
                                         </a>
                                         <div class="buttons">
-                                            <a [routerLink]="['/home/cart']" class="view-cart btn btn-solid">Your cart</a>
-                                            <a [routerLink]="['/home/checkout']" class="checkout btn btn-solid">Check out</a>
-                                            <a [routerLink]="['/home/left-sidebar/collection/all']" class="continue btn btn-solid">Continue shopping</a>
+                                            <a [routerLink]="['/home/cart']" class="view-cart btn btn-solid">Tu carrito</a>
+                                            <a [routerLink]="['/home/checkout']" class="checkout btn btn-solid">Confirmar pago</a>
+                                            <a [routerLink]="['/home/left-sidebar/collection/all']" class="continue btn btn-solid">Más servicios</a>
                                         </div>
 
-                                        <div class="upsell_payment">
+                                        <!--<div class="upsell_payment">
                                             <img src="assets/images/payment_cart.png" class="img-fluid" alt="">
-                                        </div>
+                                        </div>-->
                                     </div>
                                 </div>
 
                                 <div class="product-section">
                                     <div class="col-12 product-upsell text-center">
-                                        <h4>Customers who bought this item also.</h4>
+                                        <h4>También te puede interesar</h4>
                                     </div>
                                      <div class="row" id="upsell_product">
                                         <div class="product-box col-sm-3 col-6" *ngFor="let relatedProduct of relatedProducts(product) | slice:0:4">

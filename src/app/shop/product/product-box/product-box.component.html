@@ -7,7 +7,7 @@
 		<a [routerLink]="['/home/no-sidebar/product', product.id]"><img [src]="!variantImage ? product.pictures[0] : variantImage" class="img-fluid" alt=""></a>
 	</div>
 	<div class="cart-box" *ngIf="!productsService?.catalogMode">
-		<button [routerLink]="" (click)="addToCart(product)" [attr.data-target]="'#addtocart'+product.id" data-toggle="modal" title="Add to cart 1"><i class="ti-shopping-cart"></i></button>
+		<button [routerLink]="" (click)="addToCart(product)" [attr.data-target]="'#addtocart'+product.id" data-toggle="modal" title="Add to cart"><i class="ti-shopping-cart"></i></button>
 		<a [routerLink]="" (click)="addToWishlist(product)" title="Add to Wishlist"><i class="ti-heart" aria-hidden="true"></i></a>
 		<a [routerLink]="" [attr.data-target]="'#quick-view'+product.id" data-toggle="modal" title="Quick View"><i class="ti-search" aria-hidden="true"></i></a>
 		<a [routerLink]="['/home/compare']" (click)="addToCompare(product)" title="Compare"><i class="ti-reload" aria-hidden="true"></i></a>

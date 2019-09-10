@@ -72,9 +72,10 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">País</div>
-                                    <select name="country" [formControl]="checkoutForm.controls['country']">
-                                        <option value="" >Seleccione un país</option>
+                                    <select name="country" >
                                         <option value="Ecuador" selected>Ecuador</option>
+                                        
+                                        
                                         <!--<option value="USA">USA</option>
                                         <option value="Australia">Australia</option>-->
                                     </select>
@@ -85,9 +86,10 @@
                                 
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Ciudad</div>
-                                    <select name="country" [formControl]="checkoutForm.controls['country']">
-                                            <option value="" >Seleccione una Ciudad</option>
-                                            <option value="Quito" selected>Quito</option>
+                                    <select name="country">
+                                        <option value="Quito" selected>Quito</option>    
+                                        
+                                            
                                            
                                     </select>
                                      <div *ngIf="checkoutForm.controls.town.touched && checkoutForm.controls.town.errors?.required" class="text text-danger">
@@ -96,9 +98,10 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                     <div class="field-label">Provincia</div>
-                                    <select name="country" [formControl]="checkoutForm.controls['country']">
-                                            <option value="" >Seleccione una Provincia</option>
-                                            <option value="Pichincha" selected>Pichincha</option>
+                                    <select name="country">
+                                        <option value="Pichincha" selected>Pichincha</option>    
+                                        
+                                            
                                            
                                     </select>
                                      <div *ngIf="checkoutForm.controls.state.touched && checkoutForm.controls.state.errors?.required" class="text text-danger">
@@ -134,44 +137,61 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Fecha de Recogida</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                    <input type="date" name="datepickup" [formControl]="checkoutForm.controls['datepickup']" [(ngModel)]="datepickup" min="{{datepickupMin}}" placeholder="" autocomplete="off" (change)="updateDates();">
+                                    <div *ngIf="checkoutForm.controls.datepickup.touched && checkoutForm.controls.datepickup.errors?.required" class="text text-danger">
                                      El campo Fecha de Recogida es obligatorio.
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
-                                      Máximo 50 caracteres.
-                                    </div>
+                                    
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Fecha de Entrega</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                    <input type="date" name="datedelivery" [formControl]="checkoutForm.controls['datedelivery']" value="{{datedelivery}}" min="{{datedeliveryMin}}" placeholder="" autocomplete="off" (change)="updateDates();">
+                                    <div *ngIf="checkoutForm.controls.datedelivery.touched && checkoutForm.controls.datedelivery.errors?.required" class="text text-danger">
                                      El campo Fecha de Entrega es obligatorio.
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
-                                      Máximo 50 caracteres.
-                                    </div>
+                                   
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Hora de Recogida</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                    <!--<input type="text" name="hourpickup" [formControl]="checkoutForm.controls['hourpickup']" value="" placeholder="" autocomplete="off">-->
+                                    <select name="hourpickup">
+                                        <option value="7-8" selected>07h00 - 08h00</option> 
+                                        <option value="8-9" >08h00 - 09h00</option> 
+                                        <option value="9-10" >09h00 - 10h00</option> 
+                                        <option value="10-11" >10h00 - 11h00</option> 
+                                        <option value="11-14" >11h00 - 12h00</option> 
+                                        <option value="12-13" >12h00 - 13h00</option> 
+                                        <option value="13-14" >13h00 - 14h00</option> 
+                                        <option value="14-15" >14h00 - 15h00</option> 
+                                        <option value="15-16" >15h00 - 16h00</option> 
+                                        <option value="16-17" >16h00 - 17h00</option> 
+                                        <option value="17-18" >17h00 - 18h00</option>                   
+                                    </select>
+                                    <div *ngIf="checkoutForm.controls.hourpickup.touched && checkoutForm.controls.hourpickup.errors?.required" class="text text-danger">
                                      El campo Hora de Recogida es obligatorio.
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
-                                      Máximo 50 caracteres.
-                                    </div>
+                                    
                                 </div>
                                 
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Hora de Entrega</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                    <select name="hourdelivery">
+                                        <option value="7-8" selected>07h00 - 08h00</option> 
+                                        <option value="8-9" >08h00 - 09h00</option> 
+                                        <option value="9-10" >09h00 - 10h00</option> 
+                                        <option value="10-11" >10h00 - 11h00</option> 
+                                        <option value="11-14" >11h00 - 12h00</option> 
+                                        <option value="12-13" >12h00 - 13h00</option> 
+                                        <option value="13-14" >13h00 - 14h00</option> 
+                                        <option value="14-15" >14h00 - 15h00</option> 
+                                        <option value="15-16" >15h00 - 16h00</option> 
+                                        <option value="16-17" >16h00 - 17h00</option> 
+                                        <option value="17-18" >17h00 - 18h00</option>                   
+                                    </select>
+                                    <div *ngIf="checkoutForm.controls.hourdelivery.touched && checkoutForm.controls.hourdelivery.errors?.required" class="text text-danger">
                                      El campo Hora de Entrega es obligatorio.
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
-                                      Máximo 50 caracteres.
-                                    </div>
+                                    
                                 </div>
                             </div>
                           <!--<div class="row ">

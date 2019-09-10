@@ -25,6 +25,10 @@ export class CheckoutComponent implements OnInit {
   public ship : any = 'F';
   public privacy : boolean = false;
   public terms : boolean = false;
+  public datepickup : any;
+  public datedelivery : any;
+  public datepickupMin : any;
+  public datedeliveryMin : any;
 
 
   // Form Validator
@@ -39,7 +43,11 @@ export class CheckoutComponent implements OnInit {
       country: ['', Validators.required],
       town: ['', Validators.required],
       state: ['', Validators.required],
-      postalcode: ['', Validators.required]
+      postalcode: ['', Validators.required],
+      datepickup: ['', Validators.required],
+      datedelivery: ['', Validators.required],
+      hourpickup: ['', Validators.required],
+      hourdelivery: ['', Validators.required],
     })    
   }
 
@@ -48,9 +56,34 @@ export class CheckoutComponent implements OnInit {
     this.cartItems.subscribe(products => this.checkOutItems = products);
     this.getTotal().subscribe(amount => this.amount = amount);
     this.initConfig();
+    this.datepickup = this.currentDate(0);
+    this.updateDates();
   }
   
-  
+
+  public currentDate(num) {
+    let currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()+num);
+    return currentDate.toISOString().substring(0,10);
+  }
+
+  public updateDates(){
+    let dateDelivery = new Date(this.datepickup);
+    dateDelivery.setDate(dateDelivery.getDate()+2);
+    this.datedelivery = this.getDateString(dateDelivery);
+    this.datepickupMin = this.currentDate(0);
+    this.datedeliveryMin = this.datedelivery;
+  }
+
+  public currentDateMiliseconds(num) {
+    let currentDate = new Date();
+    currentDate.setDate(currentDate.getDate()+num);
+    return currentDate.getMilliseconds();
+  }
+
+  public getDateString(date: Date){
+    return date.toISOString().substring(0,10);
+  }
   // Get sub Total
   public getTotal(): Observable<number> {
     if(this.ship=='T')

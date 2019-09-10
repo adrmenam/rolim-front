@@ -239,6 +239,20 @@
   },
   {
     "id": 18,
+    "name": "Vestido de novia",
+    "price": 70.00,
+    "salePrice": 70.00,
+    "discount": 0,
+    "pictures": ["assets/images/laundry/product/vestido_novia.jpg"],
+    "shortDetails": "Lavado cuidadoso de vestidos de novia",
+    "description": "Lavado cuidadoso de vestidos de novia",
+    "stock": 20,
+    "new": false,
+    "sale": false,
+    "category": "tools"
+  },
+  {
+    "id": 19,
     "name": "Camisa",
     "price": 3.00,
     "salePrice": 3.00,
@@ -252,7 +266,7 @@
     "category": "tools"
   },
   {
-    "id": 19,
+    "id": 20,
     "name": "Pack 3 Camisas",
     "price": 8.00,
     "salePrice": 8.00,
@@ -266,7 +280,7 @@
     "category": "tools"
   },
   {
-    "id": 20,
+    "id": 21,
     "name": "Pack 6 Camisas",
     "price": 15.50,
     "salePrice": 15.50,
@@ -280,7 +294,7 @@
     "category": "tools"
   },
   {
-    "id": 21,
+    "id": 22,
     "name": "Pack 12 Camisas",
     "price": 30.00,
     "salePrice": 30.00,
@@ -294,7 +308,7 @@
     "category": "tools"
   },
   {
-    "id": 22,
+    "id": 23,
     "name": "Pantalon",
     "price": 3.50,
     "salePrice": 3.50,
@@ -308,7 +322,7 @@
     "category": "tools"
   },
   {
-    "id": 23,
+    "id": 24,
     "name": "Pack 3 Pantalones",
     "price": 10.00,
     "salePrice": 10.00,
@@ -322,7 +336,7 @@
     "category": "tools"
   },
   {
-    "id": 24,
+    "id": 25,
     "name": "Pack 6 Pantalones",
     "price": 18.00,
     "salePrice": 18.00,
@@ -336,7 +350,7 @@
     "category": "tools"
   },
   {
-    "id": 25,
+    "id": 26,
     "name": "Pack 12 Pantalones",
     "price": 35.00,
     "salePrice": 35.00,
@@ -350,7 +364,7 @@
     "category": "tools"
   },
   {
-    "id": 26,
+    "id": 27,
     "name": "Blusa",
     "price": 2.00,
     "salePrice": 2.00,
@@ -364,7 +378,7 @@
     "category": "tools"
   },
   {
-    "id": 27,
+    "id": 28,
     "name": "Pack 3 Blusas",
     "price": 5.50,
     "salePrice": 5.50,
@@ -378,7 +392,7 @@
     "category": "tools"
   },
   {
-    "id": 28,
+    "id": 29,
     "name": "Pack 6 Blusas",
     "price": 10.00,
     "salePrice": 10.00,
@@ -392,7 +406,7 @@
     "category": "tools"
   },
   {
-    "id": 29,
+    "id": 30,
     "name": "Pack 12 Blusas",
     "price": 20.00,
     "salePrice": 20.00,
@@ -406,7 +420,7 @@
     "category": "tools"
   },
   {
-    "id": 30,
+    "id": 31,
     "name": "Camisa",
     "price": 1.25,
     "salePrice": 1.25,
@@ -420,7 +434,7 @@
     "category": "tools"
   },
   {
-    "id": 31,
+    "id": 32,
     "name": "Pack 3 Camisas",
     "price": 3.50,
     "salePrice": 3.50,
@@ -434,7 +448,7 @@
     "category": "tools"
   },
   {
-    "id": 32,
+    "id": 33,
     "name": "Pack 6 Camisas",
     "price": 6.50,
     "salePrice": 6.50,
@@ -448,7 +462,7 @@
     "category": "tools"
   },
   {
-    "id": 33,
+    "id": 34,
     "name": "Pack 12 Camisas",
     "price": 12.50,
     "salePrice": 12.50,
@@ -462,7 +476,7 @@
     "category": "tools"
   },
   {
-    "id": 34,
+    "id": 35,
     "name": "Prenda",
     "price": 1.15,
     "salePrice": 1.15,
@@ -476,7 +490,7 @@
     "category": "tools"
   },
   {
-    "id": 35,
+    "id": 36,
     "name": "Pack 3 Prendas",
     "price": 3.50,
     "salePrice": 3.50,
@@ -490,7 +504,7 @@
     "category": "tools"
   },
   {
-    "id": 36,
+    "id": 37,
     "name": "Pack 6 Prendas",
     "price": 6.50,
     "salePrice": 6.50,
@@ -504,7 +518,7 @@
     "category": "tools"
   },
   {
-    "id": 37,
+    "id": 38,
     "name": "Pack 12 Prendas",
     "price": 12.50,
     "salePrice": 12.50,
@@ -518,7 +532,7 @@
     "category": "tools"
   },
   {
-    "id": 38,
+    "id": 39,
     "name": "Edredón",
     "price": 9.50,
     "salePrice": 9.50,
