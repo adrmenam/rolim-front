@@ -12,4 +12,7 @@ export class FooterOneComponent implements OnInit {
   ngOnInit() {
   }
 
+  public subscribeToMail(){
+    alert("Gracias por tu subscripción!");
+  }
 }

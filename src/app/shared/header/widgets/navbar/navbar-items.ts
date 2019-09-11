@@ -58,7 +58,7 @@ export const MENUITEMS: Menu[] = [
 	    ]
 	},*/
 	{ path: '/home/no-sidebar/collection/plan', title: 'Planes mensuales', type: 'link' },
-	{ path: '/home/no-sidebar/collection/tools', title: 'Individuales', type: 'link' },
+	{ path: '/home/no-sidebar/collection/individual', title: 'Individuales', type: 'link' },
 	{ path: '/pages/about-us', title: 'Conócenos', type: 'link' },
 	/*{
 		title: 'nosotros', type: 'sub', children: [

@@ -65,7 +65,7 @@
 .ti-shopping-cart:before {
 	content: "\e60d";
 	color: #2011cf;
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: bold;
 }
 .ti-shopping-cart-full:before {

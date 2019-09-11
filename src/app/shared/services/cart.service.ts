@@ -117,11 +117,13 @@ export class CartService {
 
   public getTotalWithShipping(): Observable<number> {
     return this.cartItems.pipe(map((product: CartItem[]) => {
-      return products.reduce((prev, curr: CartItem, i) => {
+      return products.reduce((prev, curr: CartItem) => {
         
         var price = 0;
-          if(i==0){
-            price = curr.product.price+1.5;           
+        let flagShipping = false;
+          if(curr.quantity==1&&!flagShipping){
+            price = curr.product.price+1.5;
+            flagShipping=true;           
           }else
             price = curr.product.price;     
         return (prev + price * curr.quantity);
