@@ -7,6 +7,7 @@ import { ProductsService } from '../../../shared/services/products.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { Observable, of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
@@ -29,25 +30,82 @@ export class CheckoutComponent implements OnInit {
   public datedelivery : any;
   public datepickupMin : any;
   public datedeliveryMin : any;
+  public hoursFiltered : any[];
+  public hoursFilteredDelivery : any[];
+  public hourpickup : any;
+  public hourdelivery : any;
+  public country: any;
+  public town: any;
+  public state: any;
+  public currentHour : any;
+  public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
+
+  public hours = [
+    {
+      value: 7,
+      text: '07h00 - 08h00'
+    },
+    {
+      value: 8,
+      text: '08h00 - 09h00'
+    },
+    {
+      value: 9,
+      text: '09h00 - 10h00'
+    },
+    {
+      value: 10,
+      text: '10h00 - 11h00'
+    },
+    {
+      value: 11,
+      text: '11h00 - 12h00'
+    },
+    {
+      value: 12,
+      text: '12h00 - 13h00'
+    },
+    {
+      value: 13,
+      text: '13h00 - 14h00'
+    },
+    {
+      value: 14,
+      text: '14h00 - 15h00'
+    },
+    {
+      value: 15,
+      text: '15h00 - 16h00'
+    },
+    {
+      value: 16,
+      text: '16h00 - 17h00'
+    },
+    {
+      value: 17,
+      text: '17h00 - 18h00'
+    }
+  ]
 
 
   // Form Validator
   constructor(private fb: FormBuilder, private cartService: CartService, 
-    public productsService: ProductsService, private orderService: OrderService) {
+    public productsService: ProductsService, private orderService: OrderService, private router: Router) {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(50)]],
+      address2: ['', [Validators.required, Validators.maxLength(50)]],
       country: ['', Validators.required],
       town: ['', Validators.required],
       state: ['', Validators.required],
       postalcode: ['', Validators.required],
-      datepickup: ['', Validators.required],
-      datedelivery: ['', Validators.required],
-      hourpickup: ['', Validators.required],
-      hourdelivery: ['', Validators.required],
+      datepickup: [''],
+      datedelivery: [''],
+      hourpickup: [''],
+      hourdelivery: ['']
     })    
   }
 
@@ -56,10 +114,38 @@ export class CheckoutComponent implements OnInit {
     this.cartItems.subscribe(products => this.checkOutItems = products);
     this.getTotal().subscribe(amount => this.amount = amount);
     this.initConfig();
-    this.datepickup = this.currentDate(0);
+    this.currentHour = new Date().getHours();
+    this.datepickup = (this.currentHour>13) ? this.currentDate(1):this.datepickup = this.currentDate(0);
     this.updateDates();
+    this.hourpickup=this.hoursFiltered[0].value;
+    this.calculateHour();
+    this.hourdelivery=this.hoursFilteredDelivery[0].value;
+    this.country='Ecuador';
+    this.town='Quito';
+    this.state='Pichincha';
+    console.log(this.hourpickup);
   }
   
+  public pay(){
+    alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
+    this.cartService.cleanCart();
+    this.router.navigate(['home/index']);
+  }
+
+  public calculateHour(){
+    if(this.datepickup == this.currentDate(0)){
+      this.hoursFiltered = this.hours.filter(hour=>hour.value>this.currentHour+4);
+    }
+    else{
+      this.hoursFiltered = this.hours;
+    }
+    this.updateHourDelivery();
+    
+  }
+
+  public updateHourDelivery(){
+    this.hoursFilteredDelivery = this.hours.filter(hour=>hour.value>=this.hourpickup);
+  }
 
   public currentDate(num) {
     let currentDate = new Date();
@@ -73,6 +159,7 @@ export class CheckoutComponent implements OnInit {
     this.datedelivery = this.getDateString(dateDelivery);
     this.datepickupMin = this.currentDate(0);
     this.datedeliveryMin = this.datedelivery;
+    this.calculateHour();
   }
 
   public currentDateMiliseconds(num) {

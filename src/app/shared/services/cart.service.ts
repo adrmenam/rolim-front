@@ -90,6 +90,13 @@ export class CartService {
       products.splice(index, 1);
       localStorage.setItem("cartItem", JSON.stringify(products));
   }
+
+   // Clean in cart
+   public cleanCart() {
+   
+      products.length=0;
+      localStorage.setItem("cartItem", JSON.stringify(products));
+  }
   
   // Total amount 
   public getTotalAmount(): Observable<number> {

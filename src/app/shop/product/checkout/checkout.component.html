@@ -72,7 +72,7 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">País</div>
-                                    <select name="country" >
+                                    <select name="country" [formControl]="checkoutForm.controls['country']" [(ngModel)]="country">
                                         <option value="Ecuador" selected>Ecuador</option>
                                         
                                         
@@ -86,7 +86,7 @@
                                 
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Ciudad</div>
-                                    <select name="country">
+                                    <select name="town" [formControl]="checkoutForm.controls['town']" [(ngModel)]="town">
                                         <option value="Quito" selected>Quito</option>    
                                         
                                             
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="form-group col-md-12 col-sm-6 col-xs-12">
                                     <div class="field-label">Provincia</div>
-                                    <select name="country">
+                                    <select name="state" [formControl]="checkoutForm.controls['state']" [(ngModel)]="state">
                                         <option value="Pichincha" selected>Pichincha</option>    
                                         
                                             
@@ -127,11 +127,11 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Dirección de Entrega</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                    <input type="text" name="address2" [formControl]="checkoutForm.controls['address2']" value="" placeholder="" autocomplete="off">
+                                    <div *ngIf="checkoutForm.controls.address2.touched && checkoutForm.controls.address2.errors?.required" class="text text-danger">
                                      El campo Dirección de Entrega es obligatorio.
                                     </div>
-                                    <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
+                                    <div *ngIf="checkoutForm.controls.address2.touched && checkoutForm.controls.address2.errors?.maxlength" class="text text-danger">
                                       Máximo 50 caracteres.
                                     </div>
                                 </div>
@@ -154,39 +154,23 @@
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Hora de Recogida</div>
                                     <!--<input type="text" name="hourpickup" [formControl]="checkoutForm.controls['hourpickup']" value="" placeholder="" autocomplete="off">-->
-                                    <select name="hourpickup">
-                                        <option value="7-8" selected>07h00 - 08h00</option> 
-                                        <option value="8-9" >08h00 - 09h00</option> 
-                                        <option value="9-10" >09h00 - 10h00</option> 
-                                        <option value="10-11" >10h00 - 11h00</option> 
-                                        <option value="11-14" >11h00 - 12h00</option> 
-                                        <option value="12-13" >12h00 - 13h00</option> 
-                                        <option value="13-14" >13h00 - 14h00</option> 
-                                        <option value="14-15" >14h00 - 15h00</option> 
-                                        <option value="15-16" >15h00 - 16h00</option> 
-                                        <option value="16-17" >16h00 - 17h00</option> 
-                                        <option value="17-18" >17h00 - 18h00</option>                   
+                                    <select name="hourpickup" (change)="updateHourDelivery();" [(ngModel)]="hourpickup" [formControl]="checkoutForm.controls['hourpickup']">
+                                        <option *ngFor="let hour of hoursFiltered" [value]="hour.value">{{hour.text}}</option> 
+                                                        
                                     </select>
                                     <div *ngIf="checkoutForm.controls.hourpickup.touched && checkoutForm.controls.hourpickup.errors?.required" class="text text-danger">
                                      El campo Hora de Recogida es obligatorio.
+                                    </div>
+                                    <div *ngIf="hoursFiltered.length==0" class="text text-danger">
+                                        Ya es muy tarde para realizar un pedido para recogerlo el día de hoy, selecciona otra fecha de recogida.
                                     </div>
                                     
                                 </div>
                                 
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Hora de Entrega</div>
-                                    <select name="hourdelivery">
-                                        <option value="7-8" selected>07h00 - 08h00</option> 
-                                        <option value="8-9" >08h00 - 09h00</option> 
-                                        <option value="9-10" >09h00 - 10h00</option> 
-                                        <option value="10-11" >10h00 - 11h00</option> 
-                                        <option value="11-14" >11h00 - 12h00</option> 
-                                        <option value="12-13" >12h00 - 13h00</option> 
-                                        <option value="13-14" >13h00 - 14h00</option> 
-                                        <option value="14-15" >14h00 - 15h00</option> 
-                                        <option value="15-16" >15h00 - 16h00</option> 
-                                        <option value="16-17" >16h00 - 17h00</option> 
-                                        <option value="17-18" >17h00 - 18h00</option>                   
+                                    <select name="hourdelivery" [(ngModel)]="hourdelivery" [formControl]="checkoutForm.controls['hourdelivery']">
+                                        <option *ngFor="let hour of hoursFilteredDelivery" [value]="hour.value" >{{hour.text}}</option>                
                                     </select>
                                     <div *ngIf="checkoutForm.controls.hourdelivery.touched && checkoutForm.controls.hourdelivery.errors?.required" class="text text-danger">
                                      El campo Hora de Entrega es obligatorio.
@@ -328,7 +312,7 @@
                                             </div>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn-solid btn" [disabled]="!checkoutForm.valid || !terms || !privacy" (click)="stripeCheckout()" type="submit"
+                                        <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="pay()" type="submit" id="pay"
                                         *ngIf="!payment">
                                            Completar pedido
                                         </button>
