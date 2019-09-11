@@ -1,20 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
-import { HomeTwoComponent } from './home-2/home-two.component';
-import { HomeThreeComponent } from './home-3/home-three.component';
-import { HomeFourComponent } from './home-4/home-four.component';
-import { HomeFiveComponent } from './home-5/home-five.component';
-import { HomeSixComponent } from './home-6/home-six.component';
-import { HomeSevenComponent } from './home-7/home-seven.component';
-import { HomeEightComponent } from './home-8/home-eight.component';
-import { HomeNineComponent } from './home-9/home-nine.component';
-import { HomeTenComponent } from './home-10/home-ten.component';
-import { HomeElevenComponent } from './home-11/home-eleven.component';
-import { HomeTwelveComponent } from './home-12/home-twelve.component';
+
 import { HomeThirteenComponent } from './home-13/home-thirteen.component';
-import { HomeFourteenComponent } from './home-14/home-fourteen.component';
 import { CollectionLeftSidebarComponent } from './product/collection/collection-left-sidebar/collection-left-sidebar.component';
 import { CollectionRightSidebarComponent } from './product/collection/collection-right-sidebar/collection-right-sidebar.component';
 import { CollectionNoSidebarComponent } from './product/collection/collection-no-sidebar/collection-no-sidebar.component';
@@ -38,62 +26,6 @@ import { SuccessComponent } from './product/success/success.component';
 
 // Routes
 const routes: Routes = [
-  { 
-    path: 'one',
-    component: HomeComponent
-  },
-  { 
-    path: 'two',
-    component: HomeTwoComponent
-  },
-  { 
-    path: 'three',
-    component: HomeThreeComponent
-  },
-  { 
-    path: 'four',
-    component: HomeFourComponent
-  },
-  { 
-    path: 'five',
-    component: HomeFiveComponent
-  },
-  { 
-    path: 'six',
-    component: HomeSixComponent
-  },
-  { 
-    path: 'seven',
-    component: HomeSevenComponent
-  },
-  { 
-    path: 'eight',
-    component: HomeEightComponent
-  },
-  { 
-    path: 'nine',
-    component: HomeNineComponent
-  },
-  { 
-    path: 'ten',
-    component: HomeTenComponent
-  },
-  { 
-    path: 'eleven',
-    component: HomeElevenComponent
-  },
-  { 
-    path: 'twelve',
-    component: HomeTwelveComponent
-  },
-  { 
-    path: 'index',
-    component: HomeThirteenComponent
-  },
-  { 
-    path: 'fourteen',
-    component: HomeFourteenComponent
-  },
   {
     path: 'left-sidebar/collection/:category',
     component: CollectionLeftSidebarComponent

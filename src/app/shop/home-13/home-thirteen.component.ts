@@ -19,9 +19,10 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
   	  product.filter((item: Product) => {
          if(item.category == 'tools')
            this.products.push(item)
-           
+           console.log("lista de productos")
       })
     });
+    
     document.body.classList.add('tools-bg'); // Add class in body
     document.getElementsByClassName("header-type")[0].classList.add("header-tools");  // Change header 4 class
     

@@ -115,7 +115,7 @@ export class CheckoutComponent implements OnInit {
     this.getTotal().subscribe(amount => this.amount = amount);
     this.initConfig();
     this.currentHour = new Date().getHours();
-    this.datepickup = (this.currentHour>13) ? this.currentDate(1):this.datepickup = this.currentDate(0);
+    this.datepickup = (this.currentHour>=13) ? this.currentDate(1): this.currentDate(0);
     this.updateDates();
     this.hourpickup=this.hoursFiltered[0].value;
     this.calculateHour();
@@ -129,7 +129,7 @@ export class CheckoutComponent implements OnInit {
   public pay(){
     alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
     this.cartService.cleanCart();
-    this.router.navigate(['home/index']);
+    this.router.navigate(['index']);
   }
 
   public calculateHour(){

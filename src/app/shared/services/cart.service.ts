@@ -42,7 +42,7 @@ export class CartService {
         let stock = this.calculateStockCounts(products[index], quantity);
         if (qty != 0 && stock) {
           products[index]['quantity'] = qty;
-          this.toastrService.success('This product has been added.');
+          this.toastrService.success('El servicio se ha añadido a tu carrito.');
         }
         return true;
       }
@@ -51,7 +51,7 @@ export class CartService {
     if(!hasItem) {
         item = { product: product, quantity: quantity };
         products.push(item);
-        this.toastrService.success('This product has been added.');
+        this.toastrService.success('El servicio se ha añadido a tu carrito.');
     }
 
     localStorage.setItem("cartItem", JSON.stringify(products));
