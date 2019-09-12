@@ -15,12 +15,12 @@
             <div class="col-lg-6 rtl-text">
               <div class="product-right">
                 <h2>{{product.name}}</h2>
-                <h3>{{product.price | currency:productsService?.currency:'symbol'}} <del><span class="money">{{product.salePrice | currency:productsService?.currency:'symbol'}}</span></del> </h3>
+                <h3>{{product.price | currency:productsService?.currency:'symbol'}} </h3>
                 <ul class="color-variant" *ngIf="product.variants">
                   <li [class]="variant.color" [class.active]="selectedColor == variant.images" (click)="changeVariantImage(variant.images)" *ngFor="let variant of product.variants"></li>
                 </ul>
                 <div class="border-product">
-                  <h6 class="product-title">product details</h6>
+                  <h6 class="product-title">Detalles del producto</h6>
                   <p>{{product.shortDetails}}</p>
                 </div>
                 <div class="product-description border-product">
@@ -31,7 +31,7 @@
                       </li>
                     </ul>
                   </div>
-                  <h6 class="product-title">quantity</h6>
+                  <h6 class="product-title">Cantidad</h6>
                   <div class="qty-box">
                     <div class="input-group">
                       <span class="input-group-prepend">
@@ -49,8 +49,8 @@
                   </div>
                 </div>
                 <div class="product-buttons">
-                  <a [routerLink]="" (click)="addToCart(product, counter)" class="btn btn-solid" >add to cart</a>
-                  <a [routerLink]="['/home/no-sidebar/product', product.id]" class="btn btn-solid">view detail</a>
+                  <a [routerLink]="" (click)="addToCart(product, counter)" class="btn btn-solid" >Añadir al carrito</a>
+                  <a [routerLink]="['/home/no-sidebar/product', product.id]" class="btn btn-solid">Ver detalle</a>
                 </div>
               </div>
             </div>

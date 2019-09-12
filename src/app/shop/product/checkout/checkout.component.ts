@@ -127,9 +127,10 @@ export class CheckoutComponent implements OnInit {
   }
   
   public pay(){
-    alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
-    this.cartService.cleanCart();
-    this.router.navigate(['index']);
+    //alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
+    //this.cartService.cleanCart();
+    //this.router.navigate(['index']);
+    this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, 1, this.amount+1.5);
   }
 
   public calculateHour(){

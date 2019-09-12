@@ -14,5 +14,6 @@ export class FooterOneComponent implements OnInit {
 
   public subscribeToMail(){
     alert("Gracias por tu subscripción!");
+    return false;
   }
 }
