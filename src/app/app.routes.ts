@@ -6,7 +6,7 @@ import {HomeThirteenComponent} from './shop/home-13/home-thirteen.component'
 
 
 export const rootRouterConfig: Routes = [
-  {
+  /*{
     path: '',
     redirectTo: 'index',
     pathMatch: 'full'
@@ -14,14 +14,15 @@ export const rootRouterConfig: Routes = [
   {
     path: 'demo',
     component: DemoComponent
-  },
+  },*/
   {
     path: '',
     component: MainComponent,
     children: [
       { 
-        path: 'index',
-        component: HomeThirteenComponent
+        path: '',
+        component: HomeThirteenComponent,
+        pathMatch: 'full'
       },
       {
         path: 'home',
@@ -38,8 +39,12 @@ export const rootRouterConfig: Routes = [
     ]
   },
   {
+    path: 'index',
+    redirectTo: ''
+  },
+  {
     path: '**',
-    redirectTo: 'index'
+    redirectTo: ''
   }
 ];
 
