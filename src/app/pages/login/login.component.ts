@@ -9,27 +9,35 @@ import { Observable, of } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
 
   constructor(public fb: FormBuilder, private loginService: LoginService) { 
-    
-  }
-
-  ngOnInit() {
     this.loginForm = this.fb.group({
       email: [''],
-      Password: ['']
+      password: ['']
     });
   }
 
-  login(userdata){ 
-    console.log(userdata);
+  ngOnInit() {
+    
+  }
+
+  login(){ 
+    console.log(this.loginForm.value);
     // User data which we have received from the registration form.
-    this.loginService.login(userdata).subscribe((response)=>{
+    var obj = 
+      {
+        "transaccion": "autenticarUsuario",
+        "datosUsuario": this.loginForm.value
+      }
+    
+    this.loginService.login(obj).subscribe((response)=>{
       console.log(response);
-     }); 
+      
+     });
   }
 
 }

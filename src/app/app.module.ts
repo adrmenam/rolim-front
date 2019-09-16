@@ -18,7 +18,6 @@ import { MainComponent } from './main/main.component';
 import { DemoComponent } from './demo/demo.component';
 import * as $ from 'jquery';
 import { TermsComponent } from './terms/terms.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 // AoT requires an exported function for factories
@@ -35,8 +34,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
-    FormsModule, 
-    ReactiveFormsModule,
     HttpModule,
     BrowserAnimationsModule,
     ShopModule,
