@@ -27,15 +27,15 @@
                 <h3>Inicio de Sesión</h3>
                 <div class="theme-card">
                     <form class="theme-form">
-                        <div class="form-group">
+                        <div class="form-group" >
                             <label for="email">Email</label>
-                            <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                            <input type="email" name="email" [formControl]="email" class="form-control" id="email" placeholder="Email" required="">
                         </div>
                         <div class="form-group">
                             <label for="review">Contraseña</label>
-                            <input type="password" class="form-control" id="review" placeholder="Ingresa tu contraseña" required="">
+                            <input type="password" name="password" [formControl]="password" class="form-control" id="review" placeholder="Ingresa tu contraseña" required="">
                         </div>
-                        <button class="btn btn-solid" (click)="false">Iniciar sesión</button>
+                        <button class="btn btn-solid" type="submit">Iniciar sesión</button>
                     </form>
                 </div>
             </div>
