@@ -3,7 +3,7 @@
       <div class="header-contact">
         <ul>
           <!--<li>{{ 'topbar-title' | translate }}</li>-->
-          <li>Bienvenido</li>
+          <li>Bienvenido {{user}}</li>
           <!--<li><i class="fa fa-phone" aria-hidden="true"></i>{{ 'call-us' | translate }}: 123 - 456 - 7890</li>-->
           <li><i class="fa fa-phone" aria-hidden="true"></i>Contacto: 097 945 6475</li>
         </ul>
@@ -23,12 +23,13 @@
           <ul class="onhover-show-div">
             <li>
               <a [routerLink]="'/pages/login'" data-lng="en">
-                  {{ 'login' | translate }}
+                <button class="btn btn-solid">{{ 'login' | translate }}</button>
+                  
               </a>
             </li>
             <li>
               <a [routerLink]="'/index'" data-lng="es">
-                  {{ 'logout' | translate }}
+                  <button class="btn btn-solid" (click)="logout()">{{ 'logout' | translate }}</button>
               </a>
             </li>
           </ul>

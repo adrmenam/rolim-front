@@ -12,12 +12,45 @@ export class LoginService {
   constructor(private httpClient : HttpClient) { }
 
   public login(obj){
-    return this.httpClient.post(this.baseUrl,obj, {
+    let transaction = 
+      {
+        "transaccion": "autenticarUsuario",
+        "datosUsuario": obj
+      }
+    return this.httpClient.post(this.baseUrl,transaction, {
       headers: new HttpHeaders({
            'Content-Type':  'application/json',
          })
     }).map(data=>
      data);
-}
+  }
+
+  public registerUser(obj){
+    let transaction = 
+      {
+        "transaccion": "registrarUsuario",
+        "datosUsuario": obj
+      }
+    return this.httpClient.post(this.baseUrl,transaction, {
+      headers: new HttpHeaders({
+           'Content-Type':  'application/json',
+         })
+    }).map(data=>
+     data);
+  }
+
+  public validateOtp(obj){
+    let transaction = 
+      {
+        "transaccion": "verificarCodigoOtp",
+        "datosUsuario": obj
+      }
+    return this.httpClient.post(this.baseUrl,transaction, {
+      headers: new HttpHeaders({
+           'Content-Type':  'application/json',
+         })
+    }).map(data=>
+     data);
+  }
 
 }

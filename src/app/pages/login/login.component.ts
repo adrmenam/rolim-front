@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {LoginService} from './../../shared/services/login.service';
+import { LoginService } from './../../shared/services/login.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
 
@@ -13,11 +14,12 @@ import { Observable, of } from 'rxjs';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public mensaje: any;
 
-  constructor(public fb: FormBuilder, private loginService: LoginService) { 
+  constructor(public fb: FormBuilder, private loginService: LoginService, private router: Router) { 
     this.loginForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     });
   }
 
@@ -28,16 +30,28 @@ export class LoginComponent implements OnInit {
   login(){ 
     console.log(this.loginForm.value);
     // User data which we have received from the registration form.
-    var obj = 
-      {
-        "transaccion": "autenticarUsuario",
-        "datosUsuario": this.loginForm.value
-      }
     
-    this.loginService.login(obj).subscribe((response)=>{
+    this.loginService.login(this.loginForm.value).subscribe((response)=>{
       console.log(response);
-      
+      if(response['mensajeRetorno']=="consulta correcta"){
+        localStorage.setItem("token", JSON.stringify(response['token']));
+        localStorage.setItem("user", JSON.stringify(this.loginForm.value['email']));
+        
+        this.router.navigate([''])
+        .then(() => {
+          window.location.reload();
+        });
+      }else{
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        
+      }
+      this.mensaje=response['mensajeRetorno'];
      });
+  }
+
+  goToRegister(){
+    this.router.navigate(['pages/register'])
   }
 
 }

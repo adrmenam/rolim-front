@@ -138,7 +138,7 @@ const routes: Routes = [
         path: 'privacy',
         component: PrivacyComponent
       }
-    ]
+    ],
   }
 ];
 

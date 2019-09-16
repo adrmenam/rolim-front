@@ -29,13 +29,28 @@
                     <form class="theme-form" [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="form-group" >
                             <label for="email">Email</label>
-                            <input type="email" name="email" formControlName="email" class="form-control" id="email" placeholder="Email" required="">
+                            <input type="email" name="email" formControlName="email" class="form-control" id="email" placeholder="Email" required="true">
+                            <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.required" class="text text-danger">
+                                El campo Email es obligatorio.
+                            </div>
+                            <div *ngIf="loginForm.controls.email.touched && loginForm.controls.email.errors?.email" class="text text-danger">
+                                Email no válido
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="review">Contraseña</label>
-                            <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required="">
+                            <input type="password" name="password" formControlName="password" class="form-control" id="password" placeholder="Ingresa tu contraseña" required="true">
+                            <div *ngIf="loginForm.controls.password.touched && loginForm.controls.password.errors?.required" class="text text-danger">
+                                El campo Contraseña es obligatorio.
+                            </div>
                         </div>
+                        <div *ngIf="mensaje!='consulta correcta'" class="text text-danger">
+                            {{mensaje}}
+                        </div>
+                        <br>
                         <button class="btn btn-solid" type="submit">Iniciar sesión</button>
+
+                        
                     </form>
                 </div>
             </div>
@@ -44,7 +59,7 @@
                 <div class="theme-card authentication-right">
                     <h6 class="title-font">Crear una cuenta</h6>
                     <p>Regístrate gratis en ROLIM. Es rápido y fácil. Te permite comprar, suscribirte a nuestros servicios y realizar un seguimiento de tus órdenes. Para empezar, haz click en CREAR UNA CUENTA.</p>
-                    <button class="btn btn-solid">Crear una cuenta</button>
+                    <button class="btn btn-solid" (click)="goToRegister()">Crear una cuenta</button>
                 </div>
             </div>
         </div>

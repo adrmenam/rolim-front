@@ -33,6 +33,7 @@ import { TermsComponent } from './terms/terms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
