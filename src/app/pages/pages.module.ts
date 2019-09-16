@@ -30,10 +30,14 @@ import { MasonaryFourGridComponent } from './portfolio/masonary-four-grid/masona
 import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/masonary-fullwidth.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     PagesRoutingModule,
     SlickCarouselModule,
     IsotopeModule

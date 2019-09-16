@@ -19,6 +19,7 @@ import { DemoComponent } from './demo/demo.component';
 import * as $ from 'jquery';
 import { TermsComponent } from './terms/terms.component';
 
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
