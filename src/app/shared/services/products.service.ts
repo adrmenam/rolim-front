@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
 import { BehaviorSubject, Observable, of, Subscriber} from 'rxjs';
@@ -15,6 +16,7 @@ export class ProductsService {
   
   public currency : string = 'USD';
   public catalogMode : boolean = false;
+  private privatebaseUrl:string = "http://198.199.69.76:3000/productos";
   
   public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
@@ -26,7 +28,46 @@ export class ProductsService {
 
   // Observable Product Array
   private products(): Observable<Product[]> {
-     return this.http.get('assets/data/products.json').map((res:any) => res.json())
+    let transaction = 
+    {
+      "transaccion": "lavado", 
+    }
+    return this.http.get('assets/data/products.json').map((res:any) => res.json())
+    //let aux = this.http.get('assets/data/products.json').map((res:any) => res.json())
+    //let aux = this.http.post(this.privatebaseUrl,transaction).map((res:any) => {
+      // let productos : Product[];
+      // let product : Product;
+      // product = {
+      //   id: res.json()['id'],
+      //   name: res.json()['descripcion'],
+      //   price: res.json()['precio'],
+      //   salePrice: res.json()['precio'],
+      //   discount: 0,
+      //   pictures: "assets/images/laundry/product/"+ res.json()['imagen'] +".jpg",
+      //   shortDetails: "Funda de Lavanderia (Lavado y Doblado)",
+      //   description: "Funda de Lavanderia (Lavado y Doblado)",
+      //   stock: 20,
+      //   new: false,
+      //   sale: false,
+      //   category: "individual"
+      // }
+      // product.id = res.json()['id'];
+      // product.name = res.json()['descripcion'];
+      // product.price = res.json()['precio'];
+      // product.pictures = "assets/images/laundry/product/"+ res.json()['imagen'] +".jpg";
+      // productos.push(product);
+      //return res.json();
+
+    //});
+    //console.log(aux);
+    //return aux;
+     
+    // return this.httpClient.post(this.baseUrl,transaction, {
+    //   headers: new HttpHeaders({
+    //        'Content-Type':  'application/json',
+    //      })
+    // }).map(data=>
+    //  data);
   }
 
   // Get Products

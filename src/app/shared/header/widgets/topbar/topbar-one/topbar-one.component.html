@@ -23,13 +23,13 @@
           <ul class="onhover-show-div">
             <li>
               <a [routerLink]="'/pages/login'" data-lng="en">
-                <button class="btn btn-solid">{{ 'login' | translate }}</button>
+                {{ 'login' | translate }}
                   
               </a>
             </li>
             <li>
-              <a [routerLink]="'/index'" data-lng="es">
-                  <button class="btn btn-solid" (click)="logout()">{{ 'logout' | translate }}</button>
+              <a [routerLink]="'/index'" data-lng="es" (click)="logout()">
+                  {{ 'logout' | translate }}
               </a>
             </li>
           </ul>
