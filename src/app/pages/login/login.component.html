@@ -20,7 +20,7 @@
 </div>
 <!-- breadcrumb End -->
 <!-- section start -->
-<section class="login-page section-b-space">
+<section class="login-page section-b-space" *ngIf="!requireOtp">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
@@ -48,7 +48,7 @@
                             {{mensaje}}
                         </div>
                         <br>
-                        <button class="btn btn-solid" type="submit">Iniciar sesión</button>
+                        <button class="btn btn-solid" [disabled]="!loginForm.valid" id="btnLogin" type="submit">Iniciar sesión</button>
 
                         
                     </form>
@@ -66,3 +66,29 @@
     </div>
 </section>
 <!--Section ends-->
+
+<section class="section-b-space light-layout" *ngIf="requireOtp">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="success-text">
+                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <h2>Activación de cuenta</h2>
+                    <p>Su cuenta fue creada, pero aún no ha sido activada.</p> 
+                    <p>Para activar su cuenta, por favor ingrese el código de confirmación enviado a su correo electrónico.</p>
+                    
+                        
+                        
+                          <form class="form-inline subscribe-form" [formGroup]="validateOtpForm">
+                            <div class="form-group mx-sm-3">
+                              <input type="tel" formControlName="otp" name="otp" id="otp" class="form-control" placeholder="Código">
+                            </div>
+                            <button class="btn btn-solid" (click)="validateOtp()">Enviar</button>
+                          </form>
+                        
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>

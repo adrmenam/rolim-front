@@ -21,15 +21,15 @@
         <li class="onhover-dropdown mobile-account">
           <i class="fa fa-user" aria-hidden="true"></i> <!--{{ 'my-account' | translate }}--> Mi cuenta
           <ul class="onhover-show-div">
-            <li>
+            <li *ngIf="user==''">
               <a [routerLink]="'/pages/login'" data-lng="en">
-                {{ 'login' | translate }}
+                <button class="btn btn-solid" style="width: 150px;">{{ 'login' | translate }}</button>
                   
               </a>
             </li>
-            <li>
+            <li *ngIf="user!=''"> 
               <a [routerLink]="'/index'" data-lng="es" (click)="logout()">
-                  {{ 'logout' | translate }}
+                <button class="btn btn-solid" style="width: 150px;">{{ 'logout' | translate }}</button>
               </a>
             </li>
           </ul>
