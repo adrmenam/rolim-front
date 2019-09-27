@@ -32,6 +32,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddressComponent } from './address/address.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -42,7 +43,14 @@ import { AddressComponent } from './address/address.component';
     ReactiveFormsModule,
     PagesRoutingModule,
     SlickCarouselModule,
-    IsotopeModule
+    IsotopeModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCM7KIVcImdLTTWaTM-WkIZFEm7LM9OdGI'
+      /* apiKey is required, unless you are a 
+      premium customer, in which case you can 
+      use clientId 
+      */
+    })
   ],
   declarations: [
     AboutUsComponent,

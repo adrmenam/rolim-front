@@ -29,6 +29,7 @@ import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/mason
 
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
+import { AddressComponent } from './address/address.component';
 
 const routes: Routes = [
   {
@@ -137,6 +138,10 @@ const routes: Routes = [
       {
         path: 'privacy',
         component: PrivacyComponent
+      },
+      {
+        path: 'address',
+        component: AddressComponent
       }
     ],
   }
