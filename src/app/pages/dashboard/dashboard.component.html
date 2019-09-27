@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-title">
-                    <h2>Dashboard</h2>
+                    <h2>Mi cuenta</h2>
                 </div>
             </div>
             <div class="col-sm-6">
                 <nav aria-label="breadcrumb" class="theme-breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a [routerLink]="'/index'">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        <li class="breadcrumb-item active" aria-current="page">Mi Cuenta</li>
                     </ol>
                 </nav>
             </div>
@@ -26,7 +26,7 @@
             <div class="col-lg-3">
                 <div class="account-sidebar">
                     <a class="popup-btn">
-                        my account
+                        Mi cuenta
                     </a>
                 </div>
                 <div class="dashboard-left">
@@ -37,14 +37,12 @@
                     </div>
                     <div class="block-content">
                         <ul>
-                            <li class="active"><a href='#'>Account Info</a></li>
-                            <li><a [routerLink]="">Address Book</a></li>
-                            <li><a [routerLink]="">My Orders</a></li>
-                            <li><a [routerLink]="">My Wishlist</a></li>
-                            <li><a [routerLink]="">Newsletter</a></li>
-                            <li><a [routerLink]="">My Account</a></li>
-                            <li><a [routerLink]="">Change Password</a></li>
-                            <li class="last"><a [routerLink]="">Log Out</a></li>
+                            <li class="active"><a [routerLink]="">Mi cuenta</a></li>
+                            <li><a [routerLink]="">Libreta de direcciones</a></li>
+                            <li><a [routerLink]="">Mis órdenes</a></li>
+                            <li><a [routerLink]="">Mi Lista de Deseos</a></li>
+                            <li><a [routerLink]="">Cambiar contraseña</a></li>
+                            <li class="last"><a [routerLink]="'/index'" (click)="logout()">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 </div>
@@ -53,39 +51,39 @@
                 <div class="dashboard-right">
                     <div class="dashboard">
                         <div class="page-title">
-                            <h2>My Dashboard</h2>
+                            <h2>Mi Cuenta</h2>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hello, MARK JECNO !</p>
-                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                            <p>Hola {{user.nombre}}!</p>
+                            <p>Desde Mi Cuenta, puedes ver un resumen de la actividad reciente de tu cuenta y actualizar tu información.Selecciona uno de los enlaces de esta página para ver o editar tu información.</p>
                         </div>
                         <div class="box-account box-info">
                             <div class="box-head">
-                                <h2>Account Information</h2>
+                                <h2>Información</h2>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Contact Information</h3>
-                                            <a [routerLink]="">Edit</a>
+                                            <h3>Información de contacto</h3>
+                                            <a [routerLink]="">Editar</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6>MARK JECNO</h6>
-                                            <h6>MARk-JECNO@gmail.com</h6>
-                                            <h6><a [routerLink]="">Change Password</a></h6>
+                                            <h6>{{user.nombre}}</h6>
+                                            <h6>{{user.email}}</h6>
+                                            <h6><a [routerLink]="">Cambiar contraseña</a></h6>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Newsletters</h3>
-                                            <a [routerLink]="">Edit</a>
+                                            <h3>Boletines</h3>
+                                            <a [routerLink]="">Editar</a>
                                         </div>
                                         <div class="box-content">
                                             <p>
-                                                You are currently not subscribed to any newsletter.
+                                                Aún no estás suscrito a ningún boletin de novedades.
                                             </p>
                                         </div>
                                     </div>
@@ -94,22 +92,29 @@
                             <div>
                                 <div class="box">
                                     <div class="box-title">
-                                        <h3>Address Book</h3>
-                                        <a [routerLink]="">Manage Addresses</a>
+                                        <h3>Libreta de direcciones</h3>
+                                        <a [routerLink]="">Administrar Direcciones</a>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
-                                            <h6>Default Billing Address</h6>
+                                        <div class="col-sm-4">
+                                            <h6>Dirección de facturación principal</h6>
                                             <address>
-                                                You have not set a default billing address.<br>
-                                                <a [routerLink]="">Edit Address</a>
+                                                Aún no has configurado una dirección de facturación.<br>
+                                                <a [routerLink]="">Editar Dirección</a>
                                             </address>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <h6>Default Shipping Address</h6>
+                                        <div class="col-sm-4">
+                                            <h6>Dirección de Retiro Principal</h6>
                                             <address>
-                                                You have not set a default shipping address.<br>
-                                                <a [routerLink]="">Edit Address</a>
+                                                Aún no has configurado una dirección de Retiro.<br>
+                                                <a [routerLink]="">Editar Dirección</a>
+                                            </address>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <h6>Dirección de Entrega Principal</h6>
+                                            <address>
+                                                Aún no has configurado una dirección de Entrega.<br>
+                                                <a [routerLink]="">Editar Dirección</a>
                                             </address>
                                         </div>
                                     </div>
