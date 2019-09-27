@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../../../shared/classes/order';
 import { OrderService } from '../../../shared/services/order.service';
 import { CartService } from '../../../shared/services/cart.service';
+import { BillingService } from '../../../shared/services/billing.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +18,7 @@ export class SuccessComponent implements OnInit {
   public total: number;
   private billingItems: any = [];
 
-  constructor(private orderService: OrderService, private cartService: CartService, private router: Router) { }
+  constructor(private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router) { }
 
   ngOnInit() {
     this.orderDetails = this.orderService.getOrderItems();
@@ -33,6 +34,7 @@ export class SuccessComponent implements OnInit {
   public sendBilling(){
 
     let sumPrice: number = 0;
+    console.log(this.orderDetails);
     this.orderDetails.product.forEach(element => {
       this.billingItems.push({
         "codigo_principal": element.product.id.toString(),
@@ -44,6 +46,8 @@ export class SuccessComponent implements OnInit {
       });
       sumPrice+=element.product.price;
     });
+
+    // for(var i=0;i<=this.orderDetails.product.length;i++)
 
     if(this.orderDetails.totalAmount == sumPrice+1.5){
       this.billingItems.push({
@@ -79,6 +83,20 @@ export class SuccessComponent implements OnInit {
 
     console.log(JSON.stringify(bill));
 
+    let billReturn = this.billingService.sendBill(bill).subscribe((response)=>{
+      console.log(response);
+      // if(response['mensajeRetorno']=="Usuario Almacenado"){
+      //   this.toastrService.success('El usuario se ha creado correctamente');  
+      //   this.requireOtp=true;   
+      // }else if(response['mensajeRetorno']=="usuario ya existe"){
+      //   this.toastrService.error("El usuario ya existe");
+      // }else{
+      //   this.toastrService.error("El usuario no se pudo registrar");
+      // }
+     });
+  
+
+    
 
     
     // let bill = {
