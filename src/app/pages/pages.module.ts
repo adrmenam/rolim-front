@@ -31,6 +31,7 @@ import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/mason
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddressComponent } from './address/address.component';
 
 
 
@@ -69,7 +70,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MasonaryFourGridComponent,
     MasonaryFullwidthComponent,
     PrivacyComponent,
-    TermsComponent
+    TermsComponent,
+    AddressComponent
   ]
 })
 export class PagesModule { }
