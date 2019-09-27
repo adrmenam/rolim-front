@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                    <div class="field-label">Apellido </div>
+                                    <div class="field-label">Apellido</div>
                                     <input type="text" name="lastname" [formControl]="checkoutForm.controls['lastname']" value="" placeholder="" autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.lastname.touched && checkoutForm.controls.lastname.errors?.required" class="text text-danger">
                                     El campo Apellido es obligatorio.
@@ -51,8 +51,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Tipo de Identificación</div>
+                                    <select name="idType" [formControl]="checkoutForm.controls['idType']" [(ngModel)]="idType" (change)="updateIdValidation();">
+                                        <option value="05" selected>Cédula</option>
+                                        <option value="04">RUC</option>
+                                        <option value="06">Pasaporte</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="field-label">Número de Identificación </div>
+                                    <input type="text" name="idNumber" maxlength="{{maxLengthId}}" [formControl]="checkoutForm.controls['idNumber']" value="" placeholder="" autocomplete="off" >
+                                    <div *ngIf="checkoutForm.controls.idNumber.touched && checkoutForm.controls.idNumber.errors?.required" class="text text-danger">
+                                        El campo Número de Identificación es obligatorio.
+                                    </div>
+                                    <div *ngIf="checkoutForm.controls.idNumber.touched && checkoutForm.controls.idNumber.errors?.minLength" class="text text-danger">
+                                        El campo Número de Identificación debe tener {{maxLengthId}} caracteres.
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Teléfono</div>
-                                    <input type="text" name="phone" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
+                                    <input type="text" name="phone" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required" class="text text-danger">
                                     El campo Teléfono es obligatorio.
                                     </div>
@@ -145,7 +164,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Fecha de Entrega</div>
-                                    <input type="date" name="datedelivery" [formControl]="checkoutForm.controls['datedelivery']" value="{{datedelivery}}" min="{{datedeliveryMin}}" placeholder="" autocomplete="off" (change)="updateDates();">
+                                    <input type="date" name="datedelivery" [formControl]="checkoutForm.controls['datedelivery']" [(ngModel)]="datedelivery" min="{{datedeliveryMin}}" placeholder="" autocomplete="off" (change)="updateDates();">
                                     <div *ngIf="checkoutForm.controls.datedelivery.touched && checkoutForm.controls.datedelivery.errors?.required" class="text text-danger">
                                      El campo Fecha de Entrega es obligatorio.
                                     </div>

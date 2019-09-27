@@ -37,6 +37,9 @@ export class CheckoutComponent implements OnInit {
   public country: any;
   public town: any;
   public state: any;
+  public idType:any;
+  public maxLengthId: any;
+  public validationRegEx: any;
   public currentHour : any;
   public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
 
@@ -94,6 +97,8 @@ export class CheckoutComponent implements OnInit {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      idType: ['', Validators.required],
+      idNumber: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(50)]],
@@ -123,7 +128,10 @@ export class CheckoutComponent implements OnInit {
     this.country='Ecuador';
     this.town='Quito';
     this.state='Pichincha';
-    console.log(this.hourpickup);
+    this.idType='05';
+    this.maxLengthId='10';
+    this.validationRegEx=/[^0-9]/g;
+    //console.log(this.hourpickup);
   }
   
   public pay(){
@@ -146,6 +154,22 @@ export class CheckoutComponent implements OnInit {
 
   public updateHourDelivery(){
     this.hoursFilteredDelivery = this.hours.filter(hour=>hour.value>=this.hourpickup);
+  }
+
+  public updateIdValidation(){
+    if(this.idType=='05'){
+      this.maxLengthId='10';
+      this.checkoutForm.controls.idNumber.setValidators([Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(this.maxLengthId)]);
+    }else if(this.idType=='04'){
+      this.maxLengthId='13';
+      this.checkoutForm.controls.idNumber.setValidators([Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(this.maxLengthId)]);
+    }else{
+      this.maxLengthId='50';
+      this.checkoutForm.controls.idNumber.setValidators([Validators.required, Validators.maxLength(this.maxLengthId)]);
+    }
+    
+    this.checkoutForm.controls.idNumber.updateValueAndValidity();
+    console.log("updateIdValidation"+this.maxLengthId);
   }
 
   public currentDate(num) {
