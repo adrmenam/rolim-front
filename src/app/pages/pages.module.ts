@@ -45,11 +45,8 @@ import { AgmCoreModule } from '@agm/core';
     SlickCarouselModule,
     IsotopeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCM7KIVcImdLTTWaTM-WkIZFEm7LM9OdGI'
-      /* apiKey is required, unless you are a 
-      premium customer, in which case you can 
-      use clientId 
-      */
+      apiKey: 'AIzaSyCM7KIVcImdLTTWaTM-WkIZFEm7LM9OdGI',
+      libraries: ['geometry', 'places']
     })
   ],
   declarations: [
