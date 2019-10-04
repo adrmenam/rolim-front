@@ -65,21 +65,23 @@
                           <div class="media-body">
                               <!-- <p>Ubicación: {{ latitude }}, {{ longitude }}</p> -->
                               <p>Dirección completa: {{address}}</p>
-                              <p>Dirección: {{addressNumber}}</p>
+                              <!-- <p>Dirección: {{addressNumber}}</p> -->
                               <p>Código Postal: {{addressZipCode}}</p>
                               <p>Ciudad: {{addressCity}}</p>
                               <p>País: {{addressCountry}}</p>
                               
                           </div>
                       </li>
-                      <!-- <li>
+                      <!-- tipos: trabajo, casa, otros -->
+                       <!-- <li>
                           <div class="contact-icon">
                               <img  src="assets/images/icon/email.png" alt="Generic placeholder image">
-                              <h6>Address</h6>
+                              <h6>Tipo de Dirección</h6>
                           </div>
                           <div class="media-body">
                               <p>Support@Shopcart.com</p>
                               <p>info@shopcart.com</p>
+
                           </div>
                       </li> -->
                       <!-- <li>
@@ -105,21 +107,32 @@
                           <input type="text" class="form-control" id="direccion" placeholder="Dirección" required="" [value]="address">
                       </div>
                       <div class="col-md-6">
-                          <label for="lalo">Ubicación</label>
+                          <label for="lalo">Calle secundaria</label>
                           <input type="text" class="form-control" id="lalo" placeholder="Ubicación" required="" [value]="latlong">
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                           <label for="review">Ciudad</label>
                           <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" required="" [value]="addressCity">
                       </div>
-                      <div class="col-md-6">
+                      <div class="col-md-4">
                           <label for="pais">País</label>
                           <input type="text" class="form-control" id="pais" placeholder="País" required="" [value]="addressCountry">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="alias">Tipo</label>
+                        <select name="alias" id="alias" class="form-control" [(ngModel)]="alias">
+                            <option value="casa">Casa</option>
+                            <option value="trabajo">Trabajo</option>
+                            <option value="otros">Otros</option> 
+                                            
+                        </select>
+                        
                       </div>
                       <div class="col-md-12">
                           <label for="referencia">Referencia</label>
                           <textarea class="form-control" placeholder="Referencia" id="referencia" rows="3"></textarea>
                       </div>
+                      
                       <div class="col-md-12">
                           <button class="btn btn-solid" type="submit">Guardar</button>
                       </div>

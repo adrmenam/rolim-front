@@ -22,6 +22,7 @@ export class AddressComponent implements OnInit {
   public addressCountry: String = "";
   public addressZipCode: String = "";
   public latlong: String = "";
+  public alias: any;
 
   @ViewChild('search',{static:false})
   public searchElementRef: ElementRef;
@@ -56,6 +57,9 @@ export class AddressComponent implements OnInit {
         });
       });
     });
+
+    //inicialización en caso de que no se obtenga data.
+    this.alias='casa';
   }
 
   // Get Current Location Coordinates
