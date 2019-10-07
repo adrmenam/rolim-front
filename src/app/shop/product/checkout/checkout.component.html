@@ -136,7 +136,13 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Dirección de Recogida</div>
-                                    <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off">
+                                    <!-- <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off"> -->
+                                    <select name="address" [formControl]="checkoutForm.controls['address']">
+                                        <option value="null" selected>Seleccione una dirección</option>
+                                        <option *ngFor="let address of addresses" [value]="address.id">{{address.direccion}}</option>     
+                                    </select>
+
+                                    
                                     <div *ngIf="checkoutForm.controls.address.touched && checkoutForm.controls.address.errors?.required" class="text text-danger">
                                      El campo Dirección de Recogida es obligatorio.
                                     </div>
@@ -146,7 +152,11 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Dirección de Entrega</div>
-                                    <input type="text" name="address2" [formControl]="checkoutForm.controls['address2']" value="" placeholder="" autocomplete="off">
+                                    <!-- <input type="text" name="address2" [formControl]="checkoutForm.controls['address2']" value="" placeholder="" autocomplete="off"> -->
+                                    <select name="address2" [formControl]="checkoutForm.controls['address2']">
+                                        <option value="null" selected>Seleccione una dirección</option>
+                                        <option *ngFor="let address of addresses" [value]="address.id">{{address.direccion}}</option>     
+                                    </select>
                                     <div *ngIf="checkoutForm.controls.address2.touched && checkoutForm.controls.address2.errors?.required" class="text text-danger">
                                      El campo Dirección de Entrega es obligatorio.
                                     </div>

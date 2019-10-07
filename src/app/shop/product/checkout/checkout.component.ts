@@ -43,6 +43,8 @@ export class CheckoutComponent implements OnInit {
   public currentHour : any;
   public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
 
+  public addresses: any;
+  
   public hours = [
     {
       value: 7,
@@ -101,8 +103,8 @@ export class CheckoutComponent implements OnInit {
       idNumber: ['', Validators.required],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       email: ['', [Validators.required, Validators.email]],
-      address: ['', [Validators.required, Validators.maxLength(50)]],
-      address2: ['', [Validators.required, Validators.maxLength(50)]],
+      address: ['null', Validators.required],
+      address2: ['null', Validators.required],
       country: ['', Validators.required],
       town: ['', Validators.required],
       state: ['', Validators.required],
@@ -111,7 +113,8 @@ export class CheckoutComponent implements OnInit {
       datedelivery: [''],
       hourpickup: [''],
       hourdelivery: ['']
-    })    
+    });
+    this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
   }
 
   ngOnInit() {
@@ -138,7 +141,12 @@ export class CheckoutComponent implements OnInit {
     //alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
     //this.cartService.cleanCart();
     //this.router.navigate(['index']);
-    this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, Math.floor((Math.random() * 1000) + 1), this.amount+1.5);
+    if(this.checkoutForm.value.address=="null" || this.checkoutForm.value.address2=="null"){
+      alert("Debe seleccionar una dirección");
+    }else{
+      this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, Math.floor((Math.random() * 1000) + 1), this.amount+1.5);
+    }
+    
   }
 
   public calculateHour(){
