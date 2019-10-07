@@ -100,28 +100,32 @@
       </div>
       <div class="row">
           <div class="col-sm-12">
-              <form class="theme-form">
+              <form class="theme-form" [formGroup]="addressForm" (ngSubmit)="saveAddress()">
                   <div class="form-row">
                       <div class="col-md-6">
                           <label for="direccion">Dirección</label>
-                          <input type="text" class="form-control" id="direccion" placeholder="Dirección" required="" [value]="address">
+                          <input type="text" class="form-control" id="direccion" placeholder="Dirección" required="" formControlName="direccion" [value]="address" >
                       </div>
                       <div class="col-md-6">
-                          <label for="lalo">Calle secundaria</label>
-                          <input type="text" class="form-control" id="lalo" placeholder="Ubicación" required="" [value]="latlong">
+                          <label for="direccion2">Calle secundaria</label>
+                          <input type="text" class="form-control" id="direccion2" placeholder="Calle secundaria" formControlName="direccion2" required="" >
                       </div>
+                      <div class="col-md-6" hidden>
+                        <label for="lalo">Ubicación</label>
+                        <input type="text" class="form-control" id="lalo" placeholder="Ubicación" required="" formControlName="lalo" [value]="latlong">
+                    </div>
                       <div class="col-md-4">
-                          <label for="review">Ciudad</label>
-                          <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" required="" [value]="addressCity">
+                          <label for="ciudad">Ciudad</label>
+                          <input type="text" class="form-control" id="ciudad" placeholder="Ciudad" required="" formControlName="ciudad" [value]="addressCity" >
                       </div>
                       <div class="col-md-4">
                           <label for="pais">País</label>
-                          <input type="text" class="form-control" id="pais" placeholder="País" required="" [value]="addressCountry">
+                          <input type="text" class="form-control" id="pais" placeholder="País" required="" formControlName="pais" [value]="addressCountry" >
                       </div>
                       <div class="col-md-4">
                         <label for="alias">Tipo</label>
-                        <select name="alias" id="alias" class="form-control" [(ngModel)]="alias">
-                            <option value="casa">Casa</option>
+                        <select name="alias" id="alias" class="form-control" formControlName="alias" >
+                            <option value="casa" selected>Casa</option>
                             <option value="trabajo">Trabajo</option>
                             <option value="otros">Otros</option> 
                                             
@@ -130,7 +134,7 @@
                       </div>
                       <div class="col-md-12">
                           <label for="referencia">Referencia</label>
-                          <textarea class="form-control" placeholder="Referencia" id="referencia" rows="3"></textarea>
+                          <textarea class="form-control" placeholder="Referencia" id="referencia" formControlName="referencia" rows="3"></textarea>
                       </div>
                       
                       <div class="col-md-12">
