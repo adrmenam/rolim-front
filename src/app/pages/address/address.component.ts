@@ -3,6 +3,7 @@ import { MapsAPILoader } from '@agm/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddressService } from './../../shared/services/address.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router, NavigationEnd } from '@angular/router';
 
 //let google: any;
 @Component({
@@ -33,7 +34,7 @@ export class AddressComponent implements OnInit {
   
 
 
-  constructor(public fb: FormBuilder, private addressService: AddressService, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private toastrService: ToastrService) { 
+  constructor(public fb: FormBuilder, private addressService: AddressService, private router: Router, private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private toastrService: ToastrService) { 
     this.addressForm = this.fb.group({
       direccion: [{value: '', disabled: true}, Validators.required],
       direccion2: ['', Validators.required],
@@ -64,6 +65,7 @@ export class AddressComponent implements OnInit {
             return;
           }
  
+
           //set latitude, longitude and zoom
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
@@ -71,6 +73,8 @@ export class AddressComponent implements OnInit {
         });
       });
     });
+
+    this.getAddresses();
 
     //inicialización en caso de que no se obtenga data.
     //this.alias='casa';
@@ -93,11 +97,22 @@ export class AddressComponent implements OnInit {
       console.log(response);
       if(response['codigoRetorno']=="0001"){
         this.toastrService.success('Dirección guardada correctamente'); 
+        this.getAddresses();
+        //this.router.navigate(["'/pages/dashboard'"]);
       }else{
         this.toastrService.error('La dirección no se pudo guardar: '+response['mensajeRetorno']); 
         
       }
       
+     });
+  }
+
+  private getAddresses(){
+    this.addressService.getAddresses(localStorage.getItem("token")).subscribe((response)=>{
+      console.log(response);
+      if(response['codigoRetorno']=="0001"){
+        localStorage.setItem("addresses", JSON.stringify(response['data']));
+      }
      });
   }
 
@@ -113,6 +128,8 @@ export class AddressComponent implements OnInit {
       });
     }
   }
+
+
 
   markerDragEnd($event: any) {
     console.log($event);

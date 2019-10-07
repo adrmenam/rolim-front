@@ -28,6 +28,7 @@ export class TopbarOneComponent implements OnInit {
   logout(){
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("addresses");
     this.cartService.cleanCart();
     window.location.reload();
   }

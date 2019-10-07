@@ -75,7 +75,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6" hidden>
                                     <div class="box">
                                         <div class="box-title">
                                             <h3>Boletines</h3>
@@ -89,34 +89,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
                             <div>
                                 <div class="box">
                                     <div class="box-title">
                                         <h3>Libreta de direcciones</h3>
-                                        <a [routerLink]="">Administrar Direcciones</a>
+                                        <a [routerLink]="'/pages/address'">Nueva Dirección</a>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-4">
-                                            <h6>Dirección de facturación principal</h6>
+                                        <div *ngFor="let address of addresses" class="col-sm-4" style="margin-bottom: 20px;">
+                                            <h6>Dirección {{address.alias}}</h6>
                                             <address>
-                                                Aún no has configurado una dirección de facturación.<br>
-                                                <a [routerLink]="'/pages/address'">Editar Dirección</a>
+                                                {{address.direccion}}<br>      
+                                                <p *ngIf="address.activo">ACTIVA</p>
+                                                <p *ngIf="!address.activo">INACTIVA</p>
+                                                <a [routerLink]="">Editar Dirección</a><br>
+                                                <a [routerLink]="">Eliminar</a>
                                             </address>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <h6>Dirección de Retiro Principal</h6>
-                                            <address>
-                                                Aún no has configurado una dirección de Retiro.<br>
-                                                <a [routerLink]="">Editar Dirección</a>
-                                            </address>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <h6>Dirección de Entrega Principal</h6>
-                                            <address>
-                                                Aún no has configurado una dirección de Entrega.<br>
-                                                <a [routerLink]="">Editar Dirección</a>
-                                            </address>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>

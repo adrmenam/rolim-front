@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from '../../shared/classes/product';
 import { ProductsService } from '../../shared/services/products.service';
+import { AddressService } from './../../shared/services/address.service';
+
 declare var $: any;
 
 @Component({
@@ -12,7 +14,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   
-  constructor(private productsService: ProductsService) {   }
+  constructor(private productsService: ProductsService, private addressService: AddressService) {   }
 
   ngOnInit() {
   	this.productsService.getProducts().subscribe(product => { 
@@ -24,12 +26,21 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
     
     document.body.classList.add('tools-bg'); // Add class in body
     document.getElementsByClassName("header-type")[0].classList.add("header-tools");  // Change header 4 class
-    
+    this.getAddresses();
   }
 
   ngOnDestroy(){
     document.body.classList.remove('tools-bg');
     document.getElementsByClassName("header-type")[0].classList.remove("header-tools");
+  }
+
+  private getAddresses(){
+    this.addressService.getAddresses(localStorage.getItem("token")).subscribe((response)=>{
+      //console.log(response);
+      if(response['codigoRetorno']=="0001"){
+        localStorage.setItem("addresses", JSON.stringify(response['data']));
+      }
+     });
   }
 
 }
