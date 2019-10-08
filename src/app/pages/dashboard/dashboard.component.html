@@ -103,8 +103,8 @@
                                                 {{address.direccion}}<br>      
                                                 <p *ngIf="address.activo">ACTIVA</p>
                                                 <p *ngIf="!address.activo">INACTIVA</p>
-                                                <a [routerLink]="">Editar Dirección</a><br>
-                                                <a [routerLink]="">Eliminar</a>
+                                                
+                                                <a [routerLink]="" (click)="deleteAddress(address.id)">Eliminar</a>
                                             </address>
                                         </div>
                                         

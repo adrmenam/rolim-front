@@ -11,11 +11,30 @@ export class AddressService {
 
   constructor(private httpClient : HttpClient) { }
 
+
   public saveAddress(obj, token){
     let transaction = 
       {
         "transaccion": "registrarDirecciones",
         "datosDireccion": obj
+      }
+      console.log(JSON.stringify(transaction));
+    return this.httpClient.post(this.baseUrl,transaction, {
+      headers: new HttpHeaders({
+           'Content-Type':  'application/json',
+           'x-token': token
+         })
+    }).map(data=>
+     data);
+  }
+
+  public deleteAddress(id, token){
+    let transaction = 
+      {
+        "transaccion": "eliminarDireccion",
+        "datosDireccion": {
+          "direccion": id
+        }
       }
       console.log(JSON.stringify(transaction));
     return this.httpClient.post(this.baseUrl,transaction, {
@@ -40,4 +59,6 @@ export class AddressService {
     }).map(data=>
      data);
   }
+
+
 }
