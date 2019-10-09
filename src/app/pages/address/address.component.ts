@@ -4,8 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddressService } from './../../shared/services/address.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, NavigationEnd } from '@angular/router';
+import { google } from '@google/maps';
 
 //let google: any;
+declare var google: any;
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
