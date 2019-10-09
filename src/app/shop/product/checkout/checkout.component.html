@@ -304,19 +304,19 @@
                                             <ul>
                                                 <li>
                                                     <div class="radio-option">
-                                                        <input type="radio" [(ngModel)]="payment" [value]="false"  name="payment-group" id="payment-1">
+                                                        <input type="radio" [(ngModel)]="payment" [value]="true"  name="payment-group" id="payment-1">
                                                         <label for="payment-1">Pago contra Entrega
                                                         <span class="small-text">Cancela al momento de recibir tu pedido listo.</span></label>
                                                     </div>
                                                 </li>
-                                                <!--<li>
+                                                <li>
                                                     <div class="radio-option">
                                                         <input type="radio" [(ngModel)]="payment" [value]="false"  name="payment-group" id="payment-2">
-                                                        <label for="payment-2">Stripe
-                                                            <span class="small-text">Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</span></label>
+                                                        <label for="payment-2">Tarjeta de crédito
+                                                            <span class="small-text">Cancela con tu tarjeta favorita.</span></label>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <!--<li>
                                                     <div class="radio-option paypal">
                                                         <input type="radio" [(ngModel)]="payment" [value]="true" name="payment-group" id="payment-3">
                                                         <label for="payment-3">PayPal<span class="image"><img src="assets/images/paypal.png" alt="" /></span></label>
@@ -341,12 +341,11 @@
                                             </div>
                                     </div>
                                     <div class="text-right">
-                                        <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="pay()" type="submit" id="pay"
-                                        *ngIf="!payment">
+                                        <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="pay()" type="submit" id="pay">
                                            Completar pedido
                                         </button>
-                                        <ngx-paypal [config]="payPalConfig" [ngClass]="{'btn disabled': !checkoutForm.valid}" *ngIf="payment">
-                                        </ngx-paypal>
+                                        <!-- <ngx-paypal [config]="payPalConfig" [ngClass]="{'btn disabled': !checkoutForm.valid}" *ngIf="payment">
+                                        </ngx-paypal> -->
                                     </div>
                                 </div>
                             </div>

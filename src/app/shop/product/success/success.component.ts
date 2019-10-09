@@ -23,7 +23,7 @@ export class SuccessComponent implements OnInit {
   ngOnInit() {
     this.orderDetails = this.orderService.getOrderItems();
     this.total = this.orderDetails.totalAmount+1.5;
-    this.sendBilling();
+    //this.sendBilling();
   }
 
   public returnHome(){

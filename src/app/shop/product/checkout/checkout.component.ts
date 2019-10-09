@@ -8,6 +8,7 @@ import { CartService } from '../../../shared/services/cart.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
@@ -42,6 +43,9 @@ export class CheckoutComponent implements OnInit {
   public validationRegEx: any;
   public currentHour : any;
   public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
+
+  public payment: any;
+  public totalPayment: any;
 
   public addresses: any;
   
@@ -95,7 +99,7 @@ export class CheckoutComponent implements OnInit {
 
   // Form Validator
   constructor(private fb: FormBuilder, private cartService: CartService, 
-    public productsService: ProductsService, private orderService: OrderService, private router: Router) {
+    public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService) {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -144,7 +148,47 @@ export class CheckoutComponent implements OnInit {
     if(this.checkoutForm.value.address=="null" || this.checkoutForm.value.address2=="null"){
       alert("Debe seleccionar una dirección");
     }else{
-      this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, Math.floor((Math.random() * 1000) + 1), this.amount+1.5);
+      
+      let detallePedido = [];
+      for(var i=0; i<this.checkOutItems.length;i++){
+        detallePedido.push(
+          {
+            "id": this.checkOutItems[i].product.id, 
+            "precio": this.checkOutItems[i].product.price.toString(),  
+            "cantidadPedido": this.checkOutItems[i].quantity,
+            "totalPorArticulo": "$"+this.checkOutItems[i].product.price,
+          }
+        )
+      }
+
+      this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
+
+      let orderJson = {
+        "direccionRecogida": parseInt(this.checkoutForm.value.address),
+        "direccionEntrega": parseInt(this.checkoutForm.value.address2),
+        "fechaRecoger": this.datepickup.replace(/-/g,'/'),
+        "horaRecoger": this.hourpickup+":00",
+        "fechaEntrega": this.datedelivery.replace(/-/g,'/'),
+        "horaEntrega": this.hourdelivery+":00",
+        "comentarioPedido": null,
+        "valorDescuento": null,
+        "totalPedido": this.totalPayment,
+        "idCupon": null,
+        "metodoPago": (this.payment)? "EFECTIVO":"TARJETA",
+        "detallePedido": detallePedido
+      }
+      console.log(orderJson);
+      console.log(this.checkOutItems);
+      this.orderService.saveOrder(localStorage.getItem("token"), orderJson).subscribe((response)=>{
+        console.log(response);
+        if(response['codigoRetorno']=="0001"){
+          console.log("orden creada: " + response['idPedido']);
+          this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, parseInt(response['idPedido']), this.totalPayment);
+        }else{
+          this.toastrService.error('El pedido no se pudo generar: '+response['mensajeRetorno']);
+        }
+       });
+      //this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, Math.floor((Math.random() * 1000) + 1), this.amount+1.5);
     }
     
   }
