@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-visit-mobile',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitMobileComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  public returnHome(){
+    this.router.navigate(['index']);
   }
 
 }
