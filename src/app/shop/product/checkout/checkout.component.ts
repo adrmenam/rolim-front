@@ -46,6 +46,7 @@ export class CheckoutComponent implements OnInit {
 
   public payment: any;
   public totalPayment: any;
+  public deliveryPrice: any;
 
   public addresses: any;
   
@@ -119,6 +120,7 @@ export class CheckoutComponent implements OnInit {
       hourdelivery: ['']
     });
     this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
+    this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
   }
 
   ngOnInit() {
@@ -150,6 +152,7 @@ export class CheckoutComponent implements OnInit {
     }else{
       
       let detallePedido = [];
+      let priceSum = 0;
       for(var i=0; i<this.checkOutItems.length;i++){
         detallePedido.push(
           {
@@ -159,9 +162,20 @@ export class CheckoutComponent implements OnInit {
             "totalPorArticulo": "$"+this.checkOutItems[i].product.price,
           }
         )
+        priceSum+=this.checkOutItems[i].product.price;
+
       }
 
       this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
+
+      if(priceSum+this.deliveryPrice == this.totalPayment){
+        detallePedido.push({
+          "id": 0, 
+          "precio": this.deliveryPrice,  
+          "cantidadPedido": 1,
+          "totalPorArticulo": "$"+this.deliveryPrice,
+        });
+      }
 
       let orderJson = {
         "direccionRecogida": parseInt(this.checkoutForm.value.address),
