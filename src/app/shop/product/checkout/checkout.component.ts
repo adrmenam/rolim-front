@@ -168,12 +168,13 @@ export class CheckoutComponent implements OnInit {
 
       this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
 
+console.log(priceSum+this.deliveryPrice == this.totalPayment);
       if(priceSum+this.deliveryPrice == this.totalPayment){
         detallePedido.push({
           "id": 0, 
-          "precio": this.deliveryPrice,  
+          "precio": this.deliveryPrice.toString(),  
           "cantidadPedido": 1,
-          "totalPorArticulo": "$"+this.deliveryPrice,
+          "totalPorArticulo": "$"+this.deliveryPrice
         });
       }
 
