@@ -17,9 +17,11 @@ export class CartService {
   // Array
   public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
+  public deliveryPrice: any;
   
   constructor(private toastrService: ToastrService) { 
       this.cartItems.subscribe(products => products = products);
+      this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
   }
   
   // Get Products
@@ -110,7 +112,7 @@ export class CartService {
   public getShippingCost(): Observable<number> {
     return this.cartItems.pipe(map((product: CartItem[]) => {
       return products.reduce((prev, curr: CartItem) => {
-        return 1.5;
+        return this.deliveryPrice;
       }, 0);
     }));
   }
@@ -122,7 +124,7 @@ export class CartService {
         var price = 0;
         
           if(i==0){
-            price = curr.product.price+(1.5/curr.quantity);         
+            price = curr.product.price+(this.deliveryPrice/curr.quantity);         
           }else
             price = curr.product.price;     
         return (prev + price * curr.quantity);
