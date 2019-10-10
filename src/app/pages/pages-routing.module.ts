@@ -30,6 +30,7 @@ import { MasonaryFullwidthComponent } from './portfolio/masonary-fullwidth/mason
 import { PrivacyComponent } from './privacy/privacy.component';
 import { TermsComponent } from './terms/terms.component';
 import { AddressComponent } from './address/address.component';
+import { VisitMobileComponent } from './visit-mobile/visit-mobile.component';
 
 const routes: Routes = [
   {
@@ -142,6 +143,10 @@ const routes: Routes = [
       {
         path: 'address',
         component: AddressComponent
+      },
+      {
+        path: 'visit-mobile',
+        component: VisitMobileComponent
       }
     ],
   }

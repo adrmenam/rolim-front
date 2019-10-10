@@ -33,6 +33,7 @@ import { TermsComponent } from './terms/terms.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddressComponent } from './address/address.component';
 import { AgmCoreModule } from '@agm/core';
+import { VisitMobileComponent } from './visit-mobile/visit-mobile.component';
 
 
 
@@ -76,7 +77,8 @@ import { AgmCoreModule } from '@agm/core';
     MasonaryFullwidthComponent,
     PrivacyComponent,
     TermsComponent,
-    AddressComponent
+    AddressComponent,
+    VisitMobileComponent
   ]
 })
 export class PagesModule { }
