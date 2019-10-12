@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Teléfono</div>
-                                    <input type="text" name="phone" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'');" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
+                                    <input type="text" name="phone" maxlength="13" oninput="this.value=this.value.replace(/[^+][^0-9]/g,'');" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.phone.touched && checkoutForm.controls.phone.errors?.required" class="text text-danger">
                                     El campo Teléfono es obligatorio.
                                     </div>
@@ -127,7 +127,7 @@
                                         El campo Provincia es obligatorio.
                                     </div>
                                 </div>
-                                <div class="form-group col-md-12 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-12 col-sm-6 col-xs-12" hidden>
                                     <div class="field-label">Código Postal</div>
                                     <input type="text" name="postalcode" [formControl]="checkoutForm.controls['postalcode']" value="" placeholder="" autocomplete="off">
                                     <div *ngIf="checkoutForm.controls.postalcode.touched && checkoutForm.controls.postalcode.errors?.required" class="text text-danger">

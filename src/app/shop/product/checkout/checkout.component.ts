@@ -48,6 +48,11 @@ export class CheckoutComponent implements OnInit {
   public totalPayment: any;
   public deliveryPrice: any;
 
+  public firstname: any;
+  public lastname: any;
+  public phone: any;
+  public email: any;
+
   public addresses: any;
   
   public hours = [
@@ -101,26 +106,32 @@ export class CheckoutComponent implements OnInit {
   // Form Validator
   constructor(private fb: FormBuilder, private cartService: CartService, 
     public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService) {
-    this.checkoutForm = this.fb.group({
-      firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      idType: ['', Validators.required],
-      idNumber: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      email: ['', [Validators.required, Validators.email]],
-      address: ['null', Validators.required],
-      address2: ['null', Validators.required],
-      country: ['', Validators.required],
-      town: ['', Validators.required],
-      state: ['', Validators.required],
-      postalcode: ['', Validators.required],
-      datepickup: [''],
-      datedelivery: [''],
-      hourpickup: [''],
-      hourdelivery: ['']
-    });
-    this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
-    this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
+      this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
+      this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
+      this.firstname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
+      this.lastname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
+      this.phone = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["telefono"]:'';
+      this.email = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["email"]:'';
+    
+      this.checkoutForm = this.fb.group({
+        firstname: [this.firstname, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+        lastname: [this.lastname, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+        idType: ['', Validators.required],
+        idNumber: ['', Validators.required],
+        phone: [this.phone, [Validators.required, Validators.pattern('[+][0-9]+')]],
+        email: [this.email, [Validators.required, Validators.email]],
+        address: ['null', Validators.required],
+        address2: ['null', Validators.required],
+        country: ['', Validators.required],
+        town: ['', Validators.required],
+        state: ['', Validators.required],
+        postalcode: [''],
+        datepickup: [''],
+        datedelivery: [''],
+        hourpickup: [''],
+        hourdelivery: ['']
+      });
+    
   }
 
   ngOnInit() {
