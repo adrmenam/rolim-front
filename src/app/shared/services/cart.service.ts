@@ -18,10 +18,15 @@ export class CartService {
   public cartItems  :  BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
   public deliveryPrice: any;
+  public minOrder: any;
+  public minFreeDelivery: any;
   
   constructor(private toastrService: ToastrService) { 
       this.cartItems.subscribe(products => products = products);
-      this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
+      this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
+      this.minOrder = sessionStorage.getItem("pedido minimo")?parseFloat(sessionStorage.getItem("pedido minimo")):0;
+      this.minFreeDelivery = sessionStorage.getItem("domicilio minimo")?parseFloat(sessionStorage.getItem("domicilio minimo")):0;
+      
   }
   
   // Get Products
@@ -113,6 +118,30 @@ export class CartService {
     return this.cartItems.pipe(map((product: CartItem[]) => {
       return products.reduce((prev, curr: CartItem) => {
         return this.deliveryPrice;
+      }, 0);
+    }));
+  }
+
+  public getShippingCostNull(): Observable<number> {
+    return this.cartItems.pipe(map((product: CartItem[]) => {
+      return products.reduce((prev, curr: CartItem) => {
+        return 0;
+      }, 0);
+    }));
+  }
+
+  public getMinOrderTotal(): Observable<number> {
+    return this.cartItems.pipe(map((product: CartItem[]) => {
+      return products.reduce((prev, curr: CartItem) => {
+        return this.minOrder;
+      }, 0);
+    }));
+  }
+
+  public getMinOrderTotalWithShipping(): Observable<number> {
+    return this.cartItems.pipe(map((product: CartItem[]) => {
+      return products.reduce((prev, curr: CartItem) => {
+        return this.minOrder+this.deliveryPrice;
       }, 0);
     }));
   }

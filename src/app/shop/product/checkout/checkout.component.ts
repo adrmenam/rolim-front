@@ -45,8 +45,11 @@ export class CheckoutComponent implements OnInit {
   public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
 
   public payment: any;
+  public subtotalPayment: any;
   public totalPayment: any;
   public deliveryPrice: any;
+  public minFreeDelivery: any;
+  public minOrder: any;
 
   public firstname: any;
   public lastname: any;
@@ -107,18 +110,21 @@ export class CheckoutComponent implements OnInit {
   constructor(private fb: FormBuilder, private cartService: CartService, 
     public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService) {
       this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
-      this.deliveryPrice = localStorage.getItem("deliveryPrice")?parseInt(localStorage.getItem("deliveryPrice")):1.5;
+      this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
+      this.minOrder = sessionStorage.getItem("pedido minimo")?parseFloat(sessionStorage.getItem("pedido minimo")):0;
+      this.minFreeDelivery = sessionStorage.getItem("domicilio minimo")?parseFloat(sessionStorage.getItem("domicilio minimo")):0;
       this.firstname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
       this.lastname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
       this.phone = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["telefono"]:'';
       this.email = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["email"]:'';
     
+
       this.checkoutForm = this.fb.group({
         firstname: [this.firstname, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
         lastname: [this.lastname, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
         idType: ['', Validators.required],
         idNumber: ['', Validators.required],
-        phone: [this.phone, [Validators.required, Validators.pattern('[+][0-9]+')]],
+        phone: [this.phone, Validators.required],
         email: [this.email, [Validators.required, Validators.email]],
         address: ['null', Validators.required],
         address2: ['null', Validators.required],
@@ -138,6 +144,7 @@ export class CheckoutComponent implements OnInit {
     this.cartItems = this.cartService.getItems();
     this.cartItems.subscribe(products => this.checkOutItems = products);
     this.getTotal().subscribe(amount => this.amount = amount);
+    
     this.initConfig();
     this.currentHour = new Date().getHours();
     this.datepickup = (this.currentHour>=13) ? this.currentDate(1): this.currentDate(0);
@@ -151,7 +158,17 @@ export class CheckoutComponent implements OnInit {
     this.idType='05';
     this.maxLengthId='10';
     this.validationRegEx=/[^0-9]/g;
+    this.payment=true;
+    this.cartService.getTotalAmount().subscribe((total: number)=>{this.subtotalPayment = total});
+    if(this.subtotalPayment<this.minOrder){
+      this.toastrService.info('El pedido mínimo es de '+this.minOrder+' dólares, agrega más elementos a tu pedido, de lo contrario se cobrará el mínimo');
+      
+    }
     //console.log(this.hourpickup);
+    if(this.firstname==''){
+      this.toastrService.info('Para pagar, primero debes iniciar sesión o registrarte.');
+      this.router.navigate(['pages/login']);
+    }
   }
   
   public pay(){
@@ -210,6 +227,7 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
         if(response['codigoRetorno']=="0001"){
           console.log("orden creada: " + response['idPedido']);
           this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, parseInt(response['idPedido']), this.totalPayment);
+          this.cartService.cleanCart();
         }else{
           this.toastrService.error('El pedido no se pudo generar: '+response['mensajeRetorno']);
         }
@@ -274,9 +292,17 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
   public getDateString(date: Date){
     return date.toISOString().substring(0,10);
   }
-  // Get sub Total
+
+  // Get  Total
   public getTotal(): Observable<number> {
-    if(this.ship=='T')
+    
+    //In case order total is lower than minimum order total
+    if(this.subtotalPayment<this.minOrder){
+        return (this.ship=='T')?this.cartService.getMinOrderTotalWithShipping():this.cartService.getMinOrderTotal();
+    }
+
+    //If is a normal order superior to minimum order total asks for conditions to add shipping
+    if(this.ship=='T' && this.subtotalPayment<this.minFreeDelivery)
       return this.cartService.getTotalWithShipping();
     else
       return this.cartService.getTotalAmount();
@@ -287,7 +313,12 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
   }
 
   public getShippingCost(): Observable<number> {
-    return this.cartService.getShippingCost();
+    if(this.subtotalPayment<this.minFreeDelivery){
+      return this.cartService.getShippingCost();
+    }else{
+      return this.cartService.getShippingCostNull();
+    }
+    
   }
 
 
