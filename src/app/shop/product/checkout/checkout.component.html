@@ -347,6 +347,8 @@
                                         <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="pay()" type="submit" id="pay" *ngIf="payment">
                                            Completar pedido
                                         </button>
+                                        <!--<script [src]="widgetUrl"></script>-->
+                                        <form action="/home/checkout/success" class="paymentWidgets" data-brands="VISA MASTER AMEX DINERS DISCOVER"></form>
                                         <!--<ngx-paypal [config]="payPalConfig" [ngClass]="{'btn disabled': !checkoutForm.valid}" *ngIf="!payment">
                                         </ngx-paypal>-->
                                     </div>
@@ -357,6 +359,7 @@
 
                 </form>
             </div>
+                                        
         </div>
     </div>
 </section>

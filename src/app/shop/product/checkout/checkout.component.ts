@@ -6,6 +6,7 @@ import { CartItem } from '../../../shared/classes/cart-item';
 import { ProductsService } from '../../../shared/services/products.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { OrderService } from '../../../shared/services/order.service';
+import { DatafastService } from '../../../shared/services/datafast.service';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -57,7 +58,10 @@ export class CheckoutComponent implements OnInit {
   public email: any;
 
   public addresses: any;
-  
+
+  public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutid=";
+  public loadAPI: Promise<any>;
+
   public hours = [
     {
       value: 7,
@@ -108,7 +112,7 @@ export class CheckoutComponent implements OnInit {
 
   // Form Validator
   constructor(private fb: FormBuilder, private cartService: CartService, 
-    public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService) {
+    public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService, private datafastService: DatafastService) {
       this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
       this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
       this.minOrder = sessionStorage.getItem("pedido minimo")?parseFloat(sessionStorage.getItem("pedido minimo")):0;
@@ -160,15 +164,41 @@ export class CheckoutComponent implements OnInit {
     this.validationRegEx=/[^0-9]/g;
     this.payment=true;
     this.cartService.getTotalAmount().subscribe((total: number)=>{this.subtotalPayment = total});
+    this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
+    //Info toast if minimum order total not reached
     if(this.subtotalPayment<this.minOrder){
-      this.toastrService.info('El pedido mínimo es de '+this.minOrder+' dólares, agrega más elementos a tu pedido, de lo contrario se cobrará el mínimo');
-      
+      this.toastrService.info('El pedido mínimo es de '+this.minOrder+' dólares, agrega más elementos a tu pedido, de lo contrario se cobrará el mínimo');  
     }
-    //console.log(this.hourpickup);
+
+    //Datafast step 1: get CheckoutId 
+    this.getCheckoutId(this.totalPayment);
+    //Load datafast api
+    
+
+    //Force user to login for accessing checkout page
     if(this.firstname==''){
       this.toastrService.info('Para pagar, primero debes iniciar sesión o registrarte.');
       this.router.navigate(['pages/login']);
     }
+  }
+
+  public getCheckoutId(amount){
+    //Datafast step 1: get CheckoutId 
+    this.datafastService.getCheckoutId(amount).subscribe((response)=>{
+      console.log(response);
+      if(response['result']['description']=="successfully created checkout"){
+        console.log("CheckoutId: " + response['id']);
+        this.widgetUrl+=response['id'];
+        console.log(this.widgetUrl);
+        this.loadAPI = new Promise((resolve) => {
+          console.log('resolving promise...');
+          this.loadScript(this.widgetUrl);
+          
+        });
+      }else{
+        this.toastrService.error('No se pudo comunicar con el botón de pago.');
+      }
+     });
   }
   
   public pay(){
@@ -321,6 +351,18 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     
   }
 
+
+
+  //Add Script tag to head for Datafast integration
+  public loadScript(url) {
+    console.log('preparing to load...')
+    let node = document.createElement('script');
+    node.src = url;
+    //node.type = 'text/javascript';
+    //node.async = true;
+    //node.charset = 'utf-8';
+    document.getElementsByTagName('head')[0].appendChild(node);
+  }
 
  
   // stripe payment gateway
