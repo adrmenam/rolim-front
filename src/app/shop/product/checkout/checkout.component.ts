@@ -59,7 +59,7 @@ export class CheckoutComponent implements OnInit {
 
   public addresses: any;
 
-  public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutid=";
+  public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=";
   public loadAPI: Promise<any>;
 
   public hours = [
@@ -358,10 +358,9 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     console.log('preparing to load...')
     let node = document.createElement('script');
     node.src = url;
-    //node.type = 'text/javascript';
-    //node.async = true;
-    //node.charset = 'utf-8';
-    document.getElementsByTagName('head')[0].appendChild(node);
+    
+    document.getElementsByTagName('body')[0].appendChild(node); 
+    
   }
 
  

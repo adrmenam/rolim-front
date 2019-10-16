@@ -11,8 +11,7 @@ export class DatafastService {
 
   public getCheckoutId(amount){
     let url = "https://test.oppwa.com/v1/checkouts";
-    let data = ""
-    + "authentication.entityId=8a829418533cf31d01533d06f2ee06fa"
+    let data = "authentication.entityId=8a829418533cf31d01533d06f2ee06fa"
     + "&authentication.userId=8a829418533cf31d01533d06fd040748"
     + "&authentication.password=Xt7F22QENX"
     + "&amount="+amount.toFixed(2)
