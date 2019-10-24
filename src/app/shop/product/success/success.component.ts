@@ -3,7 +3,8 @@ import { Order } from '../../../shared/classes/order';
 import { OrderService } from '../../../shared/services/order.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { BillingService } from '../../../shared/services/billing.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DatafastService } from '../../../shared/services/datafast.service';
 
 @Component({
   selector: 'app-order-success',
@@ -17,13 +18,30 @@ export class SuccessComponent implements OnInit {
   public orderDetails : Order = {};
   public total: number;
   private billingItems: any = [];
+  
+  private resourcePath: any;
 
-  constructor(private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
 
   ngOnInit() {
     this.orderDetails = this.orderService.getOrderItems();
     this.total = this.orderDetails.totalAmount;
     //this.sendBilling();
+    this.resourcePath = this.route.snapshot.paramMap.get("resourcePath");
+    this.processPurchase(this.resourcePath);
+  }
+
+  public processPurchase(resourcePath){
+    //Datafast step 2: Purchase process 
+    this.datafastService.processPurchase(resourcePath).subscribe((response)=>{
+      console.log(response);
+      if(response['result']['code']=="000.100.110"){
+        console.log("Respuesta: " + response['result']['description']);
+        
+      }else{
+        console.log('No se pudo comunicar con el botón de pago.');
+      }
+     });
   }
 
   public returnHome(){
