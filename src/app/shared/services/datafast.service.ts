@@ -31,7 +31,7 @@ export class DatafastService {
   }
 
   public processPurchase(resourcePath){
-    let url = "https://test.oppwa.com"+resourcePath;
+    let url = "https://test.oppwa.com/v1/checkouts/"+resourcePath+"/payment";
     url += "?authentication.userId="+this.userId;
     url += "&authentication.password="+this.password;
     url += "&authentication.entityId="+this.entityId;
