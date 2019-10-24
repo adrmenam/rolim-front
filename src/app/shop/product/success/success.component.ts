@@ -28,6 +28,7 @@ export class SuccessComponent implements OnInit {
     this.total = this.orderDetails.totalAmount;
     //this.sendBilling();
     this.resourcePath = this.route.snapshot.paramMap.get("resourcePath");
+    console.log("ResourcePath: "+this.resourcePath);
     this.processPurchase(this.resourcePath);
   }
 
