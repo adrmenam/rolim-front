@@ -10,6 +10,7 @@ import { DatafastService } from '../../../shared/services/datafast.service';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-checkout',
@@ -56,6 +57,7 @@ export class CheckoutComponent implements OnInit {
   public lastname: any;
   public phone: any;
   public email: any;
+  private publicIp: any;
 
   public addresses: any;
 
@@ -111,7 +113,7 @@ export class CheckoutComponent implements OnInit {
 
 
   // Form Validator
-  constructor(private fb: FormBuilder, private cartService: CartService, 
+  constructor(private http : HttpClient, private fb: FormBuilder, private cartService: CartService, 
     public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService, private datafastService: DatafastService) {
       this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
       this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
@@ -170,8 +172,15 @@ export class CheckoutComponent implements OnInit {
       this.toastrService.info('El pedido mínimo es de '+this.minOrder+' dólares, agrega más elementos a tu pedido, de lo contrario se cobrará el mínimo');  
     }
 
+    this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
+      this.publicIp=data['ip'];
+      console.log(this.publicIp);
+      this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
+        this.checkoutForm.value.lastname,this.publicIp,"TRX",this.checkoutForm.value.email,this.checkoutForm.value.idNumber,this.checkOutItems);
+    });
+
     //Datafast step 1: get CheckoutId 
-    this.getCheckoutId(this.totalPayment);
+    
     //Load datafast api
     
 
@@ -180,11 +189,16 @@ export class CheckoutComponent implements OnInit {
       this.toastrService.info('Para pagar, primero debes iniciar sesión o registrarte.');
       this.router.navigate(['pages/login']);
     }
+
+    //get public IP
+    
   }
 
-  public getCheckoutId(amount){
+
+
+  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items){
     //Datafast step 1: get CheckoutId 
-    this.datafastService.getCheckoutId(amount).subscribe((response)=>{
+    this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items).subscribe((response)=>{
       console.log(response);
       if(response['result']['description']=="successfully created checkout"){
         console.log("CheckoutId: " + response['id']);
