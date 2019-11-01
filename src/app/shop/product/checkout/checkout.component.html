@@ -19,7 +19,7 @@
     </div>
 </div>
 <!-- breadcrumb End -->
-<section class="section-b-space">
+<section class="section-b-space" [hidden]="datafast">
     <div class="container padding-cls">
         <div class="checkout-page">
             <div class="checkout-form">
@@ -347,11 +347,14 @@
                                         <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="pay()" type="submit" id="pay" *ngIf="payment">
                                            Completar pedido
                                         </button>
+                                        <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="showPayment()" type="submit" id="showPayment" *ngIf="!payment">
+                                            Pasarela de pago
+                                         </button>
                                         <!--<script [src]="widgetUrl"></script>-->
                                         
                                             
                                         
-                                        <form action="http://localhost:4200/home/checkout/success" class="paymentWidgets" data-brands="VISA MASTER AMEX DINERS DISCOVER"></form>
+                                        <!--<form *ngIf="!payment" action="http://localhost:4200/home/checkout/success" class="paymentWidgets" data-brands="VISA MASTER AMEX DINERS DISCOVER"></form>-->
                                         <!--<ngx-paypal [config]="payPalConfig" [ngClass]="{'btn disabled': !checkoutForm.valid}" *ngIf="!payment">
                                         </ngx-paypal>-->
                                     </div>
@@ -366,3 +369,4 @@
         </div>
     </div>
 </section>
+<form *ngIf="datafast" action="http://localhost:4200/home/checkout/success" class="paymentWidgets" data-brands="VISA MASTER AMEX DINERS DISCOVER"></form>

@@ -18,20 +18,32 @@ export class SuccessComponent implements OnInit {
   public orderDetails : Order = {};
   public total: number;
   private billingItems: any = [];
+  public orderid: any;
   
   private resourcePath: any;
 
   constructor(private route: ActivatedRoute, private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
 
   ngOnInit() {
-    this.orderDetails = this.orderService.getOrderItems();
-    this.total = this.orderDetails.totalAmount;
+    
     //this.sendBilling();
     this.route.queryParams.subscribe(params => {
       let resourcePath = params['resourcePath'];
       console.log(resourcePath); // Print the parameter to the console. 
-      this.processPurchase(resourcePath);
+      if(resourcePath){
+        this.processPurchase(resourcePath);
+        //this.orderDetails = this.orderService.getOrderItems();
+        
+        this.orderid=sessionStorage.getItem("orderId");
+      }else{
+        this.orderDetails = this.orderService.getOrderItems();
+        //this.total = this.orderDetails.totalAmount;
+        this.orderid= this.orderDetails.orderId;
+      }
+      
     });
+    console.log(this.orderDetails);
+    console.log(this.orderid);
   }
 
   public processPurchase(resourcePath){
@@ -49,6 +61,7 @@ export class SuccessComponent implements OnInit {
 
   public returnHome(){
     this.cartService.cleanCart();
+    sessionStorage.removeItem("orderId");
     this.router.navigate(['']);
   }
 

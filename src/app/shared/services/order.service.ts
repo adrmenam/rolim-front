@@ -35,7 +35,20 @@ export class OrderService {
         totalAmount: amount
     };
     this.OrderDetails = item;
+    sessionStorage.setItem("orderId", orderId);
     this.router.navigate(['/home/checkout/success']);
+  }
+
+  public createOrderNoRedirect(product: any, details: any, orderId: any, amount: any) {
+    var item = {
+        shippingDetails: details,
+        product: product,
+        orderId: orderId,
+        totalAmount: amount
+    };
+    this.OrderDetails = item;
+    sessionStorage.setItem("orderId", orderId);
+    //this.router.navigate(['/home/checkout/success']);
   }
 
   public saveOrder(token, order){

@@ -46,6 +46,7 @@ export class CheckoutComponent implements OnInit {
   public currentHour : any;
   public mensajeHora: any = "Ya es muy tarde para realizar un pedido para recogerlo el día de hoy.";
 
+  public datafast: any;
   public payment: any;
   public subtotalPayment: any;
   public totalPayment: any;
@@ -151,6 +152,8 @@ export class CheckoutComponent implements OnInit {
     this.cartItems.subscribe(products => this.checkOutItems = products);
     this.getTotal().subscribe(amount => this.amount = amount);
     
+    this.datafast = false;
+
     this.initConfig();
     this.currentHour = new Date().getHours();
     this.datepickup = (this.currentHour>=13) ? this.currentDate(1): this.currentDate(0);
@@ -172,12 +175,7 @@ export class CheckoutComponent implements OnInit {
       this.toastrService.info('El pedido mínimo es de '+this.minOrder+' dólares, agrega más elementos a tu pedido, de lo contrario se cobrará el mínimo');  
     }
 
-    this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
-      this.publicIp=data['ip'];
-      console.log(this.publicIp);
-      this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
-        this.checkoutForm.value.lastname,this.publicIp,"TRX",this.checkoutForm.value.email,this.checkoutForm.value.idNumber,this.checkOutItems);
-    });
+    
 
     //Datafast step 1: get CheckoutId 
     
@@ -195,6 +193,76 @@ export class CheckoutComponent implements OnInit {
   }
 
 
+  public showPayment(){
+
+    if(this.checkoutForm.value.address=="null" || this.checkoutForm.value.address2=="null"){
+      alert("Debe seleccionar una dirección");
+    }else{
+      this.datafast = true;
+      let detallePedido = [];
+      let priceSum = 0;
+      for(var i=0; i<this.checkOutItems.length;i++){
+        detallePedido.push(
+          {
+            "id": this.checkOutItems[i].product.id, 
+            "precio": this.checkOutItems[i].product.price.toString(),  
+            "cantidadPedido": this.checkOutItems[i].quantity,
+            "totalPorArticulo": "$"+this.checkOutItems[i].product.price,
+          }
+        )
+        priceSum+=this.checkOutItems[i].product.price;
+
+      }
+
+      this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
+
+console.log(priceSum+this.deliveryPrice == this.totalPayment);
+      if(priceSum+this.deliveryPrice == this.totalPayment){
+        detallePedido.push({
+          "id": 0, 
+          "precio": this.deliveryPrice.toString(),  
+          "cantidadPedido": 1,
+          "totalPorArticulo": "$"+this.deliveryPrice
+        });
+      }
+
+      let orderJson = {
+        "direccionRecogida": parseInt(this.checkoutForm.value.address),
+        "direccionEntrega": parseInt(this.checkoutForm.value.address2),
+        "fechaRecoger": this.datepickup.replace(/-/g,'/'),
+        "horaRecoger": this.hourpickup+":00",
+        "fechaEntrega": this.datedelivery.replace(/-/g,'/'),
+        "horaEntrega": this.hourdelivery+":00",
+        "comentarioPedido": null,
+        "valorDescuento": null,
+        "totalPedido": this.totalPayment,
+        "idCupon": null,
+        "metodoPago": (this.payment)? "EFECTIVO":"TARJETA",
+        "detallePedido": detallePedido
+      }
+      console.log(orderJson);
+      console.log(this.checkOutItems);
+      this.orderService.saveOrder(localStorage.getItem("token"), orderJson).subscribe((response)=>{
+        console.log(response);
+        if(response['codigoRetorno']=="0001"){
+          console.log("orden creada: " + response['idPedido']);
+          this.orderService.createOrderNoRedirect(this.checkOutItems, this.checkoutForm.value, parseInt(response['idPedido']), this.totalPayment);
+          this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
+            this.publicIp=data['ip'];
+            console.log(this.publicIp);
+            this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
+                this.checkoutForm.value.lastname,this.publicIp,"TRX",this.checkoutForm.value.email,this.checkoutForm.value.idNumber,this.checkOutItems);
+          });
+          this.cartService.cleanCart();
+        }else{
+          this.toastrService.error('El pedido no se pudo generar: '+response['mensajeRetorno']);
+        }
+       });
+      //this.orderService.createOrder(this.checkOutItems, this.checkoutForm.value, Math.floor((Math.random() * 1000) + 1), this.amount+1.5);
+    }
+
+    
+  }
 
   public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items){
     //Datafast step 1: get CheckoutId 
@@ -215,6 +283,7 @@ export class CheckoutComponent implements OnInit {
      });
   }
   
+
   public pay(){
     //alert("Gracias por contratar nuestros servicios! Un asesor de ROLIM se contactará con usted.");
     //this.cartService.cleanCart();

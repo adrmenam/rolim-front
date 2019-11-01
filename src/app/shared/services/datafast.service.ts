@@ -37,7 +37,7 @@ export class DatafastService {
     + "&amount=1.00"
     //+amount.toFixed(2)
     + "&currency=USD"
-    + "&paymentType=DB"
+    + "&paymentType=DB";
 
 //parametros para fase 2 de prueba final
 /*    
