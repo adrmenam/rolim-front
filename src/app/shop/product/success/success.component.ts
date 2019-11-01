@@ -27,9 +27,11 @@ export class SuccessComponent implements OnInit {
     this.orderDetails = this.orderService.getOrderItems();
     this.total = this.orderDetails.totalAmount;
     //this.sendBilling();
-    this.resourcePath = this.route.snapshot.paramMap.get("resourcePath");
-    console.log("ResourcePath: "+this.resourcePath);
-    this.processPurchase(this.resourcePath);
+    this.route.queryParams.subscribe(params => {
+      let resourcePath = params['resourcePath'];
+      console.log(resourcePath); // Print the parameter to the console. 
+      this.processPurchase(resourcePath);
+    });
   }
 
   public processPurchase(resourcePath){
