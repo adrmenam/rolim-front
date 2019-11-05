@@ -4,6 +4,7 @@ import { Product } from '../../../../shared/classes/product';
 import { ProductsService } from '../../../../shared/services/products.service';
 import { PaginationService } from '../../../../shared/classes/paginate'
 import { trigger, transition, style, animate } from "@angular/animations";
+import { CartService } from '../../../../shared/services/cart.service';
 import * as _ from 'lodash'
 import * as $ from 'jquery';
 
@@ -32,9 +33,10 @@ export class CollectionNoSidebarComponent implements OnInit {
   public  animation    :   any;   // Animation
   paginate: any = {};
 
-  constructor(private route: ActivatedRoute, private router: Router,
+  constructor(private cartService: CartService,private route: ActivatedRoute, private router: Router,
     private productsService: ProductsService, private paginateService: PaginationService) { 
-       this.route.params.subscribe(params => {
+      this.clearServices(); 
+      this.route.params.subscribe(params => {
           const category = params['category'];
           this.productsService.getProductByCategory(category).subscribe(products => {
              this.allProduct = products
@@ -45,6 +47,20 @@ export class CollectionNoSidebarComponent implements OnInit {
 
   ngOnInit() {  }
  
+  private clearServices(){
+    let cart = JSON.parse(localStorage.getItem('cartItem'));
+    console.log(cart);
+    if(cart){
+      cart.filter((item) => {
+        console.log(item);
+        if(item.product.category == 'plan'){
+          this.cartService.cleanCart();
+          this.router.navigate(['']);
+        }
+      });
+    }
+  }
+
   // Animation Effect fadeIn
   public fadeIn() {
       this.animation = 'fadeIn';

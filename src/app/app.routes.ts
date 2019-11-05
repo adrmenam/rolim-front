@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { DemoComponent } from './demo/demo.component';
 import {HomeThirteenComponent} from './shop/home-13/home-thirteen.component'
+import { SampleComponent} from './sample/sample.component';
 
 
 export const rootRouterConfig: Routes = [
@@ -15,6 +16,10 @@ export const rootRouterConfig: Routes = [
     path: 'demo',
     component: DemoComponent
   },*/
+  {
+    path: 'sample',
+    component: SampleComponent
+  },
   {
     path: '',
     component: MainComponent,

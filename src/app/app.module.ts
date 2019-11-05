@@ -18,6 +18,7 @@ import { MainComponent } from './main/main.component';
 import { DemoComponent } from './demo/demo.component';
 import * as $ from 'jquery';
 import { TermsComponent } from './terms/terms.component';
+import { SampleComponent } from './sample/sample.component';
 
 
 // AoT requires an exported function for factories
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     MainComponent,
     DemoComponent,
-    TermsComponent
+    TermsComponent,
+    SampleComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       progressBar: false,
       enableHtml: true,
     }),
-    RouterModule.forRoot(rootRouterConfig, { useHash: false, anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })
+    RouterModule.forRoot(rootRouterConfig, { useHash: false, anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled', onSameUrlNavigation: 'reload' })
   ],
   providers: [],
   bootstrap: [AppComponent]

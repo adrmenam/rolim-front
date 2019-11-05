@@ -61,6 +61,7 @@ export class CheckoutComponent implements OnInit {
   private publicIp: any;
 
   public addresses: any;
+  public idOrden: any;
 
   public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=";
   public loadAPI: Promise<any>;
@@ -120,8 +121,8 @@ export class CheckoutComponent implements OnInit {
       this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
       this.minOrder = sessionStorage.getItem("pedido minimo")?parseFloat(sessionStorage.getItem("pedido minimo")):0;
       this.minFreeDelivery = sessionStorage.getItem("domicilio minimo")?parseFloat(sessionStorage.getItem("domicilio minimo")):0;
-      this.firstname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
-      this.lastname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"]:'';
+      this.firstname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"].toString().split(" ")[0]:'';
+      this.lastname = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["nombre"].toString().split(" ")[1]:'';
       this.phone = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["telefono"]:'';
       this.email = localStorage.getItem("user")?JSON.parse(localStorage.getItem("user"))["email"]:'';
     
@@ -188,7 +189,7 @@ export class CheckoutComponent implements OnInit {
       this.router.navigate(['pages/login']);
     }
 
-    //get public IP
+   
     
   }
 
@@ -200,6 +201,7 @@ export class CheckoutComponent implements OnInit {
     }else{
       this.datafast = true;
       let detallePedido = [];
+      let productosDatafast = [];
       let priceSum = 0;
       for(var i=0; i<this.checkOutItems.length;i++){
         detallePedido.push(
@@ -209,7 +211,16 @@ export class CheckoutComponent implements OnInit {
             "cantidadPedido": this.checkOutItems[i].quantity,
             "totalPorArticulo": "$"+this.checkOutItems[i].product.price,
           }
-        )
+        );
+        productosDatafast.push(
+          {
+            "id": this.checkOutItems[i].product.id, 
+            "precio": this.checkOutItems[i].product.price.toString(),
+            "nombre": this.checkOutItems[i].product.name,  
+            "cantidad": this.checkOutItems[i].quantity
+            
+          }
+        );
         priceSum+=this.checkOutItems[i].product.price;
 
       }
@@ -242,16 +253,18 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
       }
       console.log(orderJson);
       console.log(this.checkOutItems);
+      
       this.orderService.saveOrder(localStorage.getItem("token"), orderJson).subscribe((response)=>{
         console.log(response);
         if(response['codigoRetorno']=="0001"){
           console.log("orden creada: " + response['idPedido']);
+          this.idOrden = response['idPedido'];
           this.orderService.createOrderNoRedirect(this.checkOutItems, this.checkoutForm.value, parseInt(response['idPedido']), this.totalPayment);
           this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
             this.publicIp=data['ip'];
             console.log(this.publicIp);
             this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
-                this.checkoutForm.value.lastname,this.publicIp,"TRX",this.checkoutForm.value.email,this.checkoutForm.value.idNumber,this.checkOutItems);
+                this.checkoutForm.value.lastname,this.publicIp,this.idOrden,this.checkoutForm.value.email,this.checkoutForm.value.idNumber,productosDatafast);
           });
           this.cartService.cleanCart();
         }else{

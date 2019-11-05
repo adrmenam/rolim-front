@@ -67,9 +67,13 @@ export class ProductNoSidebarComponent implements OnInit {
 
   // Add to cart
   public buyNow(product: Product, quantity) {
-     if (quantity > 0) 
-       this.cartService.addToCart(product,parseInt(quantity));
-       this.router.navigate(['/home/checkout']);
+    if (quantity > 0) {
+      if(product.category=='plan')
+        this.cartService.cleanCart();
+      this.cartService.addToCart(product,parseInt(quantity));
+    }
+       
+      this.router.navigate(['/home/checkout']);
   }
 
   // Add to wishlist

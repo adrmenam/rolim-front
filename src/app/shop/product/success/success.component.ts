@@ -5,6 +5,7 @@ import { CartService } from '../../../shared/services/cart.service';
 import { BillingService } from '../../../shared/services/billing.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatafastService } from '../../../shared/services/datafast.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-success',
@@ -22,7 +23,7 @@ export class SuccessComponent implements OnInit {
   
   private resourcePath: any;
 
-  constructor(private route: ActivatedRoute, private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
+  constructor(private toastrService: ToastrService, private route: ActivatedRoute, private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
 
   ngOnInit() {
     
@@ -54,7 +55,9 @@ export class SuccessComponent implements OnInit {
         console.log("Respuesta: " + response['result']['description']);
         
       }else{
-        console.log('No se pudo comunicar con el botón de pago.');
+        console.log('La transacción con el botón de pagos no pudo completarse.');
+        this.toastrService.error("La transacción con el botón de pagos no pudo completarse.");
+        
       }
      });
   }

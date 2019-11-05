@@ -14,16 +14,16 @@
     </li>
   </ul>
   <div class="cart-info cart-wrap" *ngIf="!productsService?.catalogMode">
-    <a [routerLink]="" [attr.data-target]="'#addtocart'+product.id" data-toggle="modal" (click)="addToCart(product)" data-placement="left" title="Add to cart">
+    <!--<a [routerLink]="" [attr.data-target]="'#addtocart'+product.id" data-toggle="modal" (click)="addToCart(product)" data-placement="left" title="Add to cart">
        <i class="ti-shopping-cart" ></i>
-    </a>
-    <a [routerLink]="" (click)="addToWishlist(product)" title="Add to Wishlist">
+    </a>-->
+    <a [routerLink]="" (click)="addToWishlist(product)" title="Añadir a la lista de deseos">
        <i class="ti-heart" aria-hidden="true"></i>
     </a>
-    <a [routerLink]="" [attr.data-target]="'#quick-view'+product.id" data-toggle="modal" title="Quick View">
+    <a [routerLink]="" [attr.data-target]="'#quick-view'+product.id" data-toggle="modal" title="Vista rápida">
        <i class="ti-search" aria-hidden="true"></i>
     </a>
-    <a [routerLink]="['/home/compare']" (click)="addToCompare(product)" title="Compare">
+    <a [routerLink]="['/home/compare']" (click)="addToCompare(product)" title="Comparar">
        <i class="ti-reload" aria-hidden="true"></i>
     </a>
   </div>

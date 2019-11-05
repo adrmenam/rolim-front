@@ -3,6 +3,8 @@ import { Product } from '../../shared/classes/product';
 import { ProductsService } from '../../shared/services/products.service';
 import { AddressService } from './../../shared/services/address.service';
 import { GeneralService } from './../../shared/services/general.service';
+import { CartService } from './../../shared/services/cart.service';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -15,13 +17,15 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   
-  constructor(private generalService: GeneralService, private productsService: ProductsService, private addressService: AddressService) {   }
+  constructor(private cartService: CartService,private router: Router, private generalService: GeneralService, private productsService: ProductsService, private addressService: AddressService) { 
+    this.clearServices();
+  }
 
   ngOnInit() {
   	this.productsService.getProducts().subscribe(product => { 
   	  product.filter((item: Product) => {
          if(item.category == 'individual')
-           this.products.push(item)
+           this.products.push(item);
       })
     });
     
@@ -29,6 +33,11 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
     document.getElementsByClassName("header-type")[0].classList.add("header-tools");  // Change header 4 class
     this.getAddresses();
     this.getConfigurations();
+    /*let user = localStorage.getItem('user');
+    if(user){
+      this.router.navigate(['']);
+    }*/
+    
   }
 
   ngOnDestroy(){
@@ -36,6 +45,20 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
     document.getElementsByClassName("header-type")[0].classList.remove("header-tools");
   }
 
+  private clearServices(){
+    let cart = JSON.parse(localStorage.getItem('cartItem'));
+    console.log(cart);
+    if(cart){
+      cart.filter((item) => {
+        console.log(item);
+        if(item.product.category == 'plan'){
+          this.cartService.cleanCart();
+          this.router.navigate(['']);
+        }
+      });
+    }
+  }
+  
   private getAddresses(){
     this.addressService.getAddresses(localStorage.getItem("token")).subscribe((response)=>{
       //console.log(response);

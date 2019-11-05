@@ -114,8 +114,8 @@
   {
     "id": 9,
     "name": "Funda de Lavanderia",
-    "price": 12.00,
-    "salePrice": 12.00,
+    "price": 1.00,
+    "salePrice": 1.00,
     "discount": 0,
     "pictures": ["assets/images/laundry/product/funda.jpg"],
     "shortDetails": "Funda de Lavanderia (Lavado y Doblado)",
