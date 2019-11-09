@@ -10,16 +10,19 @@ export class DatafastService {
 
   
   //data de pruebas fase 1
-  /*private userId: any = '8a829418533cf31d01533d06fd040748';
+  private userId: any = '8a829418533cf31d01533d06fd040748';
   private entityId: any = '8a829418533cf31d01533d06f2ee06fa';
   private password: any = 'Xt7F22QENX';
-  */
+  
+
   //data de comercio rolim
+  /*
   private userId: any = '8a8294185a65bf5e015a6c8c728c0d95';
   private entityId: any = '8ac7a4c86e1b58ef016e1e33f5750709'
   private password: any = 'bfqGqwQ32X';
   private mid: any = '1000000505';
   private tid: any = 'PD100406';
+  */
 
   constructor(private httpClient : HttpClient) { }
 
@@ -53,7 +56,7 @@ export class DatafastService {
     + "&paymentType=DB"
 
 //parametros para fase 2 de prueba final
-    
+    /*
     + "&customer.givenName="+firstName
     //+ "&customer.middleName="+secondName
     + "&customer.surname="+lastName
@@ -78,6 +81,7 @@ export class DatafastService {
 
     data += "&customParameters["+this.mid+"_"+this.tid+"]="+customParameters ;
     data += "&risk.parameters[USER_DATA2]=ROLIM";
+*/
 
     console.log(data);
     return this.httpClient.post(url,data, {
