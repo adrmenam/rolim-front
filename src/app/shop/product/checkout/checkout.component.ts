@@ -203,6 +203,7 @@ export class CheckoutComponent implements OnInit {
       let detallePedido = [];
       let productosDatafast = [];
       let priceSum = 0;
+      let isRecurrent = false;
       for(var i=0; i<this.checkOutItems.length;i++){
         detallePedido.push(
           {
@@ -223,6 +224,10 @@ export class CheckoutComponent implements OnInit {
         );
         priceSum+=this.checkOutItems[i].product.price;
 
+        if(this.checkOutItems[i].product.category=="plan"){
+          isRecurrent=true;
+          sessionStorage.setItem("planId",this.checkOutItems[i].product.id.toString());
+        }
       }
 
       this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
@@ -263,8 +268,9 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
           this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
             this.publicIp=data['ip'];
             console.log(this.publicIp);
+            console.log("recurrente: "+isRecurrent);
             this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
-                this.checkoutForm.value.lastname,this.publicIp,this.idOrden,this.checkoutForm.value.email,this.checkoutForm.value.idNumber,productosDatafast);
+                this.checkoutForm.value.lastname,this.publicIp,this.idOrden,this.checkoutForm.value.email,this.checkoutForm.value.idNumber,productosDatafast,isRecurrent);
           });
           this.cartService.cleanCart();
         }else{
@@ -277,9 +283,9 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     
   }
 
-  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items){
+  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent){
     //Datafast step 1: get CheckoutId 
-    this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items).subscribe((response)=>{
+    this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent).subscribe((response)=>{
       console.log(response);
       if(response['result']['description']=="successfully created checkout"){
         console.log("CheckoutId: " + response['id']);

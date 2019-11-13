@@ -5,6 +5,7 @@ import { CartService } from '../../../shared/services/cart.service';
 import { BillingService } from '../../../shared/services/billing.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatafastService } from '../../../shared/services/datafast.service';
+import { SubscriptionService } from '../../../shared/services/subscription.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -20,14 +21,17 @@ export class SuccessComponent implements OnInit {
   public total: number;
   private billingItems: any = [];
   public orderid: any;
+  public planid: any;
   
   private resourcePath: any;
 
-  constructor(private toastrService: ToastrService, private route: ActivatedRoute, private orderService: OrderService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
+  constructor(private toastrService: ToastrService, private route: ActivatedRoute, private orderService: OrderService, private subscriptionService: SubscriptionService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
 
   ngOnInit() {
     
     //this.sendBilling();
+    this.planid=sessionStorage.getItem("planId")?sessionStorage.getItem("planId"):'1';
+
     this.route.queryParams.subscribe(params => {
       let resourcePath = params['resourcePath'];
       console.log(resourcePath); // Print the parameter to the console. 
@@ -35,7 +39,8 @@ export class SuccessComponent implements OnInit {
         this.processPurchase(resourcePath);
         //this.orderDetails = this.orderService.getOrderItems();
         
-        this.orderid=sessionStorage.getItem("orderId");
+        this.orderid=sessionStorage.getItem("orderId")?sessionStorage.getItem("orderId"):'';
+        
       }else{
         this.orderDetails = this.orderService.getOrderItems();
         //this.total = this.orderDetails.totalAmount;
@@ -53,7 +58,12 @@ export class SuccessComponent implements OnInit {
       console.log(response);
       if(response['result']['code']=="000.100.110"){
         console.log("Respuesta: " + response['result']['description']);
+        let cardToken = response['registrationId'];
         
+        console.log("Registro del plan "+this.planid+" con el cardToken "+cardToken)
+        this.subscriptionService.registerPlan(localStorage.getItem("token"),this.planid,cardToken).subscribe((response=>{
+          console.log(response);
+        }))
       }else{
         console.log('La transacción con el botón de pagos no pudo completarse.');
         this.toastrService.error("La transacción con el botón de pagos no pudo completarse.");

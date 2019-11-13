@@ -26,7 +26,7 @@ export class DatafastService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items){
+  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent){
 
     
     secondName="Alexander";
@@ -53,11 +53,15 @@ export class DatafastService {
     + "&authentication.password="+this.password
     + "&amount="+amount.toFixed(2)
     + "&currency=USD"
-    + "&paymentType=DB"
+    + "&paymentType=DB";
+
+    if(recurrent){
+      data+="&recurringType=INITIAL";
+    }
 
 //parametros para fase 2 de prueba final
     /*
-    + "&customer.givenName="+firstName
+    data += "&customer.givenName="+firstName
     //+ "&customer.middleName="+secondName
     + "&customer.surname="+lastName
     + "&customer.ip="+ip_address
