@@ -4,6 +4,7 @@ import { Product } from '../../../../shared/classes/product';
 import { ProductsService } from '../../../../shared/services/products.service';
 import { WishlistService } from '../../../../shared/services/wishlist.service';
 import { CartService } from '../../../../shared/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -21,7 +22,7 @@ export class ProductNoSidebarComponent implements OnInit {
   //Get Product By Id
   constructor(private route: ActivatedRoute, private router: Router,
     public productsService: ProductsService, private wishlistService: WishlistService,
-    private cartService: CartService) {
+    private cartService: CartService, private toastrService: ToastrService) {
       this.route.params.subscribe(params => {
         const id = +params['id'];
         this.productsService.getProduct(id).subscribe(product => this.product = product)
@@ -68,8 +69,10 @@ export class ProductNoSidebarComponent implements OnInit {
   // Add to cart
   public buyNow(product: Product, quantity) {
     if (quantity > 0) {
-      if(product.category=='plan')
+      if(product.category=='plan'){
         this.cartService.cleanCart();
+        this.toastrService.info("Se ha limpiado el carrito y se ha cargado solamente el plan para realizar la subscripción.");
+      }   
       this.cartService.addToCart(product,parseInt(quantity));
     }
        

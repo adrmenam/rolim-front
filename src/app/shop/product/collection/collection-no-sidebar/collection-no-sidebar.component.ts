@@ -5,6 +5,7 @@ import { ProductsService } from '../../../../shared/services/products.service';
 import { PaginationService } from '../../../../shared/classes/paginate'
 import { trigger, transition, style, animate } from "@angular/animations";
 import { CartService } from '../../../../shared/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 import * as _ from 'lodash'
 import * as $ from 'jquery';
 
@@ -34,7 +35,7 @@ export class CollectionNoSidebarComponent implements OnInit {
   paginate: any = {};
 
   constructor(private cartService: CartService,private route: ActivatedRoute, private router: Router,
-    private productsService: ProductsService, private paginateService: PaginationService) { 
+    private productsService: ProductsService, private paginateService: PaginationService, private toastrService: ToastrService) { 
       this.clearServices(); 
       this.route.params.subscribe(params => {
           const category = params['category'];
@@ -55,6 +56,7 @@ export class CollectionNoSidebarComponent implements OnInit {
         console.log(item);
         if(item.product.category == 'plan'){
           this.cartService.cleanCart();
+          this.toastrService.info("Se ha limpiado el carrito ya que no se ha completado la subscripción al plan");
           this.router.navigate(['']);
         }
       });

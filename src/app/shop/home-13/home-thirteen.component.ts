@@ -4,6 +4,7 @@ import { ProductsService } from '../../shared/services/products.service';
 import { AddressService } from './../../shared/services/address.service';
 import { GeneralService } from './../../shared/services/general.service';
 import { CartService } from './../../shared/services/cart.service';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 declare var $: any;
@@ -17,7 +18,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
 
   public products: Product[] = [];
   
-  constructor(private cartService: CartService,private router: Router, private generalService: GeneralService, private productsService: ProductsService, private addressService: AddressService) { 
+  constructor(private cartService: CartService,private router: Router, private generalService: GeneralService, private productsService: ProductsService, private addressService: AddressService, private toastrService: ToastrService) { 
     this.clearServices();
   }
 
@@ -53,6 +54,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
         console.log(item);
         if(item.product.category == 'plan'){
           this.cartService.cleanCart();
+          this.toastrService.info("Se ha limpiado el carrito ya que no se ha completado la subscripción al plan");
           this.router.navigate(['']);
         }
       });
