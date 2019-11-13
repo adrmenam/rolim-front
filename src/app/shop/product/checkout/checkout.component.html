@@ -134,7 +134,7 @@
                                         El campo Código Postal es obligatorio.
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-5 col-sm-5 col-xs-12">
                                     <div class="field-label">Dirección de Recogida</div>
                                     <!-- <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="" autocomplete="off"> -->
                                     <select name="address" [formControl]="checkoutForm.controls['address']">
@@ -150,7 +150,7 @@
                                       Máximo 50 caracteres.
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group col-md-5 col-sm-5 col-xs-12">
                                     <div class="field-label">Dirección de Entrega</div>
                                     <!-- <input type="text" name="address2" [formControl]="checkoutForm.controls['address2']" value="" placeholder="" autocomplete="off"> -->
                                     <select name="address2" [formControl]="checkoutForm.controls['address2']">
@@ -163,6 +163,9 @@
                                     <div *ngIf="checkoutForm.controls.address2.touched && checkoutForm.controls.address2.errors?.maxlength" class="text text-danger">
                                       Máximo 50 caracteres.
                                     </div>
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-xs-12" style="padding-top: 15px; margin-bottom: 15px;">
+                                        <a [routerLink]="'/pages/dashboard'">Administrar Direcciones</a>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Fecha de Recogida</div>
