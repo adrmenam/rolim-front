@@ -65,6 +65,7 @@ export class CheckoutComponent implements OnInit {
 
   public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=";
   public scriptSaveDatafast: any;
+  public scriptSaveDatafastNormal: any;
   public loadAPI: Promise<any>;
   public loadScriptDatafastForm: Promise<any>;
 
@@ -161,7 +162,22 @@ export class CheckoutComponent implements OnInit {
         +"requireCvv:true,"
         +"hideInitialPaymentForms:true"
         +"}"
+        +"}";
+      
+      this.scriptSaveDatafastNormal = "var wpwlOptions = {"
+        +"onReady: function(onReady){"
+        +"var createRegistrationHtml = '<div class=\"customLabel\" >Desea guardar de manera segura sus datos?</div>'+"
+        +"'<div class=\"customInput\" ><input type=\"checkbox\" name=\"createRegistration\" /></div>';"
+        +"$('form.wpwl-form-card').find('.wpwl-button').before(createRegistrationHtml);"
+        +"},"
+        +"style: \"card\","
+        +"locale: \"es\","
+        +"labels: {cvv:\"Código de verificación\", cardHolder: \"Nombre(Igual que en la tarjeta)\"},"
+        +"registrations:{"
+        +"requireCvv:true,"
+        +"hideInitialPaymentForms:true"
         +"}"
+        +"}";
     
   }
 
@@ -304,17 +320,20 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     //Datafast step 1: get CheckoutId 
     this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type).subscribe((response)=>{
       console.log(response);
+      let scriptSave;
       if(response['result']['description']=="successfully created checkout"){
         console.log("CheckoutId: " + response['id']);
         this.widgetUrl+=response['id'];
         console.log(this.widgetUrl);
         if(type=="firstRecurrent"){
-          this.loadScriptDatafastForm = new Promise((resolve) => {
-            console.log('resolving promise...');
-            this.loadScriptContent(this.scriptSaveDatafast);
-          });
+          scriptSave=this.scriptSaveDatafast;
+        }else{
+          scriptSave=this.scriptSaveDatafastNormal;
         }
-        
+        this.loadScriptDatafastForm = new Promise((resolve) => {
+          console.log('resolving promise...');
+          this.loadScriptContent(scriptSave);
+        });
         this.loadAPI = new Promise((resolve) => {
           console.log('resolving promise...');
           this.loadScript(this.widgetUrl);
