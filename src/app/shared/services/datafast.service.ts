@@ -26,7 +26,7 @@ export class DatafastService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent){
+  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type){
 
     
     secondName="Alexander";
@@ -55,7 +55,7 @@ export class DatafastService {
     + "&currency=USD"
     + "&paymentType=DB";
 
-    if(recurrent){
+    if(type=="firstRecurrent"){
       data+="&recurringType=INITIAL";
     }
 

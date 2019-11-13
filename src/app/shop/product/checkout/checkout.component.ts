@@ -64,7 +64,9 @@ export class CheckoutComponent implements OnInit {
   public idOrden: any;
 
   public widgetUrl: any = "https://test.oppwa.com/v1/paymentWidgets.js?checkoutId=";
+  public scriptSaveDatafast: any;
   public loadAPI: Promise<any>;
+  public loadScriptDatafastForm: Promise<any>;
 
   public hours = [
     {
@@ -145,6 +147,21 @@ export class CheckoutComponent implements OnInit {
         hourpickup: [''],
         hourdelivery: ['']
       });
+
+      this.scriptSaveDatafast = "var wpwlOptions = {"
+        +"onReady: function(onReady){"
+        +"var createRegistrationHtml = '<div class=\"customLabel\" hidden>Desea guardar de manera segura sus datos?</div>'+"
+        +"'<div class=\"customInput\" hidden><input type=\"checkbox\" name=\"createRegistration\" Checked /></div>';"
+        +"$('form.wpwl-form-card').find('.wpwl-button').before(createRegistrationHtml);"
+        +"},"
+        +"style: \"card\","
+        +"locale: \"es\","
+        +"labels: {cvv:\"Código de verificación\", cardHolder: \"Nombre(Igual que en la tarjeta)\"},"
+        +"registrations:{"
+        +"requireCvv:true,"
+        +"hideInitialPaymentForms:true"
+        +"}"
+        +"}"
     
   }
 
@@ -203,7 +220,7 @@ export class CheckoutComponent implements OnInit {
       let detallePedido = [];
       let productosDatafast = [];
       let priceSum = 0;
-      let isRecurrent = false;
+      let checkoutType = 'normal';
       for(var i=0; i<this.checkOutItems.length;i++){
         detallePedido.push(
           {
@@ -225,7 +242,7 @@ export class CheckoutComponent implements OnInit {
         priceSum+=this.checkOutItems[i].product.price;
 
         if(this.checkOutItems[i].product.category=="plan"){
-          isRecurrent=true;
+          checkoutType="firstRecurrent";
           sessionStorage.setItem("planId",this.checkOutItems[i].product.id.toString());
         }
       }
@@ -268,9 +285,9 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
           this.http.get('https://api.ipify.org?format=json').subscribe(data=>{
             this.publicIp=data['ip'];
             console.log(this.publicIp);
-            console.log("recurrente: "+isRecurrent);
+            console.log("recurrente: "+checkoutType);
             this.getCheckoutId(this.totalPayment, this.checkoutForm.value.firstname,this.checkoutForm.value.firstname,
-                this.checkoutForm.value.lastname,this.publicIp,this.idOrden,this.checkoutForm.value.email,this.checkoutForm.value.idNumber,productosDatafast,isRecurrent);
+                this.checkoutForm.value.lastname,this.publicIp,this.idOrden,this.checkoutForm.value.email,this.checkoutForm.value.idNumber,productosDatafast,checkoutType);
           });
           this.cartService.cleanCart();
         }else{
@@ -283,18 +300,24 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     
   }
 
-  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent){
+  public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type){
     //Datafast step 1: get CheckoutId 
-    this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,recurrent).subscribe((response)=>{
+    this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type).subscribe((response)=>{
       console.log(response);
       if(response['result']['description']=="successfully created checkout"){
         console.log("CheckoutId: " + response['id']);
         this.widgetUrl+=response['id'];
         console.log(this.widgetUrl);
+        if(type=="firstRecurrent"){
+          this.loadScriptDatafastForm = new Promise((resolve) => {
+            console.log('resolving promise...');
+            this.loadScriptContent(this.scriptSaveDatafast);
+          });
+        }
+        
         this.loadAPI = new Promise((resolve) => {
           console.log('resolving promise...');
           this.loadScript(this.widgetUrl);
-          
         });
       }else{
         this.toastrService.error('No se pudo comunicar con el botón de pago.');
@@ -460,10 +483,23 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
     console.log('preparing to load...')
     let node = document.createElement('script');
     node.src = url;
-    
+      
     document.getElementsByTagName('body')[0].appendChild(node); 
     
   }
+
+  //Add Script tag to head for Datafast integration
+  public loadScriptContent(content) {
+    console.log('preparing to load...')
+    let node = document.createElement('script');
+    node.type = 'text/javascript';
+    node.innerHTML = content;
+    console.log(node);
+      
+    document.getElementsByTagName('body')[0].appendChild(node); 
+    
+  }
+
 
  
   // stripe payment gateway

@@ -30,7 +30,7 @@ export class SuccessComponent implements OnInit {
   ngOnInit() {
     
     //this.sendBilling();
-    this.planid=sessionStorage.getItem("planId")?sessionStorage.getItem("planId"):'1';
+    this.planid=sessionStorage.getItem("planId")?sessionStorage.getItem("planId"):'noPlan';
 
     this.route.queryParams.subscribe(params => {
       let resourcePath = params['resourcePath'];
@@ -60,10 +60,13 @@ export class SuccessComponent implements OnInit {
         console.log("Respuesta: " + response['result']['description']);
         let cardToken = response['registrationId'];
         
-        console.log("Registro del plan "+this.planid+" con el cardToken "+cardToken)
-        this.subscriptionService.registerPlan(localStorage.getItem("token"),this.planid,cardToken).subscribe((response=>{
-          console.log(response);
-        }))
+        if(this.planid!="noPlan"){
+          console.log("Registro del plan "+this.planid+" con el cardToken "+cardToken)
+          this.subscriptionService.registerPlan(localStorage.getItem("token"),this.planid,cardToken).subscribe((response=>{
+            console.log(response);
+          }))
+        }
+        
       }else{
         console.log('La transacción con el botón de pagos no pudo completarse.');
         this.toastrService.error("La transacción con el botón de pagos no pudo completarse.");
@@ -75,6 +78,7 @@ export class SuccessComponent implements OnInit {
   public returnHome(){
     this.cartService.cleanCart();
     sessionStorage.removeItem("orderId");
+    sessionStorage.removeItem("planId");
     this.router.navigate(['']);
   }
 
