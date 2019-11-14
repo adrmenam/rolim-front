@@ -59,6 +59,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
         }
       });
     }
+    sessionStorage.removeItem("fromCheckout");
   }
   
   private getAddresses(){

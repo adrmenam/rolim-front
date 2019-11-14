@@ -61,6 +61,7 @@ export class CollectionNoSidebarComponent implements OnInit {
         }
       });
     }
+    sessionStorage.removeItem("fromCheckout");
   }
 
   // Animation Effect fadeIn

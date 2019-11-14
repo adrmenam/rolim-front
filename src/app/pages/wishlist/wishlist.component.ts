@@ -10,6 +10,7 @@ export class WishlistComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem("fromCheckout");
   }
 
 }

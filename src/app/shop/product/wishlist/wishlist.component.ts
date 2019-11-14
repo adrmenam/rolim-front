@@ -22,7 +22,9 @@ export class WishlistComponent implements OnInit {
     this.product.subscribe(products => this.wishlistItems = products);
   }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    sessionStorage.removeItem("fromCheckout");
+  }
 
   // Add to cart
   public addToCart(product: Product,  quantity: number = 1) {

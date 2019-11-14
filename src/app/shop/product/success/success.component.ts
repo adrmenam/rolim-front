@@ -31,6 +31,7 @@ export class SuccessComponent implements OnInit {
     
     //this.sendBilling();
     this.planid=sessionStorage.getItem("planId")?sessionStorage.getItem("planId"):'noPlan';
+    sessionStorage.removeItem("fromCheckout");
 
     this.route.queryParams.subscribe(params => {
       let resourcePath = params['resourcePath'];

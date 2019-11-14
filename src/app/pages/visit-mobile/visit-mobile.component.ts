@@ -11,6 +11,7 @@ export class VisitMobileComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
+    sessionStorage.removeItem("fromCheckout");
   }
 
   public returnHome(){
