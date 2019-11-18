@@ -45,6 +45,10 @@
                             <li class="last"><a [routerLink]="'/index'" (click)="logout()">Cerrar sesión</a></li>
                         </ul>
                     </div>
+                    <br>
+                    <button class="btn-solid btn" (click)="goToPayment()" id="btnReturn" *ngIf = "fromCheckout=='true'">
+                        Regresar al pago
+                     </button>
                 </div>
             </div>
             <div class="col-lg-9">

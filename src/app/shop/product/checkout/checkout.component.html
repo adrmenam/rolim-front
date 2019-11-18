@@ -165,7 +165,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-12" style="padding-top: 15px; margin-bottom: 15px;">
-                                        <a [routerLink]="'/pages/dashboard'">Administrar Direcciones</a>
+                                        <a href="javascript:void(0);" (click) = "goToDashboard()">Administrar Direcciones</a>
                                 </div>
                                 <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                     <div class="field-label">Fecha de Recogida</div>
@@ -351,7 +351,7 @@
                                            Completar pedido
                                         </button>
                                         <button class="btn-solid btn" [disabled]=" !checkoutForm.valid || !terms || !privacy" (click)="showPayment()" type="submit" id="showPayment" *ngIf="!payment">
-                                            Pasarela de pago
+                                            Pagar
                                          </button>
                                         <!--<script [src]="widgetUrl"></script>-->
                                         

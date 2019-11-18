@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
     }]
     this.country = this.countries[0].code;
     //this.requireOtp=sessionStorage.getItem('requireOtp')=='true'?true:false;
+    sessionStorage.removeItem("fromCheckout");
   }
 
   register(){ 

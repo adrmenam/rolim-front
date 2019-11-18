@@ -226,6 +226,11 @@ export class CheckoutComponent implements OnInit {
     
   }
 
+  public goToDashboard(){
+    console.log("goToDashboard");
+    sessionStorage.setItem("fromCheckout",'true');
+    this.router.navigate(['/pages/dashboard']);
+  }
 
   public showPayment(){
 

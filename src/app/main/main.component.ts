@@ -43,6 +43,7 @@ export class MainComponent implements OnInit {
         }
       });
     }
+    sessionStorage.removeItem("fromCheckout");
   }
 
 }

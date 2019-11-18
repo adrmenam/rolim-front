@@ -10,6 +10,7 @@ export class AboutUsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem("fromCheckout");
   }
 
   // Testimonial Carousel

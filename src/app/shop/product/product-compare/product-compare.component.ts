@@ -20,6 +20,7 @@ export class ProductCompareComponent implements OnInit {
   ngOnInit() {
   	this.product = this.productsService.getComapreProducts();
     this.product.subscribe(products => this.products = products);
+    sessionStorage.removeItem("fromCheckout");
   }
 
   // Add to cart

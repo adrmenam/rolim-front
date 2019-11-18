@@ -10,6 +10,7 @@ export class PrivacyComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem("fromCheckout");
   }
 
 }

@@ -10,6 +10,7 @@ export class CompareComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    sessionStorage.removeItem("fromCheckout");
   }
 
 }
