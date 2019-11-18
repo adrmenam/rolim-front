@@ -14,7 +14,7 @@ export interface Product {
   price?: number;
   salePrice?: number;
   discount?: number;
-  pictures?: string;
+  pictures?: string[];
   shortDetails?: string;
   description?: string;
   stock?: number;

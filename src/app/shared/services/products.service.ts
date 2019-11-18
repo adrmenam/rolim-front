@@ -17,6 +17,7 @@ export class ProductsService {
   public currency : string = 'USD';
   public catalogMode : boolean = false;
   private privatebaseUrl:string = "http://198.199.69.76:3000/productos";
+  //public productos : Product[]=[];
   
   public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
   public observer   :  Subscriber<{}>;
@@ -32,35 +33,42 @@ export class ProductsService {
     {
       "transaccion": "lavado", 
     }
-    return this.http.get('assets/data/products.json').map((res:any) => res.json())
+    var productos : Product[]=[];
+    //return this.http.get('assets/data/products.json').map((res:any) => res.json())
     //let aux = this.http.get('assets/data/products.json').map((res:any) => res.json())
-    //let aux = this.http.post(this.privatebaseUrl,transaction).map((res:any) => {
-      // let productos : Product[];
-      // let product : Product;
-      // product = {
-      //   id: res.json()['id'],
-      //   name: res.json()['descripcion'],
-      //   price: res.json()['precio'],
-      //   salePrice: res.json()['precio'],
-      //   discount: 0,
-      //   pictures: "assets/images/laundry/product/"+ res.json()['imagen'] +".jpg",
-      //   shortDetails: "Funda de Lavanderia (Lavado y Doblado)",
-      //   description: "Funda de Lavanderia (Lavado y Doblado)",
-      //   stock: 20,
-      //   new: false,
-      //   sale: false,
-      //   category: "individual"
-      // }
-      // product.id = res.json()['id'];
-      // product.name = res.json()['descripcion'];
-      // product.price = res.json()['precio'];
-      // product.pictures = "assets/images/laundry/product/"+ res.json()['imagen'] +".jpg";
-      // productos.push(product);
+    let aux = this.http.post(this.privatebaseUrl,transaction).map((res:any) => {
+      console.log(res.json());
+      console.log(res.json()['data'].length);
+      
+      for(var i=0;i<res.json()['data'].length;i++){
+        
+       let product : Product;
+       product = {
+         id: res.json()['data'][i]['id'],
+         name: res.json()['data'][i]['descripcion'],
+         price: res.json()['data'][i]['precio'],
+         salePrice: res.json()['data'][i]['precio'],
+         discount: 0,
+         pictures: ["assets/images/laundry/product/"+ res.json()['data'][i]['imagen'] +".jpg"],
+         shortDetails: "Funda de Lavanderia (Lavado y Doblado)",
+         description: "Funda de Lavanderia (Lavado y Doblado)",
+         stock: res.json()['data'][i]['estado']?1000:0,
+         new: false,
+         sale: false,
+         category: "individual"
+       }
+       
+       console.log(product);
+       productos.push(product);
+       console.log(productos);
+      }
+       console.log(productos);
+      return productos;
       //return res.json();
 
-    //});
-    //console.log(aux);
-    //return aux;
+    });
+    console.log(aux);
+    return aux;
      
     // return this.httpClient.post(this.baseUrl,transaction, {
     //   headers: new HttpHeaders({

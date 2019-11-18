@@ -24,6 +24,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   	this.productsService.getProducts().subscribe(product => { 
+      console.log(product);
   	  product.filter((item: Product) => {
          if(item.category == 'individual')
            this.products.push(item);
