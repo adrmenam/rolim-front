@@ -31,11 +31,16 @@ export class ProductsService {
   private products(): Observable<Product[]> {
     let transaction = 
     {
-      "transaccion": "lavado", 
+      "transaccion": "generico",
+      "tipo": "1"
     }
     var productos : Product[]=[];
+
+    //Obtención de productos desde json en front
     //return this.http.get('assets/data/products.json').map((res:any) => res.json())
     //let aux = this.http.get('assets/data/products.json').map((res:any) => res.json())
+    
+    //Obtención de productos desde api rolim
     let aux = this.http.post(this.privatebaseUrl,transaction).map((res:any) => {
       console.log(res.json());
       console.log(res.json()['data'].length);
@@ -50,8 +55,8 @@ export class ProductsService {
          salePrice: res.json()['data'][i]['precio'],
          discount: 0,
          pictures: ["assets/images/laundry/product/"+ res.json()['data'][i]['imagen'] +".jpg"],
-         shortDetails: "Funda de Lavanderia (Lavado y Doblado)",
-         description: "Funda de Lavanderia (Lavado y Doblado)",
+         shortDetails: res.json()['data'][i]['descripcion'],
+         description: res.json()['data'][i]['descripcion'],
          stock: res.json()['data'][i]['estado']?1000:0,
          new: false,
          sale: false,

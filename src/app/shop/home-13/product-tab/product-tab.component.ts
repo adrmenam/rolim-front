@@ -10,7 +10,14 @@ declare var $: any;
 export class ProductTabThirteenComponent implements OnInit {
   
   // Get product Using Input
-  @Input() products: Product;
+  @Input() products: Product[];
+
+  public productsArray: Product[];
+  public cat1: Product[];
+  public cat2: any;
+  public cat3: any;
+  public cat4: any;
+  public cat5: any;
 
   constructor() { }
 
@@ -26,6 +33,10 @@ export class ProductTabThirteenComponent implements OnInit {
       $('#' + currunt_href).show();
       $(this).parent().parent().parent().find(".tab-content").not('#' + currunt_href).css("display", "none");
     });
+
+    this.productsArray=this.products;
+    console.log(this.products);
+    console.log(this.productsArray.filter(product=>true));
   }
 
   // Slick slider config

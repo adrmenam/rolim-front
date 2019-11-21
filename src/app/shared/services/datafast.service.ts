@@ -27,11 +27,10 @@ export class DatafastService {
   constructor(private httpClient : HttpClient) { }
 
   public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type){
-
-    
-    secondName="Alexander";
     
 
+    //Cálculo de valores y armado de string para customParameters[] en request para Fase 2 con datos del comercio. 
+    /*
     let valIva12 = amount * 0.12;
     let valBaseIva12 = amount - valIva12;
 
@@ -43,9 +42,11 @@ export class DatafastService {
     
     let customParameters = iva12+iva0+idComercio+idProveedorServicio+baseIva12;
     customParameters += customParameters.length.toString().padStart(4,'0')+customParameters;
+    
 
     let userid = JSON.parse(localStorage.getItem("addresses"))[0].usuario_id;
-    //let orderid = sessionStorage.getItem('orderId');
+    let orderid = sessionStorage.getItem('orderId');
+    */
 
     let url = "https://test.oppwa.com/v1/checkouts";
     let data = "authentication.entityId="+this.entityId
@@ -55,11 +56,12 @@ export class DatafastService {
     + "&currency=USD"
     + "&paymentType=DB";
 
+    //En caso de transacción con pago recurrente (subscripcion de planes)
     if(type=="firstRecurrent"){
       data+="&recurringType=INITIAL";
     }
 
-//parametros para fase 2 de prueba final
+//parametros para fase 2 de prueba con datos del comercio
     /*
     data += "&customer.givenName="+firstName
     //+ "&customer.middleName="+secondName
@@ -98,6 +100,15 @@ export class DatafastService {
   }
 
   public processPurchase(resourcePath){
+
+    //resourcePath se obtiene de URL en la página de redireccion definida en <form>
+    /*FUNCION PARA OBTENER RESOURCEPATH EN LA PAGINA DE REDIRECCION
+      this.route.queryParams.subscribe(params => {
+        let resourcePath = params['resourcePath']; 
+        this.processPurchase(resourcePath);
+      });
+    */
+
     let url = "https://test.oppwa.com/"+resourcePath;
     url += "?authentication.userId="+this.userId;
     url += "&authentication.password="+this.password;
