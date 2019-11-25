@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
-import { BehaviorSubject, Observable, of, Subscriber} from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscriber, forkJoin} from 'rxjs';
 import { map, filter, scan } from 'rxjs/operators';
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,17 @@ export class ProductsService {
   
   public currency : string = 'USD';
   public catalogMode : boolean = false;
-  private privatebaseUrl:string = "http://198.199.69.76:3000/productos";
+  private productsUrl:string = "http://198.199.69.76:3000/productos";
+  private transactionProducts = {
+    "transaccion": "generico",
+    "tipo": "1"
+  }
+
+  private plansUrl:string = "http://198.199.69.76:3000/detallePlanes";
+  private transactionPlans = {
+    "transaccion": "consultarPlanes"
+  }
+
   //public productos : Product[]=[];
   
   public compareProducts : BehaviorSubject<Product[]> = new BehaviorSubject([]);
@@ -29,21 +39,19 @@ export class ProductsService {
 
   // Observable Product Array
   private products(): Observable<Product[]> {
-    let transaction = 
-    {
-      "transaccion": "generico",
-      "tipo": "1"
-    }
+    
+
     var productos : Product[]=[];
+    var planes : Product[]=[];
 
     //Obtención de productos desde json en front
     //return this.http.get('assets/data/products.json').map((res:any) => res.json())
     //let aux = this.http.get('assets/data/products.json').map((res:any) => res.json())
     
     //Obtención de productos desde api rolim
-    let aux = this.http.post(this.privatebaseUrl,transaction).map((res:any) => {
-      console.log(res.json());
-      console.log(res.json()['data'].length);
+    let auxProductos = this.http.post(this.productsUrl,this.transactionProducts).map((res:any) => {
+      //console.log(res.json());
+      //console.log(res.json()['data'].length);
       
       for(var i=0;i<res.json()['data'].length;i++){
         
@@ -51,8 +59,8 @@ export class ProductsService {
        product = {
          id: res.json()['data'][i]['id'],
          name: res.json()['data'][i]['descripcion'],
-         price: res.json()['data'][i]['precio'],
-         salePrice: res.json()['data'][i]['precio'],
+         price: parseFloat(res.json()['data'][i]['precio']),
+         salePrice: parseFloat(res.json()['data'][i]['precio']),
          discount: 0,
          pictures: ["assets/images/laundry/product/"+ res.json()['data'][i]['imagen'] +".jpg"],
          shortDetails: res.json()['data'][i]['descripcion'],
@@ -63,17 +71,59 @@ export class ProductsService {
          category: "individual"
        }
        
-       console.log(product);
+       //console.log(product);
        productos.push(product);
-       console.log(productos);
+       //console.log(productos);
       }
-       console.log(productos);
+      
+      
+      //console.log(productos);
       return productos;
       //return res.json();
 
     });
-    console.log(aux);
-    return aux;
+
+    let auxPlans = this.http.post(this.plansUrl,this.transactionPlans).map((res:any) => {
+      //console.log(res.json());
+      //console.log(res.json()['retorno'].length);
+      
+      for(var i=0;i<res.json()['retorno'].length;i++){
+        
+       let plan : Product;
+       plan = {
+         id: res.json()['retorno'][i]['plan'],
+         name: res.json()['retorno'][i]['nombre'],
+         price: parseFloat(res.json()['retorno'][i]['valor'].split("$")[1]),
+         salePrice: parseFloat(res.json()['retorno'][i]['valor'].split("$")[1]),
+         discount: 0,
+         pictures: ["assets/images/laundry/product/"+ res.json()['retorno'][i]['icono']],
+         shortDetails: res.json()['retorno'][i]['descripcion'],
+         description: res.json()['retorno'][i]['descripcion'],
+         stock: 1000,
+         new: false,
+         sale: false,
+         category: "plan"
+       }
+       
+       //console.log(product);
+       planes.push(plan);
+       //console.log(productos);
+      }
+      
+      
+      //console.log(planes);
+      return planes;
+      //return res.json();
+
+    });
+
+    
+    return forkJoin(auxPlans, auxProductos).pipe(
+      map(([plansArray, productsArray]) => plansArray.concat(productsArray))
+    );
+
+    //console.log(auxPlans);
+    //return auxPlans;
      
     // return this.httpClient.post(this.baseUrl,transaction, {
     //   headers: new HttpHeaders({

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map'
+import { Product } from '../classes/product';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,10 @@ import 'rxjs/add/operator/map'
 export class SubscriptionService {
 
   private baseUrl:string = "http://198.199.69.76:3000/planes";
+  private plansUrl:string = "http://198.199.69.76:3000/detallePlanes";
+  private transactionPlans = {
+    "transaccion": "consultarPlanes"
+  }
 
   constructor(private httpClient : HttpClient) { }
 
@@ -29,5 +34,15 @@ export class SubscriptionService {
          })
     }).map(data=>
      data);
+  }
+
+  public getPlans(){
+    
+    return this.httpClient.post(this.plansUrl,this.transactionPlans, {
+      headers: new HttpHeaders({
+           'Content-Type':  'application/json'
+         })
+    })
+    .map(data => data);
   }
 }

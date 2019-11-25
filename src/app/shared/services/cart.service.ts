@@ -153,10 +153,10 @@ export class CartService {
         var price = 0;
         
           if(i==0){
-            price = curr.product.price+(this.deliveryPrice/curr.quantity);         
+            price = curr.product.price+(this.deliveryPrice/curr.quantity);  
           }else
             price = curr.product.price;     
-        return (prev + price * curr.quantity);
+        return (prev + (price * curr.quantity));
       }, 0);
     }));
   }
