@@ -23,13 +23,13 @@ export class CollectionSliderThirteenComponent implements OnInit {
       for(var i=0;i<response['retorno'].length;i++){
         var htmlText="";
         for(var j=0;j<response['retorno'][i]['productosPlan'].length;j++){
-          htmlText += '<li><a href="#">'+response['retorno'][i]['productosPlan'][j]['cantidad']+' '+response['retorno'][i]['productosPlan'][j]['descripcion']+'</a></li>';
+          htmlText += '<li><a href="#void">'+response['retorno'][i]['productosPlan'][j]['cantidad']+' '+response['retorno'][i]['productosPlan'][j]['descripcion']+'</a></li>';
         }
         let plan;
         plan = {
           image: 'assets/images/laundry/product/'+response['retorno'][i]['icono'],
           title: response['retorno'][i]['nombre'],
-          text:  htmlText+'<li><a href="#">'+response['retorno'][i]['domicilios']+' domicilios</a></li>'+'<li><a href="#">'+response['retorno'][i]['valor']+'</a></li>',
+          text:  htmlText+'<li><a href="#void">'+response['retorno'][i]['domicilios']+' domicilios</a></li>'+'<li><a href="#void">'+response['retorno'][i]['valor']+'</a></li>',
           url: '/home/no-sidebar/product/'+response['retorno'][i]['plan']
         }
        
