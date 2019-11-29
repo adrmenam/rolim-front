@@ -18,8 +18,7 @@ export class ProductsService {
   public catalogMode : boolean = false;
   private productsUrl:string = "http://198.199.69.76:3000/productos";
   private transactionProducts = {
-    "transaccion": "generico",
-    "tipo": "1"
+    "transaccion": "completos"
   }
 
   private plansUrl:string = "http://198.199.69.76:3000/detallePlanes";
@@ -57,7 +56,7 @@ export class ProductsService {
         
        let product : Product;
        product = {
-         id: res.json()['data'][i]['id'],
+         id: res.json()['data'][i]['producto'],
          name: res.json()['data'][i]['descripcion'],
          price: parseFloat(res.json()['data'][i]['precio']),
          salePrice: parseFloat(res.json()['data'][i]['precio']),
@@ -68,7 +67,7 @@ export class ProductsService {
          stock: res.json()['data'][i]['estado']?1000:0,
          new: false,
          sale: false,
-         category: "individual"
+         category: res.json()['data'][i]['categoria']
        }
        
        //console.log(product);
@@ -83,6 +82,7 @@ export class ProductsService {
 
     });
 
+    //Consulta de planes desde api Rolim
     let auxPlans = this.http.post(this.plansUrl,this.transactionPlans).map((res:any) => {
       //console.log(res.json());
       //console.log(res.json()['retorno'].length);
@@ -93,8 +93,8 @@ export class ProductsService {
        plan = {
          id: res.json()['retorno'][i]['plan'],
          name: res.json()['retorno'][i]['nombre'],
-         price: parseFloat(res.json()['retorno'][i]['valor'].split("$")[1]),
-         salePrice: parseFloat(res.json()['retorno'][i]['valor'].split("$")[1]),
+         price: parseFloat(res.json()['retorno'][i]['valor']),
+         salePrice: parseFloat(res.json()['retorno'][i]['valor']),
          discount: 0,
          pictures: ["assets/images/laundry/product/"+ res.json()['retorno'][i]['icono']],
          shortDetails: res.json()['retorno'][i]['descripcion'],
@@ -117,7 +117,7 @@ export class ProductsService {
 
     });
 
-    
+    //Append planes y productos
     return forkJoin(auxPlans, auxProductos).pipe(
       map(([plansArray, productsArray]) => plansArray.concat(productsArray))
     );
@@ -149,7 +149,9 @@ export class ProductsService {
        items.filter((item: Product) => {
          if(category == 'all')
             return item
-         else
+         else if(category == 'individual'){
+            return item.category != 'plan'
+         }else
             return item.category === category; 
         
        })

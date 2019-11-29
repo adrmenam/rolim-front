@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../../../shared/classes/product';
+import { ProductsService } from '../../../shared/services/products.service';
+
 declare var $: any;
 
 @Component({
@@ -12,14 +14,13 @@ export class ProductTabThirteenComponent implements OnInit {
   // Get product Using Input
   @Input() products: Product[];
 
-  public productsArray: Product[];
-  public cat1: Product[];
-  public cat2: any;
-  public cat3: any;
-  public cat4: any;
-  public cat5: any;
+  public productosLavado: Product[];
+  public productosLavadoPlanchado: Product[];
+  public productosPlanchado: Product[];
+  public productosLavadoSeco: Product[];
+  public productosHogar: Product[];
 
-  constructor() { }
+  constructor(private productsService: ProductsService) { }
 
   ngOnInit() {
      // tab js
@@ -34,9 +35,26 @@ export class ProductTabThirteenComponent implements OnInit {
       $(this).parent().parent().parent().find(".tab-content").not('#' + currunt_href).css("display", "none");
     });
 
-    this.productsArray=this.products;
-    console.log(this.products);
-    console.log(this.productsArray.filter(product=>true));
+    this.productsService.getProductByCategory("lavado").subscribe(product => { 
+  	  this.productosLavado=product;
+    });
+
+    this.productsService.getProductByCategory("planchado").subscribe(product => { 
+  	  this.productosPlanchado=product;
+    });
+
+    this.productsService.getProductByCategory("lavado planchado").subscribe(product => { 
+  	  this.productosLavadoPlanchado=product;
+    });
+
+    this.productsService.getProductByCategory("lavado seco").subscribe(product => { 
+  	  this.productosLavadoSeco=product;
+    });
+
+    this.productsService.getProductByCategory("hogar").subscribe(product => { 
+  	  this.productosHogar=product;
+    });
+
   }
 
   // Slick slider config

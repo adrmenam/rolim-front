@@ -4,7 +4,7 @@
         <div class="row multiple-slider">
             <div class="col-xl-3 col-lg-4 col-md-12">
                 <div class="theme-card">
-                    <h5 class="title-border">Servicios Destacados</h5>
+                    <h5 class="title-border">Destacados</h5>
                     <ngx-slick-carousel class="offer-slider" #slickModal="slick-carousel">
                     <div ngxSlickItem *ngFor="let product of products | slice:0:4 ">
                       <div class="media" *ngFor="let product of products | orderBy:'asc' | slice:0:4 ">
@@ -23,7 +23,7 @@
                 <div class="theme-tab">
                     <ul class="tabs tab-title">
                         <li class="current">
-                            <a href="tab-4">Lavanderia</a>
+                            <a href="tab-4">Lavado</a>
                         </li>
                         <li class="">
                             <a href="tab-5">Lavado y Planchado</a>
@@ -32,63 +32,103 @@
                             <a href="tab-6">Planchado</a>
                         </li>
                         <li class="">
-                            <a href="tab-7">Hogar</a>
+                            <a href="tab-7">Lavado en Seco</a>
+                        </li>
+                        <li class="">
+                            <a href="tab-8">Hogar</a>
                         </li>
                             
                     </ul>
                     <div class="tab-content-cls">
                         <div id="tab-4" class="tab-content active default">
                             <div class="no-slider row">
-                              <div class="product-box" *ngFor="let product of products | slice:0:4" style="margin-bottom: 20px;">
+                              <div class="product-box" *ngFor="let product of productosLavado | slice:0:4" style="margin-bottom: 20px;">
                                  <app-product-box-hover [product]="product" ></app-product-box-hover>
                               </div>
                             </div>
                             <div class="no-slider row">
-                                <div class="product-box" *ngFor="let product of products | slice:4:8" style="margin-bottom: 20px;">
+                                <div class="product-box" *ngFor="let product of productosLavado | slice:4:8" style="margin-bottom: 20px;">
                                    <app-product-box-hover [product]="product" ></app-product-box-hover>
                                 </div>
                             </div>
                             <div class="no-slider row">
-                                <div class="product-box" *ngFor="let product of products | slice:8:10" style="margin-bottom: 20px;">
+                                <div class="product-box" *ngFor="let product of productosLavado | slice:8:12" style="margin-bottom: 20px;">
                                    <app-product-box-hover [product]="product" ></app-product-box-hover>
                                 </div>
                             </div>
                         </div>
                         <div id="tab-5" class="tab-content">
                             <div class="no-slider row">
-                              <div class="product-box" *ngFor="let product of products | slice:10:14" style="margin-bottom: 20px; ">
-                                 <app-product-box-hover [product]="product"></app-product-box-hover>
+                                <div class="product-box" *ngFor="let product of productosLavadoPlanchado | slice:0:4" style="margin-bottom: 20px;">
+                                   <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                </div>
                               </div>
-                            </div>
-                            <div class="no-slider row">
-                                <div class="product-box" *ngFor="let product of products | slice:14:18" style="margin-bottom: 20px; ">
-                                   <app-product-box-hover [product]="product"></app-product-box-hover>
-                                </div>
-                            </div>
-                            <div class="no-slider row">
-                                <div class="product-box" *ngFor="let product of products | slice:18:22" style="margin-bottom: 20px; ">
-                                   <app-product-box-hover [product]="product"></app-product-box-hover>
-                                </div>
-                            </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosLavadoPlanchado | slice:4:8" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosLavadoPlanchado | slice:8:12" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
                         </div>
                         <div id="tab-6" class="tab-content">
-                                <div class="no-slider row">
-                                    <div class="product-box" *ngFor="let product of products | slice:22:26" style="margin-bottom: 20px;">
-                                       <app-product-box-hover [product]="product"></app-product-box-hover>
-                                    </div>
+                            <div class="no-slider row">
+                                <div class="product-box" *ngFor="let product of productosPlanchado | slice:0:4" style="margin-bottom: 20px;">
+                                   <app-product-box-hover [product]="product" ></app-product-box-hover>
                                 </div>
-                                <div class="no-slider row">
-                                    <div class="product-box" *ngFor="let product of products | slice:26:30" style="margin-bottom: 20px;">
-                                       <app-product-box-hover [product]="product"></app-product-box-hover>
-                                    </div>
-                                </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosPlanchado | slice:4:8" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosPlanchado | slice:8:12" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
                         </div>
                         <div id="tab-7" class="tab-content">
-                                <div class="no-slider row">
-                                    <div class="product-box" *ngFor="let product of products | slice:30:31 " style="margin-bottom: 20px;">
-                                       <app-product-box-hover [product]="product"></app-product-box-hover>
-                                    </div>
+                            <div class="no-slider row">
+                                <div class="product-box" *ngFor="let product of productosLavadoSeco | slice:0:4" style="margin-bottom: 20px;">
+                                   <app-product-box-hover [product]="product" ></app-product-box-hover>
                                 </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosLavadoSeco | slice:4:8" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosLavadoSeco | slice:8:12" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosLavadoSeco | slice:12:16" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                        </div>
+                        <div id="tab-8" class="tab-content">
+                            <div class="no-slider row">
+                                <div class="product-box" *ngFor="let product of productosHogar | slice:0:4" style="margin-bottom: 20px;">
+                                   <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosHogar | slice:4:8" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
+                              <div class="no-slider row">
+                                  <div class="product-box" *ngFor="let product of productosHogar | slice:8:12" style="margin-bottom: 20px;">
+                                     <app-product-box-hover [product]="product" ></app-product-box-hover>
+                                  </div>
+                              </div>
                         </div>
                     </div>
                 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { SubscriptionService } from '../../../shared/services/subscription.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-collection-slider-thirteen',
@@ -11,32 +12,35 @@ export class CollectionSliderThirteenComponent implements OnInit {
 
   public categories;
    // DomSanitizer for safe html content.
-  constructor(private _sanitizer:DomSanitizer, private subscriptionService: SubscriptionService) { }
+  constructor(private _sanitizer:DomSanitizer, private subscriptionService: SubscriptionService, private toastrService: ToastrService) { }
 
   ngOnInit() {
     var planes = [];
     this.subscriptionService.getPlans().subscribe((response)=>{
       console.log(response);
       if(response['codigoRetorno']=="0001"){
-        
-      }
-      for(var i=0;i<response['retorno'].length;i++){
-        var htmlText="";
-        for(var j=0;j<response['retorno'][i]['productosPlan'].length;j++){
-          htmlText += '<li><a href="#void">'+response['retorno'][i]['productosPlan'][j]['cantidad']+' '+response['retorno'][i]['productosPlan'][j]['descripcion']+'</a></li>';
+        for(var i=0;i<response['retorno'].length;i++){
+          var htmlText="";
+          for(var j=0;j<response['retorno'][i]['productosPlan'].length;j++){
+            htmlText += '<li><a href="#void">'+response['retorno'][i]['productosPlan'][j]['cantidad']+' '+response['retorno'][i]['productosPlan'][j]['descripcion']+'</a></li>';
+          }
+          let plan;
+          plan = {
+            image: 'assets/images/laundry/product/'+response['retorno'][i]['icono'],
+            title: response['retorno'][i]['nombre'],
+            text:  htmlText+'<li><a href="#void">'+response['retorno'][i]['domicilios']+' domicilios</a></li>'+'<li><a href="#void">'+response['retorno'][i]['valor']+'</a></li>',
+            url: '/home/no-sidebar/product/'+response['retorno'][i]['plan']
+          }
+         
+          //console.log(product);
+          planes.push(plan);
+          //console.log(productos);
         }
-        let plan;
-        plan = {
-          image: 'assets/images/laundry/product/'+response['retorno'][i]['icono'],
-          title: response['retorno'][i]['nombre'],
-          text:  htmlText+'<li><a href="#void">'+response['retorno'][i]['domicilios']+' domicilios</a></li>'+'<li><a href="#void">'+response['retorno'][i]['valor']+'</a></li>',
-          url: '/home/no-sidebar/product/'+response['retorno'][i]['plan']
-        }
-       
-        //console.log(product);
-        planes.push(plan);
-        //console.log(productos);
       }
+      else{
+        this.toastrService.error('No se pudo obtener los productos. Intente nuevamente.'); 
+      }
+      
       
       
       //console.log(planes);

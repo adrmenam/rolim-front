@@ -26,7 +26,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
   	this.productsService.getProducts().subscribe(product => { 
       console.log(product);
   	  product.filter((item: Product) => {
-         if(item.category == 'individual')
+         if(item.category != 'plan')
            this.products.push(item);
       })
     });
@@ -49,7 +49,7 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
 
   private clearServices(){
     let cart = JSON.parse(localStorage.getItem('cartItem'));
-    console.log(cart);
+    //console.log(cart);
     if(cart){
       cart.filter((item) => {
         console.log(item);
@@ -64,12 +64,15 @@ export class HomeThirteenComponent implements OnInit, OnDestroy {
   }
   
   private getAddresses(){
-    this.addressService.getAddresses(localStorage.getItem("token")).subscribe((response)=>{
-      //console.log(response);
-      if(response['codigoRetorno']=="0001"){
-        localStorage.setItem("addresses", JSON.stringify(response['data']));
-      }
-     });
+    if(localStorage.getItem("token")){
+      this.addressService.getAddresses(localStorage.getItem("token")).subscribe((response)=>{
+        //console.log(response);
+        if(response['codigoRetorno']=="0001"){
+          localStorage.setItem("addresses", JSON.stringify(response['data']));
+        }
+       });
+    }
+    
   }
   
 
