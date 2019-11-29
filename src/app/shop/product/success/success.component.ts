@@ -6,6 +6,7 @@ import { BillingService } from '../../../shared/services/billing.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatafastService } from '../../../shared/services/datafast.service';
 import { SubscriptionService } from '../../../shared/services/subscription.service';
+import { PaymentService } from '../../../shared/services/payment.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -25,7 +26,11 @@ export class SuccessComponent implements OnInit {
   
   private resourcePath: any;
 
-  constructor(private toastrService: ToastrService, private route: ActivatedRoute, private orderService: OrderService, private subscriptionService: SubscriptionService, private cartService: CartService, private billingService: BillingService, private router: Router, private datafastService: DatafastService) { }
+  constructor(private toastrService: ToastrService, private route: ActivatedRoute, 
+    private orderService: OrderService, private subscriptionService: SubscriptionService, 
+    private cartService: CartService, private billingService: BillingService, 
+    private router: Router, private datafastService: DatafastService, 
+    private paymentService: PaymentService) { }
 
   ngOnInit() {
     
@@ -65,7 +70,12 @@ export class SuccessComponent implements OnInit {
           console.log("Registro del plan "+this.planid+" con el cardToken "+cardToken)
           this.subscriptionService.registerPlan(localStorage.getItem("token"),this.planid,cardToken).subscribe((response=>{
             console.log(response);
-          }))
+          }));
+        }else{
+          console.log("Registro del cardToken sin plan: "+cardToken)
+          this.paymentService.registerCardToken(localStorage.getItem("token"),cardToken).subscribe((response=>{
+            console.log(response);
+          }));
         }
         
       }else{
@@ -137,14 +147,6 @@ export class SuccessComponent implements OnInit {
 
     let billReturn = this.billingService.sendBill(bill).subscribe((response)=>{
       console.log(response);
-      // if(response['mensajeRetorno']=="Usuario Almacenado"){
-      //   this.toastrService.success('El usuario se ha creado correctamente');  
-      //   this.requireOtp=true;   
-      // }else if(response['mensajeRetorno']=="usuario ya existe"){
-      //   this.toastrService.error("El usuario ya existe");
-      // }else{
-      //   this.toastrService.error("El usuario no se pudo registrar");
-      // }
      });
   
 

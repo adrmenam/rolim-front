@@ -7,6 +7,7 @@ import { ProductsService } from '../../../shared/services/products.service';
 import { CartService } from '../../../shared/services/cart.service';
 import { OrderService } from '../../../shared/services/order.service';
 import { DatafastService } from '../../../shared/services/datafast.service';
+import { PaymentService } from '../../../shared/services/payment.service';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -119,7 +120,10 @@ export class CheckoutComponent implements OnInit {
 
   // Form Validator
   constructor(private http : HttpClient, private fb: FormBuilder, private cartService: CartService, 
-    public productsService: ProductsService, private orderService: OrderService, private router: Router, private toastrService: ToastrService, private datafastService: DatafastService) {
+    public productsService: ProductsService, private orderService: OrderService, 
+    private router: Router, private toastrService: ToastrService, private datafastService: DatafastService,
+    private paymentService: PaymentService) {
+
       this.addresses = localStorage.getItem("addresses")?JSON.parse(localStorage.getItem("addresses")):'';    
       this.deliveryPrice = sessionStorage.getItem("valor delivery")?parseFloat(sessionStorage.getItem("valor delivery")):1.5;
       this.minOrder = sessionStorage.getItem("pedido minimo")?parseFloat(sessionStorage.getItem("pedido minimo")):0;
@@ -323,6 +327,17 @@ console.log(priceSum+this.deliveryPrice == this.totalPayment);
 
   public getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type){
     //Datafast step 1: get CheckoutId 
+
+
+    //Get card tokens (Registration IDs saved for user)
+    this.paymentService.getCardTokens(localStorage.getItem("token")).subscribe((response)=>{
+      console.log(response);
+      //guardar json de tokens en una variable local, 
+      //la cual se pasara como parametro a getCheckoutId 
+      //(definir parametro opcional en funcion)
+    });
+
+    //Datafast step 1: get CheckoutId
     this.datafastService.getCheckoutId(amount,firstName,secondName,lastName,ip_address,trx,email,id,items,type).subscribe((response)=>{
       console.log(response);
       let scriptSave;
