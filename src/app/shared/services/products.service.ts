@@ -54,6 +54,7 @@ export class ProductsService {
       
       for(var i=0;i<res.json()['data'].length;i++){
         
+        let image = (res.json()['data'][i]['imagen']!="")?res.json()['data'][i]['imagen']:"empty";
        let product : Product;
        product = {
          id: res.json()['data'][i]['producto'],
@@ -61,7 +62,7 @@ export class ProductsService {
          price: parseFloat(res.json()['data'][i]['precio']),
          salePrice: parseFloat(res.json()['data'][i]['precio']),
          discount: 0,
-         pictures: ["assets/images/laundry/product/"+ res.json()['data'][i]['imagen'] +".jpg"],
+         pictures: ["assets/images/laundry/product/"+ image +".jpg"],
          shortDetails: res.json()['data'][i]['descripcion'],
          description: res.json()['data'][i]['descripcion'],
          stock: res.json()['data'][i]['estado']?1000:0,
@@ -93,8 +94,8 @@ export class ProductsService {
        plan = {
          id: res.json()['retorno'][i]['plan'],
          name: res.json()['retorno'][i]['nombre'],
-         price: parseFloat(res.json()['retorno'][i]['valor']),
-         salePrice: parseFloat(res.json()['retorno'][i]['valor']),
+         price: parseFloat(res.json()['retorno'][i]['valor'].split('$')[1]),
+         salePrice: parseFloat(res.json()['retorno'][i]['valor'].split('$')[1]),
          discount: 0,
          pictures: ["assets/images/laundry/product/"+ res.json()['retorno'][i]['icono']],
          shortDetails: res.json()['retorno'][i]['descripcion'],
