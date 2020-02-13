@@ -9,8 +9,8 @@ import { Product } from '../classes/product';
 })
 export class SubscriptionService {
 
-  private baseUrl:string = "http://198.199.69.76:3000/planes";
-  private plansUrl:string = "http://198.199.69.76:3000/detallePlanes";
+  private baseUrl:string = "https://rolimapp.com:3000/planes";
+  private plansUrl:string = "https://rolimapp.com:3000/detallePlanes";
   private transactionPlans = {
     "transaccion": "consultarPlanes"
   }

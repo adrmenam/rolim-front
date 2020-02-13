@@ -16,12 +16,12 @@ export class ProductsService {
   
   public currency : string = 'USD';
   public catalogMode : boolean = false;
-  private productsUrl:string = "http://198.199.69.76:3000/productos";
+  private productsUrl:string = "https://rolimapp.com:3000/productos";
   private transactionProducts = {
     "transaccion": "completos"
   }
 
-  private plansUrl:string = "http://198.199.69.76:3000/detallePlanes";
+  private plansUrl:string = "https://rolimapp.com:3000/detallePlanes";
   private transactionPlans = {
     "transaccion": "consultarPlanes"
   }

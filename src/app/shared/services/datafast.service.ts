@@ -13,6 +13,8 @@ export class DatafastService {
   private userId: any = '8a829418533cf31d01533d06fd040748';
   private entityId: any = '8a829418533cf31d01533d06f2ee06fa';
   private password: any = 'Xt7F22QENX';
+  private tokenDatafast: any = 'OGE4Mjk0MTg1MzNjZjMxZDAxNTMzZDA2ZmQwNDA3NDh8WHQ3RjIyUUVOWA==';
+
   
 
   //data de comercio rolim
@@ -49,9 +51,9 @@ export class DatafastService {
     */
 
     let url = "https://test.oppwa.com/v1/checkouts";
-    let data = "authentication.entityId="+this.entityId
-    + "&authentication.userId="+this.userId
-    + "&authentication.password="+this.password
+    let data = "entityId="+this.entityId
+    //+ "&authentication.userId="+this.userId
+    //+ "&authentication.password="+this.password
     + "&amount="+amount.toFixed(2)
     + "&currency=USD"
     + "&paymentType=DB";
@@ -90,9 +92,10 @@ export class DatafastService {
 */
 
     console.log(data);
-    return this.httpClient.post(url,data, {
+    return this.httpClient.post(url, data, {
       headers: new HttpHeaders({
            'Content-Type':  'application/x-www-form-urlencoded',
+           'Authorization': 'Bearer ' + this.tokenDatafast
          })
     }).pipe(map(data=>
      data));

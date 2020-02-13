@@ -14,7 +14,7 @@ import 'rxjs/add/operator/map'
 
 export class OrderService {
   
-  private baseUrl:string = "http://198.199.69.76:3000/pedidos";
+  private baseUrl:string = "https://rolimapp.com:3000/pedidos";
 
   // Array
   public OrderDetails;
