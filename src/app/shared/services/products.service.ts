@@ -62,7 +62,7 @@ export class ProductsService {
          price: parseFloat(res.json()['data'][i]['precio']),
          salePrice: parseFloat(res.json()['data'][i]['precio']),
          discount: 0,
-         pictures: ["assets/images/laundry/product/"+ image +".jpg"],
+         pictures: ["assets/images/laundry/product/"+ image],
          shortDetails: res.json()['data'][i]['descripcion'],
          description: res.json()['data'][i]['descripcion'],
          stock: res.json()['data'][i]['estado']?1000:0,

@@ -15,10 +15,10 @@ export class ProductTabThirteenComponent implements OnInit {
   @Input() products: Product[];
 
   public productosLavado: Product[];
-  public productosLavadoPlanchado: Product[];
   public productosPlanchado: Product[];
   public productosLavadoSeco: Product[];
   public productosHogar: Product[];
+  public productosPromociones: Product[];
 
   constructor(private productsService: ProductsService) { }
 
@@ -35,24 +35,24 @@ export class ProductTabThirteenComponent implements OnInit {
       $(this).parent().parent().parent().find(".tab-content").not('#' + currunt_href).css("display", "none");
     });
 
-    this.productsService.getProductByCategory("lavado").subscribe(product => { 
+    this.productsService.getProductByCategory("LAVADO").subscribe(product => { 
   	  this.productosLavado=product;
     });
 
-    this.productsService.getProductByCategory("planchado").subscribe(product => { 
+    this.productsService.getProductByCategory("PLANCHADO").subscribe(product => { 
   	  this.productosPlanchado=product;
     });
 
-    this.productsService.getProductByCategory("lavado planchado").subscribe(product => { 
-  	  this.productosLavadoPlanchado=product;
-    });
-
-    this.productsService.getProductByCategory("lavado seco").subscribe(product => { 
+    this.productsService.getProductByCategory("LAVADO SECO").subscribe(product => { 
   	  this.productosLavadoSeco=product;
     });
 
-    this.productsService.getProductByCategory("hogar").subscribe(product => { 
+    this.productsService.getProductByCategory("HOGAR").subscribe(product => { 
   	  this.productosHogar=product;
+    });
+
+    this.productsService.getProductByCategory("PROMOCIONES").subscribe(product => { 
+  	  this.productosPromociones=product;
     });
 
   }
