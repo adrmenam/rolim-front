@@ -5923,7 +5923,7 @@ footer p {
   text-align: left;
   -ms-flex-item-align: center;
       align-self: center;
-  padding-left: 15px;
+  padding-left: 10px;
 }
 .product-wrapper-grid.list-view .product-box {
   display: -webkit-box;
@@ -10851,7 +10851,8 @@ footer.pet-layout-footer .social-white {
   color: #ffffff;
 }
 .tools-grey .product-box .product-info {
-  padding-left: 15px;
+  padding-left: 10px !important; 
+  padding-right: 10px !important;
   padding-bottom: 15px;
   background-color: #ffffff;
   border-top: 1px solid rgba(221, 221, 221, 0.2);

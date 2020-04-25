@@ -23,10 +23,8 @@
         </a>
     </div>
 </div>
-<div class="product-info">
+<div class="product-info" style="padding-left: 10px;padding-right: 10px;">
     <bar-rating [rate]="5" [readOnly]="true"></bar-rating>
-    <a [routerLink]="['/home/no-sidebar/product', product.id]">
-    	<h6>{{product.name}}</h6>
-    </a>
+    <a [routerLink]="['/home/no-sidebar/product', product.id]">{{product.name}}</a>
     <h4 *ngIf="!productsService?.catalogMode">{{product.price | currency:productsService?.currency:'symbol'}}</h4>
 </div>
