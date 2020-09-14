@@ -274,7 +274,7 @@ export class CheckoutComponent implements OnInit {
 
       this.getTotal().subscribe((total: number)=>{this.totalPayment = total});
 
-console.log(priceSum+this.deliveryPrice == this.totalPayment);
+      console.log(priceSum+this.deliveryPrice == this.totalPayment);
       if(priceSum+this.deliveryPrice == this.totalPayment){
         detallePedido.push({
           "id": 0, 

@@ -46,7 +46,7 @@ import { VisitMobileComponent } from './visit-mobile/visit-mobile.component';
     SlickCarouselModule,
     IsotopeModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCM7KIVcImdLTTWaTM-WkIZFEm7LM9OdGI',
+      apiKey: 'AIzaSyAVFIC9sCExP0C_yZzJvzEWmXNYQ5pHTY4',
       libraries: ['geometry', 'places']
     })
   ],

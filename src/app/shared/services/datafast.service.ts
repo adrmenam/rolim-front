@@ -113,11 +113,16 @@ export class DatafastService {
     */
 
     let url = "https://test.oppwa.com/"+resourcePath;
-    url += "?authentication.userId="+this.userId;
-    url += "&authentication.password="+this.password;
+    //url += "?authentication.userId="+this.userId;
+    //url += "&authentication.password="+this.password;
     url += "&authentication.entityId="+this.entityId;
     console.log(url);
-    return this.httpClient.get(url).pipe(map(data=>
+    return this.httpClient.get(url,{
+      headers: new HttpHeaders({
+           'Content-Type':  'application/x-www-form-urlencoded',
+           'Authorization': 'Bearer ' + this.tokenDatafast
+         })
+    }).pipe(map(data=>
      data));
   }
 }

@@ -39,6 +39,7 @@
     "isotope-layout": "^3.0.6",
     "jquery": "^3.4.1",
     "jquery-zoom": "^1.7.21",
+    "js-sha1": "^0.6.0",
     "lodash": "^4.17.11",
     "magnific-popup": "^1.1.0",
     "masonry-layout": "^4.2.2",

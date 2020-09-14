@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map'
+import * as sha1 from 'js-sha1';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class LoginService {
   constructor(private httpClient : HttpClient) { }
 
   public login(obj){
+    obj.password = sha1(obj.password); //security, send hashed password
     let transaction = 
       {
         "transaccion": "autenticarUsuario",
